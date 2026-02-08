@@ -79,11 +79,11 @@
     <section class="section" style="padding-top: 2rem;">
       <div class="container">
         <div class="pricing-toggle">
-          <span class="pricing-label active" data-period="monthly">Monthly</span>
+          <span class="pricing-toggle-option pricing-label active" data-period="monthly">Monthly</span>
           <button class="pricing-switch" id="pricingSwitch" aria-label="Toggle pricing period">
             <span class="pricing-switch-thumb"></span>
           </button>
-          <span class="pricing-label" data-period="annual">Annual <span style="color: var(--color-success); font-size: 0.75rem; font-weight: 600;">Save 22%</span></span>
+          <span class="pricing-toggle-option pricing-label" data-period="annual">Annual <span style="color: var(--color-success); font-size: 0.75rem; font-weight: 600;">Save 22%</span></span>
         </div>
 
         <!-- Pricing Cards -->
@@ -115,7 +115,8 @@
               <p class="pricing-plan-desc">Unlimited focus power</p>
             </div>
             <div class="pricing-price">
-              <span class="pricing-amount" data-monthly="$9" data-annual="$7">$9</span>
+              <span class="pricing-amount price-monthly">$9</span>
+              <span class="pricing-amount price-annual" style="display:none;">$7</span>
               <span class="pricing-period">/ month</span>
             </div>
             <a href="downloads/download.html" class="btn btn-primary btn-lg" style="width: 100%;">Start Free Trial</a>
@@ -155,106 +156,48 @@
         </div>
 
         <!-- Comparison Table -->
-        <div class="pricing-table-wrapper" style="margin-top: 4rem;">
-          <h3 style="text-align: center; margin-bottom: 2rem; font-size: 1.5rem;">Compare plans</h3>
-          <table class="pricing-table">
-            <thead>
-              <tr>
-                <th>Feature</th>
-                <th>Basic</th>
-                <th>Pro</th>
-                <th>Enterprise</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Focus sessions</td>
-                <td>3/day</td>
-                <td>Unlimited</td>
-                <td>Unlimited</td>
-              </tr>
-              <tr>
-                <td>AI Attention Coach</td>
-                <td>-</td>
-                <td>✓</td>
-                <td>✓</td>
-              </tr>
-              <tr>
-                <td>Smart Sessions</td>
-                <td>-</td>
-                <td>✓</td>
-                <td>✓</td>
-              </tr>
-              <tr>
-                <td>Screen Awareness</td>
-                <td>-</td>
-                <td>✓</td>
-                <td>✓</td>
-              </tr>
-              <tr>
-                <td>Performance Reports</td>
-                <td>Basic</td>
-                <td>Advanced</td>
-                <td>Advanced + Team</td>
-              </tr>
-              <tr>
-                <td>Custom Focus Modes</td>
-                <td>1</td>
-                <td>Unlimited</td>
-                <td>Unlimited + Shared</td>
-              </tr>
-              <tr>
-                <td>Device Sync</td>
-                <td>-</td>
-                <td>✓</td>
-                <td>✓</td>
-              </tr>
-              <tr>
-                <td>Team Dashboard</td>
-                <td>-</td>
-                <td>-</td>
-                <td>✓</td>
-              </tr>
-              <tr>
-                <td>SSO &amp; SCIM</td>
-                <td>-</td>
-                <td>-</td>
-                <td>✓</td>
-              </tr>
-              <tr>
-                <td>Support</td>
-                <td>Community</td>
-                <td>Priority</td>
-                <td>Dedicated</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        
 
         <!-- Savings Calculator -->
-        <div class="calculator-section reveal" style="margin-top: 4rem;">
-          <div class="calculator-content">
-            <h3>Calculate your focus savings</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 2rem;">See how much extra productive time BrainDock could give you.</p>
-            <div class="calculator-inputs">
-              <div class="calculator-field">
-                <label for="calc-hours">Hours you work per day</label>
-                <input type="range" id="calc-hours" min="1" max="16" value="8" class="calculator-slider">
-                <span class="calculator-value" id="calc-hours-val">8 hours</span>
+        <div class="savings-calc reveal" style="margin-top: 4rem;">
+          <div class="savings-calc-inner">
+            <div class="savings-calc-left">
+              <h2 class="savings-calc-title">Calculate<br>your <span>savings</span></h2>
+
+              <div class="savings-calc-slider-group">
+                <p class="savings-calc-slider-label">I spend <span class="savings-calc-underline" id="hoursValue">4</span> hours working a day (60% focus rate)</p>
+                <input type="range" id="hoursSlider" min="1" max="12" value="4" step="1" class="savings-calc-range">
+                <p class="savings-calc-hint">On average, people focus only 60% of their work time — BrainDock helps you stay at 100%.</p>
               </div>
-              <div class="calculator-field">
-                <label for="calc-rate">Your hourly rate ($)</label>
-                <input type="number" id="calc-rate" value="50" min="10" max="1000" class="calculator-input">
+
+              <div class="savings-calc-rate-group">
+                <label class="savings-calc-rate-label">and, my time is worth <span class="savings-calc-underline">$<input type="number" id="rateInput" value="50" min="10" max="1000"></span>/hour</label>
               </div>
             </div>
-            <div class="calculator-result">
-              <div class="calculator-result-item">
-                <span class="calculator-result-label">Extra focused hours per week</span>
-                <span class="calculator-result-value" id="calc-saved-hours">10</span>
-              </div>
-              <div class="calculator-result-item">
-                <span class="calculator-result-label">Value of recovered time per month</span>
-                <span class="calculator-result-value" id="calc-saved-money">$2,000</span>
+
+            <div class="savings-calc-right">
+              <div class="savings-calc-card">
+                <p class="savings-calc-card-header">Monthly, you'll save</p>
+                <p class="savings-calc-card-amount" id="calcNetSavings">$1,748<span>/mo</span></p>
+
+                <div class="savings-calc-card-breakdown">
+                  <div class="savings-calc-card-row">
+                    <span>Work hours per month</span>
+                    <span id="calcStudyHours">88</span>
+                  </div>
+                  <div class="savings-calc-card-row">
+                    <span>Unfocused hours (40%)</span>
+                    <span id="calcWastedHours">35.2</span>
+                  </div>
+                  <div class="savings-calc-card-row">
+                    <span>Time value saved</span>
+                    <span id="calcValueSaved">$1,760</span>
+                  </div>
+                  <div class="savings-calc-card-row">
+                    <span>BrainDock Pro monthly cost</span>
+                    <span id="calcProCost">$12</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

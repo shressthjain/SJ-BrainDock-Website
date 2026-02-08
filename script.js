@@ -263,30 +263,37 @@
   const hoursSlider = document.getElementById('hoursSlider');
   const hoursValue = document.getElementById('hoursValue');
   const rateInput = document.getElementById('rateInput');
-  const savingsResults = document.querySelectorAll('.calc-result');
 
   function updateSavings() {
     if (!hoursSlider || !rateInput) return;
 
-    const hours = parseFloat(hoursSlider.value) || 2;
+    const hours = parseFloat(hoursSlider.value) || 4;
     const rate = parseFloat(rateInput.value) || 50;
 
     if (hoursValue) hoursValue.textContent = hours;
 
-    const hoursTyping = hours * 22; // work days per month
-    const hoursSaved = Math.round(hoursTyping * 0.5); // 50% savings
-    const valueSaved = hoursSaved * rate;
-    const proCost = 9;
+    // Update slider fill percentage
+    const pct = ((hours - 1) / (12 - 1)) * 100;
+    hoursSlider.style.setProperty('--slider-pct', pct + '%');
+
+    // Without BrainDock: 60% focus rate → 40% of study time is wasted
+    // With BrainDock: 100% focus → you reclaim that 40%
+    const studyHoursMonth = hours * 22; // work/study days per month
+    const wastedHours = parseFloat((studyHoursMonth * 0.4).toFixed(1)); // 40% unfocused
+    const valueSaved = Math.round(wastedHours * rate);
+    const proCost = 12;
     const netSavings = valueSaved - proCost;
 
     const resultEls = {
-      hoursSaved: document.getElementById('calcHoursSaved'),
+      studyHours: document.getElementById('calcStudyHours'),
+      wastedHours: document.getElementById('calcWastedHours'),
       valueSaved: document.getElementById('calcValueSaved'),
       proCost: document.getElementById('calcProCost'),
       netSavings: document.getElementById('calcNetSavings'),
     };
 
-    if (resultEls.hoursSaved) resultEls.hoursSaved.textContent = hoursSaved;
+    if (resultEls.studyHours) resultEls.studyHours.textContent = studyHoursMonth;
+    if (resultEls.wastedHours) resultEls.wastedHours.textContent = wastedHours;
     if (resultEls.valueSaved) resultEls.valueSaved.textContent = '$' + valueSaved.toLocaleString();
     if (resultEls.proCost) resultEls.proCost.textContent = '$' + proCost;
     if (resultEls.netSavings) resultEls.netSavings.textContent = '$' + netSavings.toLocaleString() + '/mo';
@@ -443,34 +450,54 @@
 
   // ========== TEAM SAVINGS CALCULATOR ==========
   const teamSlider = document.getElementById('teamSlider');
+  const teamHoursSlider = document.getElementById('teamHoursSlider');
   const teamCount = document.getElementById('teamCount');
+  const teamHoursValue = document.getElementById('teamHoursValue');
   const teamRate = document.getElementById('teamRate');
 
   function updateTeamSavings() {
-    if (!teamSlider || !teamRate) return;
+    if (!teamSlider || !teamRate || !teamHoursSlider) return;
 
     const members = parseInt(teamSlider.value) || 10;
-    const rate = parseFloat(teamRate.value) || 50;
+    const hours = parseInt(teamHoursSlider.value) || 4;
+    const rate = parseFloat(teamRate.value) || 75;
 
     if (teamCount) teamCount.textContent = members;
+    if (teamHoursValue) teamHoursValue.textContent = hours;
 
-    const hoursSavedPerWeek = Math.round(members * 1); // 1 hour per person per week
-    const valueSavedPerMonth = Math.round(hoursSavedPerWeek * 4.33 * rate);
-    const teamCost = members * 9;
+    // Update slider fill percentages
+    const teamPct = ((members - 2) / (200 - 2)) * 100;
+    teamSlider.style.setProperty('--slider-pct', teamPct + '%');
+    const hoursPct = ((hours - 1) / (12 - 1)) * 100;
+    teamHoursSlider.style.setProperty('--slider-pct', hoursPct + '%');
+
+    // 60% focus → 40% wasted, per person per day × 22 workdays × team size
+    const teamStudyHoursMonth = hours * 22 * members;
+    const wastedHours = parseFloat((teamStudyHoursMonth * 0.4).toFixed(1));
+    const valueSaved = Math.round(wastedHours * rate);
+    const teamCostTotal = members * 12;
+    const netSavings = valueSaved - teamCostTotal;
 
     const els = {
-      hours: document.getElementById('teamHoursSaved'),
-      value: document.getElementById('teamValueSaved'),
+      studyHours: document.getElementById('teamStudyHours'),
+      wastedHours: document.getElementById('teamWastedHours'),
+      valueSaved: document.getElementById('teamValueSaved'),
       cost: document.getElementById('teamCost'),
+      net: document.getElementById('teamNetSavings'),
     };
 
-    if (els.hours) els.hours.textContent = hoursSavedPerWeek + ' hours';
-    if (els.value) els.value.textContent = '$' + valueSavedPerMonth.toLocaleString();
-    if (els.cost) els.cost.textContent = '$' + teamCost;
+    if (els.studyHours) els.studyHours.textContent = teamStudyHoursMonth.toLocaleString();
+    if (els.wastedHours) els.wastedHours.textContent = wastedHours;
+    if (els.valueSaved) els.valueSaved.textContent = '$' + valueSaved.toLocaleString();
+    if (els.cost) els.cost.textContent = '$' + teamCostTotal.toLocaleString();
+    if (els.net) els.net.textContent = '$' + netSavings.toLocaleString() + '/mo';
   }
 
   if (teamSlider) {
     teamSlider.addEventListener('input', updateTeamSavings);
+  }
+  if (teamHoursSlider) {
+    teamHoursSlider.addEventListener('input', updateTeamSavings);
   }
   if (teamRate) {
     teamRate.addEventListener('input', updateTeamSavings);

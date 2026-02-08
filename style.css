@@ -1819,6 +1819,24 @@ h1, h2, h3, h4, h5, h6 {
 .pricing-features {
   flex: 1;
   margin-bottom: var(--space-8);
+  list-style: none;
+  padding: 0;
+}
+
+.pricing-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.pricing-features li svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .pricing-feature {
@@ -1831,8 +1849,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .pricing-feature svg {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   color: var(--color-success);
   flex-shrink: 0;
   margin-top: 2px;
@@ -1892,102 +1910,195 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Savings Calculator */
-.savings-calculator {
-  max-width: 700px;
-  margin: var(--space-16) auto 0;
-  background: var(--bg-card);
-  border: 1px solid var(--border-default);
+.savings-calc {
+  background: #0b5b4c;
   border-radius: var(--radius-xl);
-  padding: var(--space-10);
-  text-align: left;
+  overflow: hidden;
+  color: #fff;
 }
 
-.calculator-input-group {
+.savings-calc-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+  padding: var(--space-12) var(--space-10);
+  align-items: center;
+}
+
+.savings-calc-title {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: #fff;
   margin-bottom: var(--space-8);
 }
 
-.calculator-label {
-  font-size: var(--text-base);
-  font-weight: 500;
-  margin-bottom: var(--space-4);
-  color: var(--text-primary);
+.savings-calc-title span {
+  color: #e8a0bf;
 }
 
-.calculator-slider {
-  width: 100%;
+.savings-calc-slider-group {
+  margin-bottom: var(--space-6);
+}
+
+.savings-calc-slider-label {
+  font-size: var(--text-lg);
+  color: #fff;
+  margin-bottom: var(--space-3);
+  font-weight: 500;
+}
+
+.savings-calc-underline {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.savings-calc-range {
+  width: 50%;
   height: 6px;
   -webkit-appearance: none;
   appearance: none;
-  background: var(--bg-secondary);
+  background: linear-gradient(to right, #e8a0bf var(--slider-pct, 14%), #1a7a68 var(--slider-pct, 14%));
   border-radius: 3px;
   outline: none;
-  margin: var(--space-4) 0;
+  margin: var(--space-3) 0;
+  cursor: pointer;
 }
 
-.calculator-slider::-webkit-slider-thumb {
+.savings-calc-range::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
-  background: var(--color-primary);
+  width: 22px;
+  height: 22px;
+  background: #ffffff;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: var(--glow-primary);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-.calculator-slider::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  background: var(--color-primary);
+.savings-calc-range::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  background: #ffffff;
   border-radius: 50%;
   cursor: pointer;
   border: none;
-  box-shadow: var(--glow-primary);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-.calculator-value-input {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-3) var(--space-4);
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-md);
-  width: fit-content;
+.savings-calc-hint {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: var(--space-2);
+  font-style: italic;
 }
 
-.calculator-value-input input {
+.savings-calc-rate-group {
+  margin-top: var(--space-6);
+}
+
+.savings-calc-rate-label {
+  font-size: var(--text-xl);
+  color: #fff;
+  font-weight: 500;
+}
+
+.savings-calc-rate-label input {
   width: 60px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #fff;
+  color: #fff;
   font-size: var(--text-xl);
   font-weight: 700;
-  color: var(--text-primary);
+  font-family: inherit;
   text-align: center;
+  outline: none;
+  padding: 0 2px;
+  -moz-appearance: textfield;
 }
 
-.calculator-results {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-4);
-  margin-top: var(--space-8);
-  padding-top: var(--space-8);
-  border-top: 1px solid var(--border-default);
+.savings-calc-rate-label input::-webkit-inner-spin-button,
+.savings-calc-rate-label input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-.calculator-result-item {
-  padding: var(--space-4);
-  background: var(--bg-secondary);
-  border-radius: var(--radius-lg);
+.savings-calc-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.calculator-result-value {
-  font-size: var(--text-3xl);
-  font-weight: 700;
-  color: var(--color-primary);
+.savings-calc-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: var(--space-8) var(--space-8);
+  color: #1a1a2e;
+  width: 100%;
+  max-width: 400px;
+  border: 2px solid rgba(0, 0, 0, 0.06);
 }
 
-.calculator-result-label {
-  font-size: var(--text-sm);
-  color: var(--text-tertiary);
-  margin-top: var(--space-1);
+.savings-calc-card-header {
+  text-align: center;
+  font-size: var(--text-lg);
+  color: #5a5a6e;
+  margin-bottom: var(--space-2);
+}
+
+.savings-calc-card-amount {
+  text-align: center;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 800;
+  color: #0b5b4c;
+  margin-bottom: var(--space-6);
+  font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+.savings-calc-card-amount span {
+  font-size: 0.5em;
+  font-weight: 500;
+  color: #5a5a6e;
+}
+
+.savings-calc-card-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: var(--space-5);
+}
+
+.savings-calc-card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-base);
+}
+
+.savings-calc-card-row span:first-child {
+  color: #5a5a6e;
+}
+
+.savings-calc-card-row span:last-child {
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+@media (max-width: 768px) {
+  .savings-calc-inner {
+    grid-template-columns: 1fr;
+    padding: var(--space-8) var(--space-6);
+  }
+
+  .savings-calc-range {
+    width: 100%;
+  }
+
+  .savings-calc-card {
+    max-width: 100%;
+  }
 }
 
 /* Student discount callout */
@@ -2998,7 +3109,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: var(--text-xs);
   }
 
-  .calculator-results {
+  .savings-calc-inner {
     grid-template-columns: 1fr;
   }
 

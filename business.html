@@ -217,29 +217,54 @@
     <!-- Team Savings Calculator -->
     <section class="section">
       <div class="container">
-        <div class="calculator-section reveal">
-          <div class="calculator-content">
-            <h3>Calculate your team's focus savings</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 2rem;">See the total value of recovered productive time across your team.</p>
-            <div class="calculator-inputs">
-              <div class="calculator-field">
-                <label for="team-size">Team size</label>
-                <input type="range" id="team-size" min="5" max="500" value="50" class="calculator-slider">
-                <span class="calculator-value" id="team-size-val">50 people</span>
+        <div class="savings-calc reveal">
+          <div class="savings-calc-inner">
+            <div class="savings-calc-left">
+              <h2 class="savings-calc-title">Calculate your<br>team's <span>savings</span></h2>
+
+              <div class="savings-calc-slider-group">
+                <p class="savings-calc-slider-label">My team has <span class="savings-calc-underline" id="teamCount">10</span> members working <span class="savings-calc-underline" id="teamHoursValue">4</span> hours a day (60% focus rate)</p>
+                <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: var(--space-3);">
+                  <div style="flex: 1; min-width: 140px;">
+                    <label style="font-size: var(--text-sm); color: rgba(255,255,255,0.6); margin-bottom: 4px; display: block;">Team size</label>
+                    <input type="range" id="teamSlider" min="2" max="200" value="10" step="1" class="savings-calc-range">
+                  </div>
+                  <div style="flex: 1; min-width: 140px;">
+                    <label style="font-size: var(--text-sm); color: rgba(255,255,255,0.6); margin-bottom: 4px; display: block;">Hours working/day</label>
+                    <input type="range" id="teamHoursSlider" min="1" max="12" value="4" step="1" class="savings-calc-range">
+                  </div>
+                </div>
+                <p class="savings-calc-hint">Without BrainDock, your team only focuses 60% of their work time — that's 40% wasted.</p>
               </div>
-              <div class="calculator-field">
-                <label for="team-rate">Average hourly cost ($)</label>
-                <input type="number" id="team-rate" value="75" min="20" max="500" class="calculator-input">
+
+              <div class="savings-calc-rate-group">
+                <label class="savings-calc-rate-label">average cost per person: <span class="savings-calc-underline">$<input type="number" id="teamRate" value="75" min="10" max="1000"></span>/hour</label>
               </div>
             </div>
-            <div class="calculator-result">
-              <div class="calculator-result-item">
-                <span class="calculator-result-label">Team hours saved per month</span>
-                <span class="calculator-result-value" id="team-saved-hours">500</span>
-              </div>
-              <div class="calculator-result-item">
-                <span class="calculator-result-label">Monthly value of recovered time</span>
-                <span class="calculator-result-value" id="team-saved-money">$37,500</span>
+
+            <div class="savings-calc-right">
+              <div class="savings-calc-card">
+                <p class="savings-calc-card-header">Monthly, your team saves</p>
+                <p class="savings-calc-card-amount" id="teamNetSavings">$26,280<span>/mo</span></p>
+
+                <div class="savings-calc-card-breakdown">
+                  <div class="savings-calc-card-row">
+                    <span>Team work hours/month</span>
+                    <span id="teamStudyHours">880</span>
+                  </div>
+                  <div class="savings-calc-card-row">
+                    <span>Unfocused hours (40%)</span>
+                    <span id="teamWastedHours">352</span>
+                  </div>
+                  <div class="savings-calc-card-row">
+                    <span>Time value saved</span>
+                    <span id="teamValueSaved">$26,400</span>
+                  </div>
+                  <div class="savings-calc-card-row">
+                    <span>BrainDock Pro team cost</span>
+                    <span id="teamCost">$120</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
