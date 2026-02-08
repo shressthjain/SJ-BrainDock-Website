@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrainDock - Work Smarter. Focus Deeper.</title>
+  <meta name="description" content="AI-powered focus & productivity app that helps you work smarter, focus deeper, and get more done. Available on macOS & Windows.">
+  <meta name="keywords" content="focus app, productivity, deep work, attention coach, BrainDock">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="BrainDock - Work Smarter. Focus Deeper.">
+  <meta property="og:description" content="AI-powered focus & productivity app that helps you work smarter and focus deeper.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://braindock.app">
+  <meta property="og:image" content="assets/images/og-image.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@braindock">
+  <meta name="twitter:title" content="BrainDock - Work Smarter. Focus Deeper.">
+  <meta name="twitter:description" content="AI-powered focus & productivity app.">
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="#main" class="skip-to-content">Skip to content</a>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="assets/icons/logo.png" alt="BrainDock">
+        <span class="logo-text">BrainDock</span>
+      </a>
+
+      <nav class="main-nav" id="mainNav">
+        <!-- Product Dropdown -->
+        <div class="nav-item has-dropdown" data-dropdown="product">
+          <button class="nav-link" aria-expanded="false" aria-haspopup="true">
+            Product
+            <svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="dropdown-menu" role="menu">
+            <a href="features.html" class="dropdown-item" role="menuitem">
+              <div class="dropdown-icon">⚡</div>
+              <div>
+                <div class="dropdown-title">Features</div>
+                <div class="dropdown-desc">Explore all BrainDock capabilities</div>
+              </div>
+            </a>
+            <a href="use-cases.html" class="dropdown-item" role="menuitem">
+              <div class="dropdown-icon">🎯</div>
+              <div>
+                <div class="dropdown-title">Use Cases</div>
+                <div class="dropdown-desc">See how BrainDock fits your workflow</div>
+              </div>
+            </a>
+            <a href="#" class="dropdown-item" role="menuitem">
+              <div class="dropdown-icon">✨</div>
+              <div>
+                <div class="dropdown-title">What's New</div>
+                <div class="dropdown-desc">Latest updates and improvements</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Individuals Dropdown -->
+        <div class="nav-item has-dropdown" data-dropdown="individuals">
+          <button class="nav-link" aria-expanded="false" aria-haspopup="true">
+            Individuals
+            <svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="dropdown-menu" role="menu">
+            <a href="students.html" class="dropdown-item" role="menuitem">
+              <div class="dropdown-icon">🎓</div>
+              <div>
+                <div class="dropdown-title">Students</div>
+                <div class="dropdown-desc">Focus through finals and beyond</div>
+              </div>
+            </a>
+            <a href="developers.html" class="dropdown-item" role="menuitem">
+              <div class="dropdown-icon">💻</div>
+              <div>
+                <div class="dropdown-title">Developers</div>
+                <div class="dropdown-desc">Deep focus for shipping faster</div>
+              </div>
+            </a>
+            <a href="creators.html" class="dropdown-item" role="menuitem">
+              <div class="dropdown-icon">🎨</div>
+              <div>
+                <div class="dropdown-title">Creators</div>
+                <div class="dropdown-desc">Protect your creative flow state</div>
+              </div>
+            </a>
+            <a href="sales.html" class="dropdown-item" role="menuitem">
+              <div class="dropdown-icon">📈</div>
+              <div>
+                <div class="dropdown-title">Sales</div>
+                <div class="dropdown-desc">Close more with fewer distractions</div>
+              </div>
+            </a>
+            <a href="customer-support.html" class="dropdown-item" role="menuitem">
+              <div class="dropdown-icon">🎧</div>
+              <div>
+                <div class="dropdown-title">Customer Support</div>
+                <div class="dropdown-desc">Stay focused through every ticket</div>
+              </div>
+            </a>
+            <a href="lawyers.html" class="dropdown-item" role="menuitem">
+              <div class="dropdown-icon">⚖️</div>
+              <div>
+                <div class="dropdown-title">Lawyers</div>
+                <div class="dropdown-desc">Maximize billable deep work hours</div>
+              </div>
+            </a>
+            <a href="leaders.html" class="dropdown-item" role="menuitem">
+              <div class="dropdown-icon">🏛️</div>
+              <div>
+                <div class="dropdown-title">Leaders</div>
+                <div class="dropdown-desc">Lead with clarity, not chaos</div>
+              </div>
+            </a>
+            <a href="accessibility.html" class="dropdown-item" role="menuitem">
+              <div class="dropdown-icon">♿</div>
+              <div>
+                <div class="dropdown-title">Accessibility</div>
+                <div class="dropdown-desc">Focus tools for every ability</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Business -->
+        <div class="nav-item">
+          <a href="business.html" class="nav-link">Business</a>
+        </div>
+
+        <!-- Resources Dropdown -->
+        <div class="nav-item has-dropdown" data-dropdown="resources">
+          <button class="nav-link" aria-expanded="false" aria-haspopup="true">
+            Resources
+            <svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="dropdown-menu" role="menu">
+            <a href="workflows.html" class="dropdown-item" role="menuitem">
+              <div class="dropdown-icon">🔄</div>
+              <div>
+                <div class="dropdown-title">Workflows</div>
+                <div class="dropdown-desc">Productivity guides and tips</div>
+              </div>
+            </a>
+            <a href="support.html" class="dropdown-item" role="menuitem">
+              <div class="dropdown-icon">💬</div>
+              <div>
+                <div class="dropdown-title">Support</div>
+                <div class="dropdown-desc">Get help with BrainDock</div>
+              </div>
+            </a>
+            <a href="talk-to-sales.html" class="dropdown-item" role="menuitem">
+              <div class="dropdown-icon">📞</div>
+              <div>
+                <div class="dropdown-title">Talk to Sales</div>
+                <div class="dropdown-desc">Learn about team & enterprise plans</div>
+              </div>
+            </a>
+            <a href="#faq" class="dropdown-item" role="menuitem">
+              <div class="dropdown-icon">❓</div>
+              <div>
+                <div class="dropdown-title">FAQ</div>
+                <div class="dropdown-desc">Frequently asked questions</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Pricing -->
+        <div class="nav-item">
+          <a href="pricing.html" class="nav-link">Pricing</a>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        <a href="downloads/download.html" class="btn btn-primary">Download Free</a>
+      </div>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-nav-item has-dropdown">
+      <button class="mobile-nav-link">
+        Product
+        <svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="mobile-dropdown">
+        <a href="features.html" class="mobile-dropdown-item">⚡ Features</a>
+        <a href="use-cases.html" class="mobile-dropdown-item">🎯 Use Cases</a>
+        <a href="#" class="mobile-dropdown-item">✨ What's New</a>
+      </div>
+    </div>
+    <div class="mobile-nav-item has-dropdown">
+      <button class="mobile-nav-link">
+        Individuals
+        <svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="mobile-dropdown">
+        <a href="students.html" class="mobile-dropdown-item">🎓 Students</a>
+        <a href="developers.html" class="mobile-dropdown-item">💻 Developers</a>
+        <a href="creators.html" class="mobile-dropdown-item">🎨 Creators</a>
+        <a href="sales.html" class="mobile-dropdown-item">📈 Sales</a>
+        <a href="customer-support.html" class="mobile-dropdown-item">🎧 Customer Support</a>
+        <a href="lawyers.html" class="mobile-dropdown-item">⚖️ Lawyers</a>
+        <a href="leaders.html" class="mobile-dropdown-item">🏛️ Leaders</a>
+        <a href="accessibility.html" class="mobile-dropdown-item">♿ Accessibility</a>
+      </div>
+    </div>
+    <div class="mobile-nav-item">
+      <a href="business.html" class="mobile-nav-link">Business</a>
+    </div>
+    <div class="mobile-nav-item has-dropdown">
+      <button class="mobile-nav-link">
+        Resources
+        <svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="mobile-dropdown">
+        <a href="workflows.html" class="mobile-dropdown-item">🔄 Workflows</a>
+        <a href="support.html" class="mobile-dropdown-item">💬 Support</a>
+        <a href="talk-to-sales.html" class="mobile-dropdown-item">📞 Talk to Sales</a>
+        <a href="#faq" class="mobile-dropdown-item">❓ FAQ</a>
+      </div>
+    </div>
+    <div class="mobile-nav-item">
+      <a href="pricing.html" class="mobile-nav-link">Pricing</a>
+    </div>
+    <div class="mobile-menu-cta">
+      <a href="downloads/download.html" class="btn btn-primary btn-lg">Download Free</a>
+    </div>
+  </div>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main id="main">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="hero-glow hero-glow-1"></div>
+      <div class="hero-glow hero-glow-2"></div>
+      <div class="hero-split container">
+        <div class="hero-content">
+          <h1>Own Your<br><span class="text-gradient">Attention</span></h1>
+          <p class="hero-subtitle">
+            BrainDock uses AI to help you focus, work smarter and strengthen concentration.
+          </p>
+          <div class="hero-actions">
+            <a href="downloads/download.html" class="btn btn-primary btn-lg">
+              Download
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </a>
+            <a href="features.html" class="btn btn-secondary btn-lg">
+              Learn More
+            </a>
+          </div>
+          <p class="hero-available">Available for macOS, Windows and Linux.</p>
+        </div>
+        <div class="hero-image">
+          <img src="assets/images/head-monitor.png" alt="BrainDock - brain connected to monitor illustration">
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LOGO MARQUEE ===== -->
+    <section class="marquee-section">
+      <div class="marquee-label">Works alongside the apps you already use</div>
+      <div class="marquee-stage">
+        <div class="marquee-image">
+          <img src="assets/images/girl-looking.png" alt="Girl looking through binoculars illustration">
+        </div>
+        <div class="marquee">
+          <div class="marquee-track">
+            <span class="marquee-item"><img src="https://logo.clearbit.com/byjus.com" alt="Byju's logo" onerror="this.style.display='none'"> Byju's</span>
+            <span class="marquee-item"><img src="https://logo.clearbit.com/khanacademy.org" alt="Khan Academy logo" onerror="this.style.display='none'"> Khan Academy</span>
+            <span class="marquee-item"><img src="https://logo.clearbit.com/quizlet.com" alt="Quizlet logo" onerror="this.style.display='none'"> Quizlet</span>
+            <span class="marquee-item"><img src="https://logo.clearbit.com/coursera.org" alt="Coursera logo" onerror="this.style.display='none'"> Coursera</span>
+            <span class="marquee-item"><img src="https://logo.clearbit.com/duolingo.com" alt="Duolingo logo" onerror="this.style.display='none'"> Duolingo</span>
+            <span class="marquee-item"><img src="https://logo.clearbit.com/notion.so" alt="Notion logo" onerror="this.style.display='none'"> Notion</span>
+            <span class="marquee-item"><img src="https://logo.clearbit.com/ankiweb.net" alt="Anki logo" onerror="this.style.display='none'"> Anki</span>
+            <span class="marquee-item"><img src="https://logo.clearbit.com/chegg.com" alt="Chegg logo" onerror="this.style.display='none'"> Chegg</span>
+            <span class="marquee-item"><img src="https://logo.clearbit.com/udemy.com" alt="Udemy logo" onerror="this.style.display='none'"> Udemy</span>
+            <span class="marquee-item"><img src="https://logo.clearbit.com/obsidian.md" alt="Obsidian logo" onerror="this.style.display='none'"> Obsidian</span>
+            <span class="marquee-item"><img src="https://logo.clearbit.com/byjus.com" alt="Byju's logo" onerror="this.style.display='none'"> Byju's</span>
+            <span class="marquee-item"><img src="https://logo.clearbit.com/khanacademy.org" alt="Khan Academy logo" onerror="this.style.display='none'"> Khan Academy</span>
+            <span class="marquee-item"><img src="https://logo.clearbit.com/quizlet.com" alt="Quizlet logo" onerror="this.style.display='none'"> Quizlet</span>
+            <span class="marquee-item"><img src="https://logo.clearbit.com/coursera.org" alt="Coursera logo" onerror="this.style.display='none'"> Coursera</span>
+            <span class="marquee-item"><img src="https://logo.clearbit.com/duolingo.com" alt="Duolingo logo" onerror="this.style.display='none'"> Duolingo</span>
+            <span class="marquee-item"><img src="https://logo.clearbit.com/notion.so" alt="Notion logo" onerror="this.style.display='none'"> Notion</span>
+            <span class="marquee-item"><img src="https://logo.clearbit.com/ankiweb.net" alt="Anki logo" onerror="this.style.display='none'"> Anki</span>
+            <span class="marquee-item"><img src="https://logo.clearbit.com/chegg.com" alt="Chegg logo" onerror="this.style.display='none'"> Chegg</span>
+            <span class="marquee-item"><img src="https://logo.clearbit.com/udemy.com" alt="Udemy logo" onerror="this.style.display='none'"> Udemy</span>
+            <span class="marquee-item"><img src="https://logo.clearbit.com/obsidian.md" alt="Obsidian logo" onerror="this.style.display='none'"> Obsidian</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 4X EFFICIENCY ===== -->
+    <section class="section section-lg comparison-section" id="efficiency">
+      <div class="container text-center">
+        <div class="section-title reveal">
+          <span class="text-gradient">4x more</span> productive
+        </div>
+        <p class="section-subtitle reveal">
+          After years of constant distractions, an AI focus tool that actually works is finally here. 
+          When you think clearer and focus deeper, you free up time for what matters.
+        </p>
+        <div class="pr-comparison-grid reveal" style="margin-top: 3rem;">
+          <!-- Without BrainDock Card -->
+          <div class="pr-card pr-card-plain">
+            <div class="pr-card-content">
+            <div class="pr-card-header">
+              <span class="pr-card-label">Productivity Rate</span>
+              <span class="pr-card-stat">25% <span class="pr-card-unit">PR</span></span>
+            </div>
+            <div class="pr-card-body">
+              <div class="pr-scroll-track pr-scroll-slow">
+                <div class="pr-scroll-text">
+                  <span>the file. Here are a few options. How would you like to set up the file. Here are a few options. I'm getting started with the project.&nbsp;</span>
+                  <span>the file. Here are a few options. How would you like to set up the file. Here are a few options. I'm getting started with the project.&nbsp;</span>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+          <!-- With BrainDock Card -->
+          <div class="pr-card pr-card-image">
+            <img src="assets/images/chess.jpg" alt="" class="pr-card-bg" aria-hidden="true">
+            <div class="pr-card-overlay"></div>
+            <div class="pr-card-content">
+              <div class="pr-card-header">
+                <span class="pr-card-label">Productivity Rate</span>
+                <span class="pr-card-stat">100% <span class="pr-card-unit">PR</span></span>
+              </div>
+              <div class="pr-card-body">
+                <div class="pr-scroll-track pr-scroll-fast pr-scroll-diagonal">
+                  <div class="pr-scroll-text">
+                    <span>How would you like to set up the file. Here are a few options. I'm getting started with the project. Here are a few options. How would you like to set up the file.&nbsp;</span>
+                    <span>How would you like to set up the file. Here are a few options. I'm getting started with the project. Here are a few options. How would you like to set up the file.&nbsp;</span>
+                  </div>
+                </div>
+              </div>
+              <div class="pr-waveform">
+                  <svg viewBox="0 0 120 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="4" y="14" width="2.5" height="8" rx="1.25" fill="white" opacity="0.7"><animate attributeName="height" values="8;18;8" dur="0.8s" repeatCount="indefinite"/><animate attributeName="y" values="14;9;14" dur="0.8s" repeatCount="indefinite"/></rect>
+                    <rect x="10" y="10" width="2.5" height="16" rx="1.25" fill="white" opacity="0.7"><animate attributeName="height" values="16;6;16" dur="0.6s" repeatCount="indefinite"/><animate attributeName="y" values="10;15;10" dur="0.6s" repeatCount="indefinite"/></rect>
+                    <rect x="16" y="8" width="2.5" height="20" rx="1.25" fill="white" opacity="0.8"><animate attributeName="height" values="20;10;20" dur="0.7s" repeatCount="indefinite"/><animate attributeName="y" values="8;13;8" dur="0.7s" repeatCount="indefinite"/></rect>
+                    <rect x="22" y="12" width="2.5" height="12" rx="1.25" fill="white" opacity="0.7"><animate attributeName="height" values="12;24;12" dur="0.5s" repeatCount="indefinite"/><animate attributeName="y" values="12;6;12" dur="0.5s" repeatCount="indefinite"/></rect>
+                    <rect x="28" y="6" width="2.5" height="24" rx="1.25" fill="white" opacity="0.8"><animate attributeName="height" values="24;8;24" dur="0.9s" repeatCount="indefinite"/><animate attributeName="y" values="6;14;6" dur="0.9s" repeatCount="indefinite"/></rect>
+                    <rect x="34" y="4" width="2.5" height="28" rx="1.25" fill="white" opacity="0.9"><animate attributeName="height" values="28;12;28" dur="0.55s" repeatCount="indefinite"/><animate attributeName="y" values="4;12;4" dur="0.55s" repeatCount="indefinite"/></rect>
+                    <rect x="40" y="7" width="2.5" height="22" rx="1.25" fill="white" opacity="0.9"><animate attributeName="height" values="22;30;22" dur="0.65s" repeatCount="indefinite"/><animate attributeName="y" values="7;3;7" dur="0.65s" repeatCount="indefinite"/></rect>
+                    <rect x="46" y="3" width="2.5" height="30" rx="1.25" fill="white" opacity="1"><animate attributeName="height" values="30;14;30" dur="0.5s" repeatCount="indefinite"/><animate attributeName="y" values="3;11;3" dur="0.5s" repeatCount="indefinite"/></rect>
+                    <rect x="52" y="5" width="2.5" height="26" rx="1.25" fill="white" opacity="1"><animate attributeName="height" values="26;10;26" dur="0.7s" repeatCount="indefinite"/><animate attributeName="y" values="5;13;5" dur="0.7s" repeatCount="indefinite"/></rect>
+                    <rect x="58" y="2" width="2.5" height="32" rx="1.25" fill="white" opacity="0.9"><animate attributeName="height" values="32;16;32" dur="0.45s" repeatCount="indefinite"/><animate attributeName="y" values="2;10;2" dur="0.45s" repeatCount="indefinite"/></rect>
+                    <rect x="64" y="6" width="2.5" height="24" rx="1.25" fill="white" opacity="0.9"><animate attributeName="height" values="24;8;24" dur="0.6s" repeatCount="indefinite"/><animate attributeName="y" values="6;14;6" dur="0.6s" repeatCount="indefinite"/></rect>
+                    <rect x="70" y="9" width="2.5" height="18" rx="1.25" fill="white" opacity="0.8"><animate attributeName="height" values="18;28;18" dur="0.75s" repeatCount="indefinite"/><animate attributeName="y" values="9;4;9" dur="0.75s" repeatCount="indefinite"/></rect>
+                    <rect x="76" y="11" width="2.5" height="14" rx="1.25" fill="white" opacity="0.8"><animate attributeName="height" values="14;22;14" dur="0.85s" repeatCount="indefinite"/><animate attributeName="y" values="11;7;11" dur="0.85s" repeatCount="indefinite"/></rect>
+                    <rect x="82" y="13" width="2.5" height="10" rx="1.25" fill="white" opacity="0.7"><animate attributeName="height" values="10;20;10" dur="0.55s" repeatCount="indefinite"/><animate attributeName="y" values="13;8;13" dur="0.55s" repeatCount="indefinite"/></rect>
+                    <rect x="88" y="8" width="2.5" height="20" rx="1.25" fill="white" opacity="0.8"><animate attributeName="height" values="20;6;20" dur="0.65s" repeatCount="indefinite"/><animate attributeName="y" values="8;15;8" dur="0.65s" repeatCount="indefinite"/></rect>
+                    <rect x="94" y="10" width="2.5" height="16" rx="1.25" fill="white" opacity="0.7"><animate attributeName="height" values="16;26;16" dur="0.5s" repeatCount="indefinite"/><animate attributeName="y" values="10;5;10" dur="0.5s" repeatCount="indefinite"/></rect>
+                    <rect x="100" y="12" width="2.5" height="12" rx="1.25" fill="white" opacity="0.7"><animate attributeName="height" values="12;20;12" dur="0.8s" repeatCount="indefinite"/><animate attributeName="y" values="12;8;12" dur="0.8s" repeatCount="indefinite"/></rect>
+                    <rect x="106" y="14" width="2.5" height="8" rx="1.25" fill="white" opacity="0.6"><animate attributeName="height" values="8;18;8" dur="0.7s" repeatCount="indefinite"/><animate attributeName="y" values="14;9;14" dur="0.7s" repeatCount="indefinite"/></rect>
+                    <rect x="112" y="13" width="2.5" height="10" rx="1.25" fill="white" opacity="0.6"><animate attributeName="height" values="10;22;10" dur="0.6s" repeatCount="indefinite"/><animate attributeName="y" values="13;7;13" dur="0.6s" repeatCount="indefinite"/></rect>
+                  </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MADE FOR YOU ===== -->
+    <section class="section mfy-section reveal">
+      <div class="mfy-wrapper">
+        <!-- Left column: heading + pills -->
+        <div class="mfy-left">
+          <h2 class="mfy-heading">BrainDock is made<br><span class="mfy-heading-accent">for you</span></h2>
+          <div class="mfy-pills">
+            <button class="mfy-pill active" data-mfy="accessibility">Accessibility</button>
+            <button class="mfy-pill" data-mfy="creators">Creators</button>
+            <button class="mfy-pill" data-mfy="customer-support">Customer Support</button>
+            <button class="mfy-pill" data-mfy="developers">Developers</button>
+            <button class="mfy-pill" data-mfy="lawyers">Lawyers</button>
+            <button class="mfy-pill" data-mfy="leaders">Leaders</button>
+            <button class="mfy-pill" data-mfy="sales">Sales</button>
+            <button class="mfy-pill" data-mfy="students">Students</button>
+            <button class="mfy-pill" data-mfy="teams">Teams</button>
+          </div>
+        </div>
+
+        <!-- Right column: content panels -->
+        <div class="mfy-right">
+          <div class="mfy-panel active" data-mfy-panel="accessibility">
+            <h3 class="mfy-panel-title">BrainDock for <em>Accessibility</em></h3>
+            <p class="mfy-panel-desc">We believe everyone deserves tools that help them focus. BrainDock is built with accessibility as a core principle, not an afterthought.</p>
+            <div class="mfy-panel-actions">
+              <a href="accessibility.html" class="btn btn-outline">Learn more</a>
+              <a href="downloads/download.html" class="btn btn-primary">Download for free</a>
+            </div>
+          </div>
+          <div class="mfy-panel" data-mfy-panel="creators">
+            <h3 class="mfy-panel-title">BrainDock for <em>Creators</em></h3>
+            <p class="mfy-panel-desc">Whether you're designing, editing, writing, or composing - BrainDock shields your creative process from the constant buzz of notifications and distractions.</p>
+            <div class="mfy-panel-actions">
+              <a href="creators.html" class="btn btn-outline">Learn more</a>
+              <a href="downloads/download.html" class="btn btn-primary">Download for free</a>
+            </div>
+          </div>
+          <div class="mfy-panel" data-mfy-panel="customer-support">
+            <h3 class="mfy-panel-title">BrainDock for <em>Customer Support</em></h3>
+            <p class="mfy-panel-desc">Customer support is demanding. BrainDock helps agents stay focused through high-volume queues, reduce context-switching between tools, and deliver better responses.</p>
+            <div class="mfy-panel-actions">
+              <a href="customer-support.html" class="btn btn-outline">Learn more</a>
+              <a href="downloads/download.html" class="btn btn-primary">Download for free</a>
+            </div>
+          </div>
+          <div class="mfy-panel" data-mfy-panel="developers">
+            <h3 class="mfy-panel-title">BrainDock for <em>Developers</em></h3>
+            <p class="mfy-panel-desc">BrainDock helps developers enter and protect flow state. Block Slack noise, silence notifications, and maintain the deep focus needed to write great code.</p>
+            <div class="mfy-panel-actions">
+              <a href="developers.html" class="btn btn-outline">Learn more</a>
+              <a href="downloads/download.html" class="btn btn-primary">Download for free</a>
+            </div>
+          </div>
+          <div class="mfy-panel" data-mfy-panel="lawyers">
+            <h3 class="mfy-panel-title">BrainDock for <em>Lawyers</em></h3>
+            <p class="mfy-panel-desc">Legal work demands intense concentration. BrainDock protects your deep work time for research, drafting, and document review - so every billable hour counts.</p>
+            <div class="mfy-panel-actions">
+              <a href="lawyers.html" class="btn btn-outline">Learn more</a>
+              <a href="downloads/download.html" class="btn btn-primary">Download for free</a>
+            </div>
+          </div>
+          <div class="mfy-panel" data-mfy-panel="leaders">
+            <h3 class="mfy-panel-title">BrainDock for <em>Leaders</em></h3>
+            <p class="mfy-panel-desc">As a leader, your most valuable asset is strategic thinking time. BrainDock protects it fiercely - blocking the noise so you can focus on what truly moves the needle.</p>
+            <div class="mfy-panel-actions">
+              <a href="leaders.html" class="btn btn-outline">Learn more</a>
+              <a href="downloads/download.html" class="btn btn-primary">Download for free</a>
+            </div>
+          </div>
+          <div class="mfy-panel" data-mfy-panel="sales">
+            <h3 class="mfy-panel-title">BrainDock for <em>Sales</em></h3>
+            <p class="mfy-panel-desc">Stop losing deals to scattered attention. BrainDock helps sales professionals stay focused during prospecting, calls, and follow-ups.</p>
+            <div class="mfy-panel-actions">
+              <a href="sales.html" class="btn btn-outline">Learn more</a>
+              <a href="downloads/download.html" class="btn btn-primary">Download for free</a>
+            </div>
+          </div>
+          <div class="mfy-panel" data-mfy-panel="students">
+            <h3 class="mfy-panel-title">BrainDock for <em>Students</em></h3>
+            <p class="mfy-panel-desc">Focus smarter, not harder. BrainDock helps students study effectively, manage distractions, and build lasting focus habits.</p>
+            <div class="mfy-panel-actions">
+              <a href="students.html" class="btn btn-outline">Learn more</a>
+              <a href="downloads/download.html" class="btn btn-primary">Download for free</a>
+            </div>
+          </div>
+          <div class="mfy-panel" data-mfy-panel="teams">
+            <h3 class="mfy-panel-title">BrainDock for <em>Teams</em></h3>
+            <p class="mfy-panel-desc">Enterprise-grade focus tools for teams that demand more productivity, security, and control.</p>
+            <div class="mfy-panel-actions">
+              <a href="business.html" class="btn btn-outline">Learn more</a>
+              <a href="downloads/download.html" class="btn btn-primary">Download for free</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== AI FEATURES ===== -->
+    <section class="section section-lg" id="features">
+      <div class="container">
+        <div class="text-center reveal">
+          <span class="section-label">AI-Powered</span>
+          <h2 class="section-title"><span class="text-gradient">AI</span> Focus Tools</h2>
+          <p class="section-subtitle">Intelligent features that understand your work patterns and protect your focus automatically.</p>
+        </div>
+
+        <div class="features-grid" style="margin-top: 3rem;">
+          <!-- Attention Coach -->
+          <div class="feature-card reveal">
+            <div class="feature-card-icon">🧠</div>
+            <h3>Attention Coach</h3>
+            <p>AI that learns your focus patterns and gently guides you back when you drift. Like having a personal productivity coach that never sleeps. Gently notices when devices pull your attention away or when you step away from your desk.</p>
+            <div class="feature-visual">
+              <div class="pulse-ring">
+                <div class="pulse-ring-inner">🧠</div>
+              </div>
+              <div style="text-align: center; margin-top: 1rem; font-size: 0.8rem; color: var(--text-tertiary);">Monitoring focus patterns...</div>
+            </div>
+          </div>
+
+          <!-- Smart Sessions -->
+          <div class="feature-card reveal reveal-delay-1">
+            <div class="feature-card-icon">⏱️</div>
+            <h3>Smart Sessions</h3>
+            <p>Structured focus periods that adapt to your energy levels. BrainDock dynamically adjusts session length based on your performance data.</p>
+            <div class="feature-visual">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                <span style="font-size: 0.75rem; color: var(--text-tertiary);">Focus Session</span>
+                <span style="font-size: 0.75rem; color: var(--color-primary); font-weight: 600;">32:15</span>
+              </div>
+              <div class="focus-indicator">
+                <div class="focus-indicator-fill"></div>
+              </div>
+              <div class="tag-pills" style="margin-top: 1rem;">
+                <span class="tag-pill">Deep Work</span>
+                <span class="tag-pill">45 min</span>
+                <span class="tag-pill">High Focus</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Screen Awareness -->
+          <div class="feature-card reveal reveal-delay-2">
+            <div class="feature-card-icon">👁️</div>
+            <h3>Screen Awareness</h3>
+            <p>Knows when you're about to fall into a distraction trap. Smart alerts at exactly the right moment - before you lose 30 minutes scrolling. Optionally tracks the active window to identify shifts to distracting applications or websites.</p>
+            <div class="feature-visual">
+              <div class="notification-mock" style="animation-delay: 0s; margin-bottom: 0.75rem;">
+                <span class="notification-dot"></span>
+                <span class="notification-text">You've been on social media for 3 min - back to work?</span>
+              </div>
+              <div style="display: flex; gap: 0.5rem; margin-top: 1.5rem;">
+                <span style="padding: 4px 12px; background: var(--color-primary); color: white; border-radius: 20px; font-size: 0.7rem; font-weight: 600;">Return to Focus</span>
+                <span style="padding: 4px 12px; background: var(--bg-glass); border: 1px solid var(--border-default); border-radius: 20px; font-size: 0.7rem; color: var(--text-tertiary);">5 more min</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Performance Reports -->
+          <div class="feature-card reveal reveal-delay-3">
+            <div class="feature-card-icon">📊</div>
+            <h3>Performance Reports</h3>
+            <p>Beautiful, actionable insights into your focus patterns. Track progress over time and discover your peak productivity hours. Generate detailed PDF reports with insights into your session highlighting your focus scores, distractions &amp; activity logs.</p>
+            <div class="feature-visual">
+              <div style="display: flex; align-items: end; gap: 6px; height: 80px; padding-bottom: 4px;">
+                <div style="flex: 1; background: var(--color-primary); opacity: 0.3; border-radius: 3px; height: 30%;"></div>
+                <div style="flex: 1; background: var(--color-primary); opacity: 0.4; border-radius: 3px; height: 45%;"></div>
+                <div style="flex: 1; background: var(--color-primary); opacity: 0.5; border-radius: 3px; height: 35%;"></div>
+                <div style="flex: 1; background: var(--color-primary); opacity: 0.6; border-radius: 3px; height: 65%;"></div>
+                <div style="flex: 1; background: var(--color-primary); opacity: 0.7; border-radius: 3px; height: 55%;"></div>
+                <div style="flex: 1; background: var(--color-primary); opacity: 0.8; border-radius: 3px; height: 80%;"></div>
+                <div style="flex: 1; background: var(--color-primary); border-radius: 3px; height: 95%;"></div>
+              </div>
+              <div style="font-size: 0.7rem; color: var(--text-tertiary); margin-top: 0.5rem; text-align: center;">Focus score trending up - 23% improvement this week</div>
+            </div>
+          </div>
+
+          <!-- Privacy First (full width - Wispr-style dark card) -->
+          <div class="privacy-card reveal">
+            <div class="privacy-card-inner">
+              <div class="privacy-text">
+                <span class="privacy-label">Privacy First</span>
+                <h3 class="privacy-heading">Your data never<br>leaves your device</h3>
+                <p class="privacy-desc">BrainDock uses local AI processing - your screen content, browsing habits, and personal data stay on your computer. Zero data retention mode available.</p>
+                <div class="privacy-badges">
+                  <div class="privacy-badge">
+                    <span class="privacy-badge-icon">🔒</span>
+                    <div>
+                      <div class="privacy-badge-title">Local Processing</div>
+                      <div class="privacy-badge-sub">All AI runs on-device</div>
+                    </div>
+                  </div>
+                  <div class="privacy-badge">
+                    <span class="privacy-badge-icon">🛡️</span>
+                    <div>
+                      <div class="privacy-badge-title">Zero Data Retention</div>
+                      <div class="privacy-badge-sub">Nothing stored on servers</div>
+                    </div>
+                  </div>
+                  <div class="privacy-badge">
+                    <span class="privacy-badge-icon">✓</span>
+                    <div>
+                      <div class="privacy-badge-title">HIPAA Ready</div>
+                      <div class="privacy-badge-sub">Healthcare compliant</div>
+                    </div>
+                  </div>
+                  <div class="privacy-badge">
+                    <span class="privacy-badge-icon">✓</span>
+                    <div>
+                      <div class="privacy-badge-title">SOC 2</div>
+                      <div class="privacy-badge-sub">Independently verified</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="privacy-visual">
+                <div class="privacy-shield">
+                  <div class="privacy-shield-ring privacy-shield-ring-1"></div>
+                  <div class="privacy-shield-ring privacy-shield-ring-2"></div>
+                  <div class="privacy-shield-ring privacy-shield-ring-3"></div>
+                  <div class="privacy-shield-core">🛡️</div>
+                </div>
+                <div class="privacy-visual-label">All data processed locally</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CROSS PLATFORM ===== -->
+    <section class="section platform-section reveal">
+      <div class="container">
+        <h2 class="section-title">On-the-go or at your desk</h2>
+        <p class="section-subtitle">With apps for macOS, Windows, and mobile, stay focused from wherever you are. Your settings and data sync seamlessly between all devices.</p>
+        <div class="platform-badges">
+          <span class="platform-badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 21.99 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09 21.99C7.79 22.03 6.8 20.68 5.96 19.47C4.25 16.97 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.89C10.1 6.87 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5Z"/></svg>
+            macOS
+          </span>
+          <span class="platform-badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.548l7.065-0.964 0.003 6.818-7.06 0.04L3 5.548zm7.062 6.632l0.006 6.827-7.062-0.97v-5.896l7.056 0.039zm0.856-7.703L21 3v8.39l-10.082 0.08V4.477zm10.088 7.958L21 21l-10.084-1.39-0.014-7.178 10.104 0.003z"/></svg>
+            Windows
+          </span>
+          <span class="platform-badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09z"/></svg>
+            iOS
+          </span>
+        </div>
+        <div class="platform-mockup reveal">
+          <div style="text-align: center; padding: 3rem 0;">
+            <div style="font-size: 4rem; margin-bottom: 1rem;">🖥️</div>
+            <div style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">BrainDock Desktop</div>
+            <div style="font-size: 0.875rem; color: var(--text-secondary);">Seamlessly integrated into your desktop workflow</div>
+            <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 2rem;">
+              <div style="text-align: center;">
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--color-primary);">v2.1</div>
+                <div style="font-size: 0.75rem; color: var(--text-tertiary);">Latest Version</div>
+              </div>
+              <div style="text-align: center;">
+                <div style="font-size: 1.5rem; font-weight: 700;">12MB</div>
+                <div style="font-size: 0.75rem; color: var(--text-tertiary);">Lightweight</div>
+              </div>
+              <div style="text-align: center;">
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--color-success);">4.9★</div>
+                <div style="font-size: 0.75rem; color: var(--text-tertiary);">User Rating</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="section testimonials-section" id="testimonials">
+      <div class="container">
+        <div class="text-center reveal">
+          <h2 class="section-title">Focus love</h2>
+          <p class="section-subtitle">Hear from people who've transformed their productivity with BrainDock.</p>
+        </div>
+      </div>
+      <div class="testimonials-track" style="margin-top: 2rem;">
+        <div class="testimonials-slide">
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"BrainDock completely changed how I work. I used to lose hours to distractions - now I'm consistently in flow state. It's probably my favorite productivity tool."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">SM</div>
+            <div>
+              <div class="testimonial-name">Sarah Mitchell</div>
+              <div class="testimonial-role">Product Designer, Figma</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"As an engineer, context switching was killing my productivity. BrainDock's screen awareness knows exactly when to nudge me back. My PR output has doubled."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">MJ</div>
+            <div>
+              <div class="testimonial-name">Marcus Johnson</div>
+              <div class="testimonial-role">Senior Engineer, Stripe</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"The attention coach is like having a mindfulness guru built into my Mac. I've seen an 85% improvement in my deep work sessions since I started using BrainDock."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">EC</div>
+            <div>
+              <div class="testimonial-name">Emily Chen</div>
+              <div class="testimonial-role">Content Lead, Notion</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"I have ADHD and BrainDock has been an absolute game-changer. The gentle nudges and smart sessions work with my brain instead of against it."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">RP</div>
+            <div>
+              <div class="testimonial-name">Rich Pankey</div>
+              <div class="testimonial-role">Freelance Developer</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"I was skeptical at first, but the performance reports opened my eyes. I didn't realize how much time I was losing to micro-distractions. Now I guard my focus fiercely."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">JT</div>
+            <div>
+              <div class="testimonial-name">Jeannette Tan</div>
+              <div class="testimonial-role">VP Engineering, StartupCo</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"We rolled out BrainDock to our entire engineering team. The shared insights and team analytics are incredible. Average focus time increased by 40% in the first month."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">AW</div>
+            <div>
+              <div class="testimonial-name">Agam Walia</div>
+              <div class="testimonial-role">Engineering Manager</div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <!-- Duplicate for seamless loop -->
+        <div class="testimonials-slide" aria-hidden="true">
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"BrainDock completely changed how I work. I used to lose hours to distractions - now I'm consistently in flow state. It's probably my favorite productivity tool."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">SM</div>
+            <div>
+              <div class="testimonial-name">Sarah Mitchell</div>
+              <div class="testimonial-role">Product Designer, Figma</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"As an engineer, context switching was killing my productivity. BrainDock's screen awareness knows exactly when to nudge me back. My PR output has doubled."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">MJ</div>
+            <div>
+              <div class="testimonial-name">Marcus Johnson</div>
+              <div class="testimonial-role">Senior Engineer, Stripe</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"The attention coach is like having a mindfulness guru built into my Mac. I've seen an 85% improvement in my deep work sessions since I started using BrainDock."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">EC</div>
+            <div>
+              <div class="testimonial-name">Emily Chen</div>
+              <div class="testimonial-role">Content Lead, Notion</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"I have ADHD and BrainDock has been an absolute game-changer. The gentle nudges and smart sessions work with my brain instead of against it."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">RP</div>
+            <div>
+              <div class="testimonial-name">Rich Pankey</div>
+              <div class="testimonial-role">Freelance Developer</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"I was skeptical at first, but the performance reports opened my eyes. I didn't realize how much time I was losing to micro-distractions. Now I guard my focus fiercely."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">JT</div>
+            <div>
+              <div class="testimonial-name">Jeannette Tan</div>
+              <div class="testimonial-role">VP Engineering, StartupCo</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"We rolled out BrainDock to our entire engineering team. The shared insights and team analytics are incredible. Average focus time increased by 40% in the first month."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">AW</div>
+            <div>
+              <div class="testimonial-name">Agam Walia</div>
+              <div class="testimonial-role">Engineering Manager</div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <!-- Case Studies -->
+      <div class="container">
+        <div class="case-studies reveal">
+          <a href="#" class="case-study-card">
+            <div class="case-study-stat">4x faster output</div>
+            <div class="case-study-title">How a startup founder reclaimed 3 hours daily with BrainDock</div>
+            <div class="case-study-author">Alex Rivera, CEO &amp; Founder</div>
+          </a>
+          <a href="#" class="case-study-card">
+            <div class="case-study-stat">50+ hours saved/mo</div>
+            <div class="case-study-title">From constant context-switching to deep focus - a developer's journey</div>
+            <div class="case-study-author">Sam Park, Senior Developer</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="text-center reveal">
+          <h2 class="section-title">Frequently asked questions</h2>
+        </div>
+        <div class="faq-section" style="margin-top: 2rem;">
+          <div class="faq-item">
+            <button class="faq-question">
+              Does BrainDock violate my privacy?
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">No, privacy was a top priority when we built BrainDock. We don't permanently store anything, we don't use facial recognition, and your session data stays on your device. BrainDock is here to help you focus, not collect your personal information.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              Is sharing your screen private and safe?
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">Yes, completely. Screen sharing is done entirely on your computer and works offline. BrainDock only reads the name of your active window to check against your distraction list. No screenshots are taken, no recordings are made, and nothing regarding this leaves your machine.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              What can BrainDock actually notice during your session?
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">BrainDock can notice activities during your session. For example, stepping away from your desk, distractions like using your phone, tablets, game controllers, etc. The best part is that it only flags these when you're actually using them in front of your screen, not just because they're nearby.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              Does BrainDock require an internet connection?
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">Screen sharing operates entirely offline, as it runs locally on your computer. AI-powered distraction sensing requires an internet connection to identify devices such as phones and tablets; however, no data is stored permanently on servers, and any data sent for analysis is discarded after processing.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              Is my data uploaded to the Cloud?
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">Your session statistics, reports, and personal data remain on your computer. For distraction sensing, frames are temporarily transmitted to our AI models for analysis and then deleted. No data is stored permanently, and we do not retain records of your sessions.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="section section-lg cta-section" id="download">
+      <div class="container">
+        <div class="cta-content reveal">
+          <h2>Start focusing</h2>
+          <p>AI-powered focus and productivity in every application. 4x more productive, with privacy built in.</p>
+          <div class="cta-actions">
+            <a href="downloads/download.html" class="btn btn-primary btn-lg">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download for macOS
+            </a>
+            <a href="#" class="btn btn-secondary btn-lg">Try BrainDock</a>
+          </div>
+          <div class="cta-note">Available on macOS, Windows, and iOS</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STILL NOT SURE ===== -->
+    <section class="ask-ai-section">
+      <div class="container">
+        <h3>Still not sure that BrainDock is right for you?</h3>
+        <p>Let your favorite AI do the thinking for you. Click a button and see what they say about BrainDock.</p>
+        <div class="ask-ai-buttons">
+          <a href="https://chat.openai.com/?q=tell+me+why+braindock+is+a+great+focus+and+productivity+app" target="_blank" rel="noopener" class="btn btn-outline">Ask ChatGPT</a>
+          <a href="https://claude.ai/new?q=tell+me+why+braindock+is+a+great+focus+and+productivity+app" target="_blank" rel="noopener" class="btn btn-outline">Ask Claude</a>
+          <a href="https://www.perplexity.ai/search/new?q=tell+me+why+braindock+is+a+great+focus+and+productivity+app" target="_blank" rel="noopener" class="btn btn-outline">Ask Perplexity</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <img src="assets/icons/logo.png" alt="BrainDock">
+            <span class="logo-text">BrainDock</span>
+          </a>
+          <p>AI-powered focus and productivity that helps you work smarter and focus deeper.</p>
+          <div class="footer-social">
+            <a href="https://twitter.com/braindock" aria-label="Twitter" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://linkedin.com/company/braindock" aria-label="LinkedIn" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="https://github.com/braindock" aria-label="GitHub" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+            <a href="https://youtube.com/@braindock" aria-label="YouTube" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Company</h4>
+          <a href="about.html">About</a>
+          <a href="careers.html">Careers</a>
+          <a href="#">Trust Center</a>
+          <a href="#">Become an Affiliate</a>
+          <a href="#">Media Kit</a>
+        </div>
+        <div class="footer-column">
+          <h4>Product</h4>
+          <a href="#">What's New</a>
+          <a href="use-cases.html">Use Cases</a>
+          <a href="students.html">BrainDock for Students</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="downloads/download.html">Download</a>
+        </div>
+        <div class="footer-column">
+          <h4>Resources</h4>
+          <a href="workflows.html">Workflows</a>
+          <a href="support.html">Talk to Support</a>
+          <a href="talk-to-sales.html">Talk to Sales</a>
+          <a href="#">Help Center</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">&copy; <span id="footerYear">2026</span> BrainDock, Inc.</div>
+        <div class="footer-legal">
+          <a href="terms.html">Terms</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="data-controls.html">Data Controls</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

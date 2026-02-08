@@ -1,0 +1,480 @@
+/* ============================================
+   BrainDock — Main JavaScript
+   Handles navigation, animations, and interactivity
+   ============================================ */
+
+(function () {
+  'use strict';
+
+  // ========== FOOTER YEAR ==========
+  const yearEl = document.getElementById('footerYear');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // ========== HEADER SCROLL EFFECT ==========
+  const header = document.getElementById('header');
+  let lastScrollY = 0;
+
+  function handleHeaderScroll() {
+    const scrollY = window.scrollY;
+    if (header) {
+      if (scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    }
+    lastScrollY = scrollY;
+  }
+
+  window.addEventListener('scroll', handleHeaderScroll, { passive: true });
+  handleHeaderScroll();
+
+  // ========== DESKTOP DROPDOWN MENUS ==========
+  const navItems = document.querySelectorAll('.nav-item.has-dropdown');
+  let activeDropdown = null;
+  let dropdownTimeout = null;
+
+  navItems.forEach((item) => {
+    const trigger = item.querySelector('.nav-link');
+
+    item.addEventListener('mouseenter', () => {
+      clearTimeout(dropdownTimeout);
+      if (activeDropdown && activeDropdown !== item) {
+        activeDropdown.classList.remove('active');
+        const prevTrigger = activeDropdown.querySelector('.nav-link');
+        if (prevTrigger) prevTrigger.setAttribute('aria-expanded', 'false');
+      }
+      item.classList.add('active');
+      if (trigger) trigger.setAttribute('aria-expanded', 'true');
+      activeDropdown = item;
+    });
+
+    item.addEventListener('mouseleave', () => {
+      dropdownTimeout = setTimeout(() => {
+        item.classList.remove('active');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+        if (activeDropdown === item) activeDropdown = null;
+      }, 150);
+    });
+
+    // Click toggle for touch devices
+    if (trigger) {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isActive = item.classList.contains('active');
+        // Close all
+        navItems.forEach((ni) => {
+          ni.classList.remove('active');
+          const t = ni.querySelector('.nav-link');
+          if (t) t.setAttribute('aria-expanded', 'false');
+        });
+        if (!isActive) {
+          item.classList.add('active');
+          trigger.setAttribute('aria-expanded', 'true');
+          activeDropdown = item;
+        } else {
+          activeDropdown = null;
+        }
+      });
+    }
+  });
+
+  // Close dropdowns on outside click
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-item.has-dropdown')) {
+      navItems.forEach((item) => {
+        item.classList.remove('active');
+        const trigger = item.querySelector('.nav-link');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      });
+      activeDropdown = null;
+    }
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      navItems.forEach((item) => {
+        item.classList.remove('active');
+        const trigger = item.querySelector('.nav-link');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      });
+      activeDropdown = null;
+
+      // Also close mobile menu
+      const mobileMenu = document.getElementById('mobileMenu');
+      const mobileToggle = document.getElementById('mobileToggle');
+      if (mobileMenu && mobileMenu.classList.contains('open')) {
+        mobileMenu.classList.remove('open');
+        if (mobileToggle) mobileToggle.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+  });
+
+  // ========== MOBILE MENU ==========
+  const mobileToggle = document.getElementById('mobileToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  if (mobileToggle && mobileMenu) {
+    mobileToggle.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.contains('open');
+      if (isOpen) {
+        mobileMenu.classList.remove('open');
+        mobileToggle.classList.remove('active');
+        document.body.style.overflow = '';
+      } else {
+        mobileMenu.classList.add('open');
+        mobileToggle.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  }
+
+  // Mobile dropdown accordion
+  const mobileNavItems = document.querySelectorAll('.mobile-nav-item.has-dropdown');
+  mobileNavItems.forEach((item) => {
+    const trigger = item.querySelector('.mobile-nav-link');
+    if (trigger) {
+      trigger.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        // Close all
+        mobileNavItems.forEach((ni) => ni.classList.remove('active'));
+        if (!isActive) {
+          item.classList.add('active');
+        }
+      });
+    }
+  });
+
+  // Close mobile menu on link click
+  const mobileLinks = mobileMenu
+    ? mobileMenu.querySelectorAll('a:not(.mobile-nav-link)')
+    : [];
+  mobileLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      if (mobileToggle) mobileToggle.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // ========== SMOOTH SCROLL FOR ANCHOR LINKS ==========
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href === '#' || href === '#main') return;
+
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        const headerHeight = header ? header.offsetHeight : 72;
+        const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerHeight - 20;
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth',
+        });
+
+        // Close mobile menu
+        if (mobileMenu && mobileMenu.classList.contains('open')) {
+          mobileMenu.classList.remove('open');
+          if (mobileToggle) mobileToggle.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      }
+    });
+  });
+
+  // ========== SCROLL REVEAL ANIMATIONS ==========
+  const revealElements = document.querySelectorAll('.reveal');
+
+  if (revealElements.length > 0 && 'IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px',
+      }
+    );
+
+    revealElements.forEach((el) => revealObserver.observe(el));
+  } else {
+    // Fallback: show all
+    revealElements.forEach((el) => el.classList.add('visible'));
+  }
+
+  // ========== FAQ ACCORDION ==========
+  const faqItems = document.querySelectorAll('.faq-item');
+
+  faqItems.forEach((item) => {
+    const question = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+
+    if (question && answer) {
+      question.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+
+        // Close all
+        faqItems.forEach((fi) => {
+          fi.classList.remove('active');
+          const fa = fi.querySelector('.faq-answer');
+          if (fa) fa.style.maxHeight = null;
+        });
+
+        // Open clicked (if it was closed)
+        if (!isActive) {
+          item.classList.add('active');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    }
+  });
+
+  // ========== PRICING TOGGLE ==========
+  const pricingToggle = document.querySelectorAll('.pricing-toggle-option');
+  const monthlyPrices = document.querySelectorAll('.price-monthly');
+  const annualPrices = document.querySelectorAll('.price-annual');
+
+  pricingToggle.forEach((option) => {
+    option.addEventListener('click', () => {
+      pricingToggle.forEach((o) => o.classList.remove('active'));
+      option.classList.add('active');
+
+      const isAnnual = option.dataset.period === 'annual';
+
+      monthlyPrices.forEach((el) => {
+        el.style.display = isAnnual ? 'none' : 'block';
+      });
+      annualPrices.forEach((el) => {
+        el.style.display = isAnnual ? 'block' : 'none';
+      });
+    });
+  });
+
+  // ========== SAVINGS CALCULATOR ==========
+  const hoursSlider = document.getElementById('hoursSlider');
+  const hoursValue = document.getElementById('hoursValue');
+  const rateInput = document.getElementById('rateInput');
+  const savingsResults = document.querySelectorAll('.calc-result');
+
+  function updateSavings() {
+    if (!hoursSlider || !rateInput) return;
+
+    const hours = parseFloat(hoursSlider.value) || 2;
+    const rate = parseFloat(rateInput.value) || 50;
+
+    if (hoursValue) hoursValue.textContent = hours;
+
+    const hoursTyping = hours * 22; // work days per month
+    const hoursSaved = Math.round(hoursTyping * 0.5); // 50% savings
+    const valueSaved = hoursSaved * rate;
+    const proCost = 9;
+    const netSavings = valueSaved - proCost;
+
+    const resultEls = {
+      hoursSaved: document.getElementById('calcHoursSaved'),
+      valueSaved: document.getElementById('calcValueSaved'),
+      proCost: document.getElementById('calcProCost'),
+      netSavings: document.getElementById('calcNetSavings'),
+    };
+
+    if (resultEls.hoursSaved) resultEls.hoursSaved.textContent = hoursSaved;
+    if (resultEls.valueSaved) resultEls.valueSaved.textContent = '$' + valueSaved.toLocaleString();
+    if (resultEls.proCost) resultEls.proCost.textContent = '$' + proCost;
+    if (resultEls.netSavings) resultEls.netSavings.textContent = '$' + netSavings.toLocaleString() + '/mo';
+  }
+
+  if (hoursSlider) {
+    hoursSlider.addEventListener('input', updateSavings);
+  }
+  if (rateInput) {
+    rateInput.addEventListener('input', updateSavings);
+  }
+  // Initial calculation
+  updateSavings();
+
+  // ========== TABS ==========
+  const tabContainers = document.querySelectorAll('[data-tabs]');
+
+  tabContainers.forEach((container) => {
+    const tabs = container.querySelectorAll('.tab');
+    const tabId = container.dataset.tabs;
+    const contents = document.querySelectorAll(`[data-tab-content="${tabId}"] .tab-content`);
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.target;
+
+        tabs.forEach((t) => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        contents.forEach((c) => {
+          c.classList.remove('active');
+          if (c.dataset.tab === target) {
+            c.classList.add('active');
+          }
+        });
+      });
+    });
+  });
+
+  // ========== USE CASE TABS ==========
+  const useCaseTabs = document.querySelectorAll('.use-case-tab');
+  const useCaseGroups = document.querySelectorAll('.use-case-group');
+
+  useCaseTabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.category;
+
+      useCaseTabs.forEach((t) => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      useCaseGroups.forEach((group) => {
+        if (target === 'all' || group.dataset.category === target) {
+          group.style.display = '';
+        } else {
+          group.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // ========== DOWNLOAD BUTTONS (display only) ==========
+  document.querySelectorAll('[data-download]').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      // Placeholder: could open download modal or redirect
+    });
+  });
+
+  // ========== TESTIMONIAL AUTO-SCROLL ==========
+  const testimonialTrack = document.querySelector('.testimonials-track');
+  if (testimonialTrack) {
+    let scrollAmount = 0;
+    let scrollDirection = 1;
+    let isHovering = false;
+    let scrollInterval;
+
+    function autoScrollTestimonials() {
+      if (isHovering) return;
+      scrollAmount += 0.5 * scrollDirection;
+      const maxScroll = testimonialTrack.scrollWidth - testimonialTrack.clientWidth;
+
+      if (scrollAmount >= maxScroll) {
+        scrollDirection = -1;
+      } else if (scrollAmount <= 0) {
+        scrollDirection = 1;
+      }
+
+      testimonialTrack.scrollLeft = scrollAmount;
+    }
+
+    scrollInterval = setInterval(autoScrollTestimonials, 30);
+
+    testimonialTrack.addEventListener('mouseenter', () => {
+      isHovering = true;
+    });
+
+    testimonialTrack.addEventListener('mouseleave', () => {
+      isHovering = false;
+      scrollAmount = testimonialTrack.scrollLeft;
+    });
+
+    // Allow manual scrolling
+    testimonialTrack.addEventListener('scroll', () => {
+      if (isHovering) {
+        scrollAmount = testimonialTrack.scrollLeft;
+      }
+    });
+  }
+
+  // ========== MADE FOR YOU — PILL SWITCHER ==========
+  const mfyPills = document.querySelectorAll('.mfy-pill');
+  const mfyPanels = document.querySelectorAll('.mfy-panel');
+
+  if (mfyPills.length) {
+    mfyPills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        const target = pill.getAttribute('data-mfy');
+
+        // Update active pill
+        mfyPills.forEach((p) => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        // Update active panel
+        mfyPanels.forEach((panel) => {
+          if (panel.getAttribute('data-mfy-panel') === target) {
+            panel.classList.add('active');
+          } else {
+            panel.classList.remove('active');
+          }
+        });
+      });
+    });
+  }
+
+  // ========== CONTACT FORM ==========
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Placeholder
+      const btn = contactForm.querySelector('button[type="submit"]');
+      if (btn) {
+        const originalText = btn.textContent;
+        btn.textContent = 'Sent! We\'ll be in touch.';
+        btn.disabled = true;
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.disabled = false;
+          contactForm.reset();
+        }, 3000);
+      }
+    });
+  }
+
+  // ========== TEAM SAVINGS CALCULATOR ==========
+  const teamSlider = document.getElementById('teamSlider');
+  const teamCount = document.getElementById('teamCount');
+  const teamRate = document.getElementById('teamRate');
+
+  function updateTeamSavings() {
+    if (!teamSlider || !teamRate) return;
+
+    const members = parseInt(teamSlider.value) || 10;
+    const rate = parseFloat(teamRate.value) || 50;
+
+    if (teamCount) teamCount.textContent = members;
+
+    const hoursSavedPerWeek = Math.round(members * 1); // 1 hour per person per week
+    const valueSavedPerMonth = Math.round(hoursSavedPerWeek * 4.33 * rate);
+    const teamCost = members * 9;
+
+    const els = {
+      hours: document.getElementById('teamHoursSaved'),
+      value: document.getElementById('teamValueSaved'),
+      cost: document.getElementById('teamCost'),
+    };
+
+    if (els.hours) els.hours.textContent = hoursSavedPerWeek + ' hours';
+    if (els.value) els.value.textContent = '$' + valueSavedPerMonth.toLocaleString();
+    if (els.cost) els.cost.textContent = '$' + teamCost;
+  }
+
+  if (teamSlider) {
+    teamSlider.addEventListener('input', updateTeamSavings);
+  }
+  if (teamRate) {
+    teamRate.addEventListener('input', updateTeamSavings);
+  }
+  updateTeamSavings();
+
+})();

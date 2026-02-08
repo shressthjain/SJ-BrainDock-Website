@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="40" viewBox="0 0 200 40" fill="none" aria-hidden="true">
+  <!-- BrainDock icon: molecular/neural node symbol -->
+  <g transform="translate(20,20)">
+    <g stroke="#111827" stroke-linecap="round" stroke-width="3.2">
+      <line x1="0" y1="-13" x2="0" y2="13"/>
+      <line x1="-11.3" y1="-6.5" x2="11.3" y2="6.5"/>
+      <line x1="-11.3" y1="6.5" x2="11.3" y2="-6.5"/>
+    </g>
+    <circle cx="0" cy="-13" r="2.2" fill="#111827"/>
+    <circle cx="0" cy="13" r="2.2" fill="#111827"/>
+    <circle cx="-11.3" cy="-6.5" r="2.2" fill="#111827"/>
+    <circle cx="11.3" cy="6.5" r="2.2" fill="#111827"/>
+    <circle cx="-11.3" cy="6.5" r="2.2" fill="#111827"/>
+    <circle cx="11.3" cy="-6.5" r="2.2" fill="#111827"/>
+  </g>
+  <!-- BrainDock text -->
+  <text x="42" y="27" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="22" font-weight="600" fill="#111827" letter-spacing="-0.5">BrainDock</text>
+</svg>
