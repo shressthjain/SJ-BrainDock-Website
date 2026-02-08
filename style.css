@@ -1,3 +1,57 @@
+/* ---------- Dark Mode Overrides ---------- */
+.dark-mode {
+  --bg-primary: #101114;
+  --bg-secondary: #181a1b;
+  --bg-elevated: #23272a;
+  --bg-card: #181a1b;
+  --bg-card-hover: #23272a;
+  --bg-glass: rgba(255,255,255,0.01);
+  --bg-glass-hover: rgba(255,255,255,0.03);
+  --text-primary: #f1f1f1;
+  --text-secondary: #b0b0b0;
+  --text-tertiary: #888;
+  --text-inverse: #101114;
+  --color-primary: #fff;
+  --color-primary-hover: #e0e0e0;
+  --color-primary-light: rgba(255,255,255,0.08);
+  --color-secondary: #4f8cff;
+  --color-secondary-light: rgba(79,140,255,0.08);
+  --color-accent: #fff;
+  --color-success: #22b07d;
+  --color-warning: #e5a400;
+  --border-default: rgba(255,255,255,0.08);
+  --border-hover: rgba(255,255,255,0.15);
+  --border-active: rgba(255,255,255,0.2);
+}
+
+body.dark-mode {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* ASCII Art Banner */
+#ascii-art {
+  width: 100vw;
+  max-width: 100%;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', 'Fira Mono', 'Consolas', monospace;
+  color: #111;
+  white-space: pre;
+  text-align: center;
+  font-size: clamp(0.7rem, 2vw, 1.2rem);
+  line-height: 1.1;
+  margin: 0 auto 2rem auto;
+  letter-spacing: 1.5px;
+  user-select: none;
+  pointer-events: none;
+  min-height: 7em;
+}
+@media (max-width: 600px) {
+  #ascii-art {
+    font-size: 0.7rem;
+    min-height: 4em;
+  }
+}
 /* ============================================
    BrainDock — Light Theme Design System
    Inspired by modern SaaS landing pages
@@ -351,12 +405,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-icon {
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  border-radius: var(--radius-full);
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: transform var(--transition-base);
+  color: var(--text-tertiary);
 }
-
 /* ---------- Header / Navigation ---------- */
 .header {
   position: fixed;
@@ -2152,15 +2206,16 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-primary);
 }
 
-.faq-question .faq-icon {
-  width: 20px;
-  height: 20px;
+
+.faq-question svg {
+  width: 16px;
+  height: 16px;
   flex-shrink: 0;
   transition: transform var(--transition-base);
   color: var(--text-tertiary);
 }
 
-.faq-item.active .faq-question .faq-icon {
+.faq-item.active .faq-question svg {
   transform: rotate(45deg);
 }
 
