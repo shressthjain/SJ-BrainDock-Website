@@ -1,3 +1,18 @@
+/* App logos for use-case cards */
+.use-case-logos {
+  display: flex;
+  gap: 8px;
+  margin-bottom: var(--space-2);
+}
+
+.app-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
 /* ---------- Dark Mode Overrides ---------- */
 .dark-mode {
   --bg-primary: #101114;
@@ -2480,47 +2495,54 @@ h1, h2, h3, h4, h5, h6 {
 
 .use-cases-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-8);
+  margin-top: var(--space-8);
 }
 
 .use-case-card {
   display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  padding: var(--space-5);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-6);
   background: var(--bg-card);
   border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
-  transition: all var(--transition-base);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 4px 24px rgba(108,71,255,0.08);
+  transition: box-shadow var(--transition-base), border-color var(--transition-base), background var(--transition-base);
+  min-height: 260px;
 }
 
 .use-case-card:hover {
-  border-color: var(--border-hover);
+  border-color: var(--color-primary);
   background: var(--bg-card-hover);
+  box-shadow: 0 8px 32px rgba(108,71,255,0.16);
 }
 
 .use-case-icon {
-  width: 40px;
-  height: 40px;
+  width: 56px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg-secondary);
-  border-radius: var(--radius-md);
-  flex-shrink: 0;
-  font-size: var(--text-lg);
+  background: var(--color-primary-light);
+  border-radius: var(--radius-full);
+  font-size: 2rem;
+  margin-bottom: var(--space-2);
 }
 
 .use-case-name {
-  font-weight: 600;
-  font-size: var(--text-sm);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  color: var(--color-primary);
+  margin-bottom: var(--space-1);
 }
 
 .use-case-desc {
-  font-size: var(--text-xs);
-  color: var(--text-tertiary);
-  margin-top: 2px;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2);
 }
 
 /* ---------- Security / Trust Section ---------- */
@@ -2886,12 +2908,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .tag-pill {
-  padding: var(--space-1) var(--space-3);
-  background: var(--bg-glass);
-  border: 1px solid var(--border-default);
+  display: inline-block;
+  padding: var(--space-1) var(--space-4);
+  background: var(--color-primary-light);
+  border: none;
   border-radius: var(--radius-full);
   font-size: var(--text-xs);
-  color: var(--text-secondary);
+  color: var(--color-primary);
+  font-weight: 500;
+  margin-right: var(--space-2);
+  margin-bottom: var(--space-1);
 }
 
 /* ---------- Two Column Layout ---------- */
