@@ -363,8 +363,36 @@
     });
   });
 
-  // Testimonial scrolling is handled purely by CSS animation
-  // (see .testimonials-track in style.css)
+  // ========== TESTIMONIAL SEAMLESS SCROLL ==========
+  const testimonialTrack = document.querySelector('.testimonials-track');
+  if (testimonialTrack) {
+    const firstSlide = testimonialTrack.querySelector('.testimonials-slide');
+    if (firstSlide) {
+      // Measure actual pixel width of one slide for a seamless loop
+      const slideWidth = firstSlide.offsetWidth;
+
+      // Inject keyframe with exact pixel distance (avoids CSS % miscalculation)
+      const scrollStyle = document.createElement('style');
+      scrollStyle.textContent = `
+        @keyframes testimonials-scroll {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-${slideWidth}px); }
+        }
+      `;
+      document.head.appendChild(scrollStyle);
+
+      // Apply smooth, infinite animation
+      testimonialTrack.style.animation = 'testimonials-scroll 40s linear infinite';
+
+      // Pause on hover so users can read
+      testimonialTrack.addEventListener('mouseenter', () => {
+        testimonialTrack.style.animationPlayState = 'paused';
+      });
+      testimonialTrack.addEventListener('mouseleave', () => {
+        testimonialTrack.style.animationPlayState = 'running';
+      });
+    }
+  }
 
   // ========== MADE FOR YOU — PILL SWITCHER ==========
   const mfyPills = document.querySelectorAll('.mfy-pill');

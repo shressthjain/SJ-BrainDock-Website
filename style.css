@@ -13,36 +13,6 @@
   background: #fff;
   box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
-/* ---------- Dark Mode Overrides ---------- */
-.dark-mode {
-  --bg-primary: #101114;
-  --bg-secondary: #181a1b;
-  --bg-elevated: #23272a;
-  --bg-card: #181a1b;
-  --bg-card-hover: #23272a;
-  --bg-glass: rgba(255,255,255,0.01);
-  --bg-glass-hover: rgba(255,255,255,0.03);
-  --text-primary: #f1f1f1;
-  --text-secondary: #b0b0b0;
-  --text-tertiary: #888;
-  --text-inverse: #101114;
-  --color-primary: #fff;
-  --color-primary-hover: #e0e0e0;
-  --color-primary-light: rgba(255,255,255,0.08);
-  --color-secondary: #4f8cff;
-  --color-secondary-light: rgba(79,140,255,0.08);
-  --color-accent: #fff;
-  --color-success: #22b07d;
-  --color-warning: #e5a400;
-  --border-default: rgba(255,255,255,0.08);
-  --border-hover: rgba(255,255,255,0.15);
-  --border-active: rgba(255,255,255,0.2);
-}
-
-body.dark-mode {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-}
 
 /* ASCII Art Banner */
 #ascii-art {
@@ -74,12 +44,12 @@ body.dark-mode {
 
 /* ---------- CSS Custom Properties ---------- */
 :root {
-  /* Background colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f8fa;
-  --bg-elevated: #f0f0f3;
+  /* Background colors — warm creme */
+  --bg-primary: #FAF7F2;
+  --bg-secondary: #F3F0EB;
+  --bg-elevated: #EDEBE6;
   --bg-card: #ffffff;
-  --bg-card-hover: #f5f5f8;
+  --bg-card-hover: #FBF9F6;
   --bg-glass: rgba(0, 0, 0, 0.02);
   --bg-glass-hover: rgba(0, 0, 0, 0.04);
 
@@ -840,9 +810,11 @@ h1, h2, h3, h4, h5, h6 {
 /* ---------- Logo Marquee ---------- */
 .marquee-section {
   padding: var(--space-16) 0;
-  border-top: 1px solid var(--border-default);
-  border-bottom: 1px solid var(--border-default);
   overflow: hidden;
+  background: #0f1a14;
+  border-radius: var(--radius-2xl);
+  max-width: 1280px;
+  margin: var(--space-10) auto;
 }
 
 .marquee-label {
@@ -873,7 +845,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(4px 0 16px rgba(255, 255, 255, 0.8));
+  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.4));
   animation: girl-sway 3s ease-in-out infinite;
 }
 
@@ -1387,10 +1359,10 @@ h1, h2, h3, h4, h5, h6 {
 /* ---------- Privacy Card (Wispr-style) ---------- */
 .privacy-card {
   grid-column: 1 / -1;
-  background: #0f0f14;
+  background: #142820;
   border-radius: var(--radius-2xl);
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .privacy-card-inner {
@@ -1650,18 +1622,17 @@ h1, h2, h3, h4, h5, h6 {
 /* ---------- Testimonials ---------- */
 .testimonials-section {
   overflow: hidden;
+  background: #0f1a14;
+  border-radius: var(--radius-2xl);
+  max-width: 1280px;
+  margin: var(--space-10) auto;
 }
 
 .testimonials-track {
   display: flex;
   gap: 0;
   padding: var(--space-4) 0;
-  animation: testimonials-scroll 40s linear infinite;
-  width: max-content;
-}
-
-.testimonials-track:hover {
-  animation-play-state: paused;
+  /* Animation applied dynamically by JS for pixel-perfect looping */
 }
 
 .testimonials-slide {
@@ -1669,11 +1640,6 @@ h1, h2, h3, h4, h5, h6 {
   gap: var(--space-6);
   flex-shrink: 0;
   padding: 0 var(--space-3);
-}
-
-@keyframes testimonials-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
 }
 
 .testimonials-track::-webkit-scrollbar {
@@ -3034,6 +3000,62 @@ h1, h2, h3, h4, h5, h6 {
 .job-card:hover .job-arrow {
   transform: translateX(4px);
   color: var(--color-primary);
+}
+
+/* ---------- Dark Greenish-Black Section Overrides ---------- */
+/* Rounded dark sections that float on the creme background */
+
+/* Features section — dark container */
+#features {
+  background: #0f1a14;
+  border-radius: var(--radius-2xl);
+  max-width: 1280px;
+  margin: var(--space-10) auto;
+}
+
+/* Light text inside dark sections */
+#features .section-title,
+.testimonials-section .section-title {
+  color: #f5f0e8;
+}
+
+#features .section-subtitle,
+.testimonials-section .section-subtitle {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Marquee section text on dark bg */
+.marquee-section .marquee-label {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.marquee-section .marquee-item {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.marquee-section .marquee-item:hover {
+  color: #c9a0dc;
+  opacity: 1;
+}
+
+/* Testimonial & case study cards stay white for contrast */
+.testimonials-section .testimonial-card {
+  background: #ffffff;
+}
+
+.testimonials-section .case-study-card {
+  background: #ffffff;
+}
+
+/* Dark section responsive — smaller radius and side margins on mobile */
+@media (max-width: 768px) {
+  .marquee-section,
+  #features,
+  .testimonials-section {
+    border-radius: var(--radius-xl);
+    margin-left: var(--space-4);
+    margin-right: var(--space-4);
+  }
 }
 
 /* ---------- Responsive ---------- */
