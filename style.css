@@ -1140,7 +1140,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .mfy-heading-accent {
-  color: #C4A882;
+  color: #5EC4B0;
 }
 
 /* Pills */
@@ -1171,8 +1171,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .mfy-pill.active {
-  background: #C4A882;
-  border-color: #C4A882;
+  background: #5EC4B0;
+  border-color: #5EC4B0;
   color: var(--text-primary);
   font-weight: 600;
 }
@@ -1208,7 +1208,7 @@ h1, h2, h3, h4, h5, h6 {
 .mfy-panel-title em {
   font-style: italic;
   text-decoration: underline;
-  text-decoration-color: #C4A882;
+  text-decoration-color: #5EC4B0;
   text-underline-offset: 4px;
 }
 
@@ -1237,14 +1237,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .mfy-panel-actions .btn-primary {
-  background: #C4A882;
-  color: var(--text-primary);
+  background: #5EC4B0;
+  color: #1a2e28;
   box-shadow: none;
 }
 
 .mfy-panel-actions .btn-primary:hover {
-  background: #D4C4A8;
-  box-shadow: 0 4px 20px rgba(196, 168, 130, 0.3);
+  background: #7AD4C3;
+  box-shadow: 0 4px 20px rgba(94, 196, 176, 0.3);
 }
 
 /* Responsive */
