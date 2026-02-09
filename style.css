@@ -3300,10 +3300,10 @@ h1, h2, h3, h4, h5, h6 {
 /* --- Google Docs editor --- */
 .hbh-editor {
   position: absolute;
-  top: 10%;
-  left: 8%;
-  right: 8%;
-  bottom: 18%;
+  top: 14%;
+  left: 14%;
+  right: 14%;
+  bottom: 22%;
   background: #ffffff;
   border-radius: var(--radius-lg);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
@@ -3508,10 +3508,10 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .hbh-editor {
-    top: 6%;
-    left: 4%;
-    right: 4%;
-    bottom: 14%;
+    top: 10%;
+    left: 8%;
+    right: 8%;
+    bottom: 18%;
   }
 
   .hbh-heading {
