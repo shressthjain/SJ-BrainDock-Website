@@ -363,46 +363,8 @@
     });
   });
 
-  // ========== TESTIMONIAL AUTO-SCROLL ==========
-  const testimonialTrack = document.querySelector('.testimonials-track');
-  if (testimonialTrack) {
-    let scrollAmount = 0;
-    let scrollDirection = 1;
-    let isHovering = false;
-    let scrollInterval;
-
-    function autoScrollTestimonials() {
-      if (isHovering) return;
-      scrollAmount += 0.5 * scrollDirection;
-      const maxScroll = testimonialTrack.scrollWidth - testimonialTrack.clientWidth;
-
-      if (scrollAmount >= maxScroll) {
-        scrollDirection = -1;
-      } else if (scrollAmount <= 0) {
-        scrollDirection = 1;
-      }
-
-      testimonialTrack.scrollLeft = scrollAmount;
-    }
-
-    scrollInterval = setInterval(autoScrollTestimonials, 30);
-
-    testimonialTrack.addEventListener('mouseenter', () => {
-      isHovering = true;
-    });
-
-    testimonialTrack.addEventListener('mouseleave', () => {
-      isHovering = false;
-      scrollAmount = testimonialTrack.scrollLeft;
-    });
-
-    // Allow manual scrolling
-    testimonialTrack.addEventListener('scroll', () => {
-      if (isHovering) {
-        scrollAmount = testimonialTrack.scrollLeft;
-      }
-    });
-  }
+  // Testimonial scrolling is handled purely by CSS animation
+  // (see .testimonials-track in style.css)
 
   // ========== MADE FOR YOU — PILL SWITCHER ==========
   const mfyPills = document.querySelectorAll('.mfy-pill');

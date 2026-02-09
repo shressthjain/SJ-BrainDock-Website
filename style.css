@@ -1655,9 +1655,9 @@ h1, h2, h3, h4, h5, h6 {
 .testimonials-track {
   display: flex;
   gap: 0;
-  overflow: hidden;
   padding: var(--space-4) 0;
   animation: testimonials-scroll 40s linear infinite;
+  width: max-content;
 }
 
 .testimonials-track:hover {
