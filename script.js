@@ -495,4 +495,78 @@
   }
   updateTeamSavings();
 
+  // ========== HOW BRAINDOCK HELPS — TYPING ANIMATION ==========
+  const hbhTextEl = document.getElementById('hbhTypedText');
+  const hbhCursor = document.getElementById('hbhCursor');
+  const hbhPopup = document.getElementById('hbhCompletePopup');
+
+  if (hbhTextEl) {
+    const hbhFullText =
+      'I met the lawyer in a quiet office, discussing contracts, deadlines, and risks. ' +
+      'Papers rustled, coffee cooled, and advice flowed calmly, leaving me relieved, ' +
+      'informed, and cautiously optimistic about next steps after a long morning.';
+
+    let hbhStarted = false;
+
+    /**
+     * Types text one character at a time with human-like variable speed.
+     * Pauses longer on punctuation for a natural rhythm.
+     */
+    function runTypingAnimation() {
+      let i = 0;
+
+      function typeChar() {
+        if (i >= hbhFullText.length) {
+          // Typing done — hide cursor, show popup after 3s
+          if (hbhCursor) hbhCursor.classList.add('hidden');
+          setTimeout(function () {
+            if (hbhPopup) hbhPopup.classList.add('visible');
+          }, 3000);
+          return;
+        }
+
+        hbhTextEl.textContent += hbhFullText[i];
+        i++;
+
+        // Variable delay for realistic typing feel
+        var char = hbhFullText[i - 1];
+        var delay;
+        if (char === '.' || char === '!') {
+          delay = 280 + Math.random() * 120; // longer pause at sentences
+        } else if (char === ',') {
+          delay = 140 + Math.random() * 80; // medium pause at commas
+        } else if (char === ' ') {
+          delay = 50 + Math.random() * 50; // quick on spaces
+        } else {
+          delay = 40 + Math.random() * 70; // base typing speed
+        }
+
+        setTimeout(typeChar, delay);
+      }
+
+      typeChar();
+    }
+
+    // Trigger when section scrolls into view (plays only once)
+    var hbhSection = document.querySelector('.hbh-section');
+    if (hbhSection && 'IntersectionObserver' in window) {
+      var hbhObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting && !hbhStarted) {
+              hbhStarted = true;
+              runTypingAnimation();
+              hbhObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+      hbhObserver.observe(hbhSection);
+    } else if (hbhSection) {
+      // Fallback: just run immediately
+      runTypingAnimation();
+    }
+  }
+
 })();
