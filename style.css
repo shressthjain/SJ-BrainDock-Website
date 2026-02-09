@@ -1114,7 +1114,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ---------- "Made For You" Section ---------- */
 .mfy-section {
-  background: var(--text-primary);
+  background: #1a1a2e;
   border-radius: var(--radius-2xl);
   max-width: 1280px;
   margin: 0 auto;
