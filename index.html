@@ -820,6 +820,55 @@
       </div>
     </section>
 
+    <!-- ===== SAVINGS CALCULATOR ===== -->
+    <section class="section savings-section reveal">
+      <div class="container">
+        <div class="savings-calc">
+          <div class="savings-calc-inner">
+            <div class="savings-calc-left">
+              <h2 class="savings-calc-title">Calculate<br>your <span>savings</span></h2>
+
+              <div class="savings-calc-slider-group">
+                <p class="savings-calc-slider-label">I spend <span class="savings-calc-underline" id="hoursValue">4</span> hours working a day (60% focus rate)</p>
+                <input type="range" id="hoursSlider" min="1" max="12" value="4" step="1" class="savings-calc-range">
+                <p class="savings-calc-hint">On average, people focus only 60% of their work time — BrainDock helps you stay at 100%.</p>
+              </div>
+
+              <div class="savings-calc-rate-group">
+                <label class="savings-calc-rate-label">and, my time is worth <span class="savings-calc-underline">$<input type="number" id="rateInput" value="50" min="10" max="1000"></span>/hour</label>
+              </div>
+            </div>
+
+            <div class="savings-calc-right">
+              <div class="savings-calc-card">
+                <p class="savings-calc-card-header">Monthly, you'll save</p>
+                <p class="savings-calc-card-amount" id="calcNetSavings">$1,748<span>/mo</span></p>
+
+                <div class="savings-calc-card-breakdown">
+                  <div class="savings-calc-card-row">
+                    <span>Work hours per month</span>
+                    <span id="calcStudyHours">88</span>
+                  </div>
+                  <div class="savings-calc-card-row">
+                    <span>Unfocused hours (40%)</span>
+                    <span id="calcWastedHours">35.2</span>
+                  </div>
+                  <div class="savings-calc-card-row">
+                    <span>Time value saved</span>
+                    <span id="calcValueSaved">$1,760</span>
+                  </div>
+                  <div class="savings-calc-card-row">
+                    <span>BrainDock Pro monthly cost</span>
+                    <span id="calcProCost">$12</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== TESTIMONIALS ===== -->
     <section class="section testimonials-section" id="testimonials">
       <div class="container">
