@@ -495,6 +495,70 @@
   }
   updateTeamSavings();
 
+  // ========== PERFORMANCE REPORTS — CHART DRAW + STAT COUNTERS ==========
+  const prChart = document.getElementById('prChart');
+  const prStats = document.getElementById('prStats');
+
+  if (prChart && 'IntersectionObserver' in window) {
+    let prAnimated = false;
+
+    const prObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !prAnimated) {
+            prAnimated = true;
+
+            // Trigger the SVG line drawing
+            prChart.classList.add('animated');
+
+            // Animate stat counters
+            if (prStats) {
+              const counters = prStats.querySelectorAll('.pr-stat-num');
+              counters.forEach(function (counter) {
+                animateCounter(counter);
+              });
+            }
+
+            prObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    prObserver.observe(prChart);
+  }
+
+  /**
+   * Animates a number element from 0 to its data-count value.
+   * Supports integers and decimals via data-decimals attribute.
+   */
+  function animateCounter(el) {
+    var target = parseFloat(el.getAttribute('data-count'));
+    var decimals = parseInt(el.getAttribute('data-decimals')) || 0;
+    var duration = 1600;
+    var startTime = null;
+
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+
+      // Ease-out cubic for a satisfying deceleration
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = eased * target;
+
+      el.textContent = current.toFixed(decimals);
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = target.toFixed(decimals);
+      }
+    }
+
+    requestAnimationFrame(step);
+  }
+
   // ========== HOW BRAINDOCK HELPS — TYPING ANIMATION ==========
   const hbhTextEl = document.getElementById('hbhTypedText');
   const hbhCursor = document.getElementById('hbhCursor');

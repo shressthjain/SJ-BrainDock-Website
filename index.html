@@ -64,11 +64,11 @@
                 <div class="dropdown-desc">See how BrainDock fits your workflow</div>
               </div>
             </a>
-            <a href="#" class="dropdown-item" role="menuitem">
-              <div class="dropdown-icon">✨</div>
+            <a href="security.html" class="dropdown-item" role="menuitem">
+              <div class="dropdown-icon">🔒</div>
               <div>
-                <div class="dropdown-title">What's New</div>
-                <div class="dropdown-desc">Latest updates and improvements</div>
+                <div class="dropdown-title">Privacy & Security</div>
+                <div class="dropdown-desc">How we protect your data</div>
               </div>
             </a>
           </div>
@@ -211,7 +211,7 @@
       <div class="mobile-dropdown">
         <a href="features.html" class="mobile-dropdown-item">⚡ Features</a>
         <a href="use-cases.html" class="mobile-dropdown-item">🎯 Use Cases</a>
-        <a href="#" class="mobile-dropdown-item">✨ What's New</a>
+        <a href="security.html" class="mobile-dropdown-item">🔒 Privacy & Security</a>
       </div>
     </div>
     <div class="mobile-nav-item has-dropdown">
@@ -314,11 +314,11 @@
       </div>
     </section>
 
-    <!-- ===== 4X EFFICIENCY ===== -->
+    <!-- ===== 2X EFFICIENCY ===== -->
     <section class="section section-lg comparison-section" id="efficiency">
       <div class="container text-center">
         <div class="section-title reveal">
-          <span class="text-gradient">4x more</span> productive
+          <span class="text-gradient">2x more</span> productive
         </div>
         <p class="section-subtitle reveal">
           After years of constant distractions, an AI focus tool that actually works is finally here. 
@@ -330,7 +330,7 @@
             <div class="pr-card-content">
             <div class="pr-card-header">
               <span class="pr-card-label">Productivity Rate</span>
-              <span class="pr-card-stat">25% <span class="pr-card-unit">PR</span></span>
+              <span class="pr-card-stat">50% <span class="pr-card-unit">PR</span></span>
             </div>
             <div class="pr-card-body">
               <div class="pr-scroll-track pr-scroll-slow">
@@ -660,10 +660,31 @@
             <h3>Attention Coach</h3>
             <p>AI that learns your focus patterns and gently guides you back when you drift. Like having a personal productivity coach that never sleeps. Gently notices when devices pull your attention away or when you step away from your desk.</p>
             <div class="feature-visual">
-              <div class="pulse-ring">
-                <div class="pulse-ring-inner">🧠</div>
+              <div class="ac-monitor">
+                <div class="ac-wave">
+                  <span class="ac-bar" style="--i:0"></span>
+                  <span class="ac-bar" style="--i:1"></span>
+                  <span class="ac-bar" style="--i:2"></span>
+                  <span class="ac-bar" style="--i:3"></span>
+                  <span class="ac-bar" style="--i:4"></span>
+                  <span class="ac-bar" style="--i:5"></span>
+                  <span class="ac-bar" style="--i:6"></span>
+                  <span class="ac-bar" style="--i:7"></span>
+                  <span class="ac-bar" style="--i:8"></span>
+                  <span class="ac-bar" style="--i:9"></span>
+                  <span class="ac-bar" style="--i:10"></span>
+                  <span class="ac-bar" style="--i:11"></span>
+                  <span class="ac-bar" style="--i:12"></span>
+                  <span class="ac-bar" style="--i:13"></span>
+                  <span class="ac-bar" style="--i:14"></span>
+                  <span class="ac-bar" style="--i:15"></span>
+                </div>
+                <div class="ac-readout">
+                  <span class="ac-dot"></span>
+                  <span class="ac-label">Focus: Active</span>
+                  <span class="ac-value">94%</span>
+                </div>
               </div>
-              <div style="text-align: center; margin-top: 1rem; font-size: 0.8rem; color: var(--text-tertiary);">Monitoring focus patterns...</div>
             </div>
           </div>
 
@@ -673,17 +694,32 @@
             <h3>Smart Sessions</h3>
             <p>Structured focus periods that adapt to your energy levels. BrainDock dynamically adjusts session length based on your performance data.</p>
             <div class="feature-visual">
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-                <span style="font-size: 0.75rem; color: var(--text-tertiary);">Focus Session</span>
-                <span style="font-size: 0.75rem; color: var(--color-primary); font-weight: 600;">32:15</span>
+              <div class="ss-timer">
+                <svg class="ss-ring" viewBox="0 0 120 120">
+                  <circle class="ss-ring-bg" cx="60" cy="60" r="52" />
+                  <circle class="ss-ring-progress" cx="60" cy="60" r="52" />
+                </svg>
+                <div class="ss-center">
+                  <span class="ss-time">32:15</span>
+                  <span class="ss-phase-label">Deep Work</span>
+                </div>
               </div>
-              <div class="focus-indicator">
-                <div class="focus-indicator-fill"></div>
-              </div>
-              <div class="tag-pills" style="margin-top: 1rem;">
-                <span class="tag-pill">Deep Work</span>
-                <span class="tag-pill">45 min</span>
-                <span class="tag-pill">High Focus</span>
+              <div class="ss-phases">
+                <div class="ss-phase-item ss-phase-item--active">
+                  <span class="ss-phase-dot"></span>
+                  <span>Focus</span>
+                  <span class="ss-phase-dur">25m</span>
+                </div>
+                <div class="ss-phase-item">
+                  <span class="ss-phase-dot"></span>
+                  <span>Break</span>
+                  <span class="ss-phase-dur">5m</span>
+                </div>
+                <div class="ss-phase-item">
+                  <span class="ss-phase-dot"></span>
+                  <span>Focus</span>
+                  <span class="ss-phase-dur">25m</span>
+                </div>
               </div>
             </div>
           </div>
@@ -694,13 +730,29 @@
             <h3>Screen Awareness</h3>
             <p>Knows when you're about to fall into a distraction trap. Smart alerts at exactly the right moment - before you lose 30 minutes scrolling. Optionally tracks the active window to identify shifts to distracting applications or websites.</p>
             <div class="feature-visual">
-              <div class="notification-mock" style="animation-delay: 0s; margin-bottom: 0.75rem;">
-                <span class="notification-dot"></span>
-                <span class="notification-text">You've been on social media for 3 min - back to work?</span>
+              <div class="sa-screen">
+                <div class="sa-app sa-app--ok">
+                  <span class="sa-app-icon">📝</span>
+                  <span class="sa-app-name">Notes</span>
+                  <span class="sa-app-check">&#10003;</span>
+                </div>
+                <div class="sa-app sa-app--ok">
+                  <span class="sa-app-icon">💻</span>
+                  <span class="sa-app-name">VS Code</span>
+                  <span class="sa-app-check">&#10003;</span>
+                </div>
+                <div class="sa-app sa-app--flagged">
+                  <span class="sa-app-icon">📱</span>
+                  <span class="sa-app-name">Twitter</span>
+                  <div class="sa-block-overlay">
+                    <span class="sa-block-x">&times;</span>
+                  </div>
+                </div>
+                <div class="sa-scan-line"></div>
               </div>
-              <div style="display: flex; gap: 0.5rem; margin-top: 1.5rem;">
-                <span style="padding: 4px 12px; background: var(--color-primary); color: white; border-radius: 20px; font-size: 0.7rem; font-weight: 600;">Return to Focus</span>
-                <span style="padding: 4px 12px; background: var(--bg-glass); border: 1px solid var(--border-default); border-radius: 20px; font-size: 0.7rem; color: var(--text-tertiary);">5 more min</span>
+              <div class="sa-alert">
+                <span class="sa-alert-dot"></span>
+                <span class="sa-alert-text">Distraction detected — redirecting focus</span>
               </div>
             </div>
           </div>
@@ -711,16 +763,29 @@
             <h3>Performance Reports</h3>
             <p>Beautiful, actionable insights into your focus patterns. Track progress over time and discover your peak productivity hours. Generate detailed PDF reports with insights into your session highlighting your focus scores, distractions &amp; activity logs.</p>
             <div class="feature-visual">
-              <div style="display: flex; align-items: end; gap: 6px; height: 80px; padding-bottom: 4px;">
-                <div style="flex: 1; background: var(--color-primary); opacity: 0.3; border-radius: 3px; height: 30%;"></div>
-                <div style="flex: 1; background: var(--color-primary); opacity: 0.4; border-radius: 3px; height: 45%;"></div>
-                <div style="flex: 1; background: var(--color-primary); opacity: 0.5; border-radius: 3px; height: 35%;"></div>
-                <div style="flex: 1; background: var(--color-primary); opacity: 0.6; border-radius: 3px; height: 65%;"></div>
-                <div style="flex: 1; background: var(--color-primary); opacity: 0.7; border-radius: 3px; height: 55%;"></div>
-                <div style="flex: 1; background: var(--color-primary); opacity: 0.8; border-radius: 3px; height: 80%;"></div>
-                <div style="flex: 1; background: var(--color-primary); border-radius: 3px; height: 95%;"></div>
+              <div class="pr-chart" id="prChart">
+                <svg class="pr-chart-svg" viewBox="0 0 280 90" fill="none" preserveAspectRatio="none">
+                  <path class="pr-grid-line" d="M0 22 H280" />
+                  <path class="pr-grid-line" d="M0 44 H280" />
+                  <path class="pr-grid-line" d="M0 66 H280" />
+                  <path class="pr-chart-line" d="M0,72 C30,68 55,58 80,50 S125,28 155,32 S195,42 215,22 S252,12 280,8" />
+                  <circle class="pr-chart-dot" cx="280" cy="8" r="4" />
+                </svg>
               </div>
-              <div style="font-size: 0.7rem; color: var(--text-tertiary); margin-top: 0.5rem; text-align: center;">Focus score trending up - 23% improvement this week</div>
+              <div class="pr-stats" id="prStats">
+                <div class="pr-stat-item">
+                  <span class="pr-stat-num" data-count="23">0</span><span class="pr-stat-unit">%</span>
+                  <span class="pr-stat-desc">Improvement</span>
+                </div>
+                <div class="pr-stat-item">
+                  <span class="pr-stat-num" data-count="4.2" data-decimals="1">0</span><span class="pr-stat-unit">hrs</span>
+                  <span class="pr-stat-desc">Avg. Deep Work</span>
+                </div>
+                <div class="pr-stat-item">
+                  <span class="pr-stat-num" data-count="12">0</span><span class="pr-stat-unit">/wk</span>
+                  <span class="pr-stat-desc">Sessions</span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -763,11 +828,23 @@
                 </div>
               </div>
               <div class="privacy-visual">
-                <div class="privacy-shield">
-                  <div class="privacy-shield-ring privacy-shield-ring-1"></div>
-                  <div class="privacy-shield-ring privacy-shield-ring-2"></div>
-                  <div class="privacy-shield-ring privacy-shield-ring-3"></div>
-                  <div class="privacy-shield-core">🛡️</div>
+                <div class="pv-orbit">
+                  <div class="pv-boundary"></div>
+                  <div class="pv-orbit-track pv-orbit-track-1">
+                    <span class="pv-particle"></span>
+                  </div>
+                  <div class="pv-orbit-track pv-orbit-track-2">
+                    <span class="pv-particle"></span>
+                  </div>
+                  <div class="pv-orbit-track pv-orbit-track-3">
+                    <span class="pv-particle"></span>
+                  </div>
+                  <div class="pv-orbit-track pv-orbit-track-4">
+                    <span class="pv-particle"></span>
+                  </div>
+                  <div class="pv-core">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="36" height="36"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  </div>
                 </div>
                 <div class="privacy-visual-label">All data processed locally</div>
               </div>
@@ -1009,7 +1086,7 @@
       <div class="container">
         <div class="case-studies reveal">
           <a href="#" class="case-study-card">
-            <div class="case-study-stat">4x faster output</div>
+            <div class="case-study-stat">2x faster output</div>
             <div class="case-study-title">How a startup founder reclaimed 3 hours daily with BrainDock</div>
             <div class="case-study-author">Alex Rivera, CEO &amp; Founder</div>
           </a>
@@ -1083,7 +1160,7 @@
       <div class="container">
         <div class="cta-content reveal">
           <h2>Start focusing</h2>
-          <p>AI-powered focus and productivity in every application. 4x more productive, with privacy built in.</p>
+          <p>AI-powered focus and productivity in every application. 2x more productive, with privacy built in.</p>
           <div class="cta-actions">
             <a href="downloads/download.html" class="btn btn-primary btn-lg">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -1145,7 +1222,7 @@
         </div>
         <div class="footer-column">
           <h4>Product</h4>
-          <a href="#">What's New</a>
+          <a href="security.html">Privacy & Security</a>
           <a href="use-cases.html">Use Cases</a>
           <a href="students.html">BrainDock for Students</a>
           <a href="pricing.html">Pricing</a>
