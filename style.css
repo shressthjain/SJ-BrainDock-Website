@@ -4738,3 +4738,30 @@ h1, h2, h3, h4, h5, h6 {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* ===== Inline SVG Icons ===== */
+.icon {
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: -0.125em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+.icon.icon-fill {
+  fill: currentColor;
+  stroke: none;
+}
+
+/* Context-specific icon sizes */
+.dropdown-icon .icon { width: 20px; height: 20px; }
+.feature-card-icon .icon,
+.feature-icon .icon,
+.use-case-icon .icon { width: 24px; height: 24px; }
+.privacy-badge-icon .icon { width: 20px; height: 20px; }
+.pulse-ring-inner .icon,
+.privacy-shield-core .icon { width: 2rem; height: 2rem; }
