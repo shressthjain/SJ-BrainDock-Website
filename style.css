@@ -2406,6 +2406,23 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-tertiary);
 }
 
+/* ---------- Binary Banner (individuals pages) ---------- */
+.binary-banner {
+  padding-top: var(--header-height);
+  width: 100%;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+.binary-banner canvas {
+  display: block;
+  width: 100%;
+}
+
+/* When banner is present, hero doesn't need header offset */
+.binary-banner + .page-hero {
+  padding-top: var(--space-12);
+}
+
 /* ---------- Page Hero (for sub-pages) ---------- */
 .page-hero {
   padding: calc(var(--header-height) + var(--space-20)) 0 var(--space-16);
