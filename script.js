@@ -650,7 +650,7 @@
     var CELL_W = 6;
     var CELL_H = 10;
 
-    var W, H, cols, rows, mask, dripMask, grid, rainY, settled, animId;
+    var W, H, cols, rows, mask, dripMask, centerWeight, grid, rainY, settled, animId;
 
     /** Set canvas dimensions and rebuild everything. */
     function setup() {
@@ -726,6 +726,20 @@
           dripMask[r2][c2] = nearest < 99 ? Math.max(0, 0.45 - nearest * 0.04) : 0;
         }
       }
+
+      // Center-weight map: elliptical Gaussian falloff for background noise density
+      var halfW = W / 2;
+      var halfH = H / 2;
+      centerWeight = [];
+      for (var r3 = 0; r3 < rows; r3++) {
+        centerWeight[r3] = [];
+        for (var c3 = 0; c3 < cols; c3++) {
+          var dx = (c3 * CELL_W + CELL_W / 2 - halfW) / halfW; // -1 to 1
+          var dy = (r3 * CELL_H + CELL_H / 2 - halfH) / halfH; // -1 to 1
+          var d2 = dx * dx + dy * dy; // squared elliptical distance
+          centerWeight[r3][c3] = Math.exp(-d2 * 2.5); // Gaussian falloff
+        }
+      }
     }
 
     /** Fill grid with random binary chars and stagger rain start positions. */
@@ -797,8 +811,11 @@
             // Medium-visible drip chars near the text
             alpha = settled ? drip : Math.min(drip, dist / 6);
           } else {
-            // Visible background noise field
-            alpha = settled ? 0.14 : Math.min(0.14, dist / 30);
+            // Background noise with center-focused density
+            var cw = centerWeight[r][c];
+            if (cw < 0.02) continue; // skip near-empty edges
+            var baseAlpha = 0.14 * cw;
+            alpha = settled ? baseAlpha : Math.min(baseAlpha, dist / 30);
           }
 
           if (alpha < 0.01) continue; // skip invisible
