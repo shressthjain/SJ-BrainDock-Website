@@ -26,10 +26,22 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://esm.sh">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- React importmap for scroll animation component -->
+  <script type="importmap">
+  {
+    "imports": {
+      "react": "https://esm.sh/react@18.3.1",
+      "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+      "framer-motion": "https://esm.sh/framer-motion@11?deps=react@18.3.1,react-dom@18.3.1"
+    }
+  }
+  </script>
 </head>
 <body>
   <a href="#main" class="skip-to-content">Skip to content</a>
@@ -536,6 +548,9 @@
         </div>
       </div>
     </section>
+
+    <!-- ===== CONTAINER SCROLL ANIMATION (React) ===== -->
+    <div id="scroll-animation-root"></div>
 
     <!-- ===== FEATURE SHOWCASE: Personal Blocks & Session Report ===== -->
     <section class="section feature-showcase-section">
@@ -1248,5 +1263,101 @@
   </footer>
 
   <script src="script.js"></script>
+
+  <!-- Container Scroll Animation (React + framer-motion) -->
+  <script type="module">
+    import React from 'react';
+    import { createRoot } from 'react-dom/client';
+    import { motion, useScroll, useTransform } from 'framer-motion';
+
+    const { createElement: h, useRef, useState, useEffect } = React;
+
+    // --- ContainerScroll Component ---
+    function ContainerScroll({ titleComponent, children }) {
+      const containerRef = useRef(null);
+      const { scrollYProgress } = useScroll({ target: containerRef });
+      const [isMobile, setIsMobile] = useState(false);
+
+      useEffect(() => {
+        const check = () => setIsMobile(window.innerWidth <= 768);
+        check();
+        window.addEventListener('resize', check);
+        return () => window.removeEventListener('resize', check);
+      }, []);
+
+      const scaleDimensions = isMobile ? [0.7, 0.9] : [1.05, 1];
+      const rotate = useTransform(scrollYProgress, [0, 1], [20, 0]);
+      const scale = useTransform(scrollYProgress, [0, 1], scaleDimensions);
+      const translate = useTransform(scrollYProgress, [0, 1], [0, -100]);
+
+      return h('div', { className: 'csa-wrapper', ref: containerRef },
+        h('div', { className: 'csa-inner', style: { perspective: '1000px' } },
+          h(Header, { translate, titleComponent }),
+          h(Card, { rotate, scale, children })
+        )
+      );
+    }
+
+    // --- Header ---
+    function Header({ translate, titleComponent }) {
+      return h(motion.div, {
+        style: { translateY: translate },
+        className: 'csa-header',
+      }, titleComponent);
+    }
+
+    // --- Card ---
+    function Card({ rotate, scale, children }) {
+      return h(motion.div, {
+        style: {
+          rotateX: rotate,
+          scale,
+          boxShadow:
+            '0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003',
+        },
+        className: 'csa-card',
+      },
+        h('div', { className: 'csa-card-inner' }, children)
+      );
+    }
+
+    // --- App ---
+    function ScrollAnimationApp() {
+      return h(ContainerScroll, {
+        titleComponent: h('div', { className: 'csa-title-block' },
+          h('p', { className: 'csa-subtitle' }, 'Experience the power of'),
+          h('h2', { className: 'csa-main-title' },
+            'Deep ',
+            h('span', { className: 'text-gradient' }, 'Focus'),
+            ' in Action'
+          )
+        ),
+      },
+        h('img', {
+          src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1400&q=80',
+          alt: 'BrainDock productivity workspace',
+          className: 'csa-img',
+          loading: 'lazy',
+          draggable: false,
+        })
+      );
+    }
+
+    // --- Lazy mount via IntersectionObserver ---
+    const rootEl = document.getElementById('scroll-animation-root');
+    if (rootEl) {
+      if ('IntersectionObserver' in window) {
+        const obs = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting) {
+            obs.disconnect();
+            createRoot(rootEl).render(h(ScrollAnimationApp));
+          }
+        }, { rootMargin: '200px' });
+        obs.observe(rootEl);
+      } else {
+        createRoot(rootEl).render(h(ScrollAnimationApp));
+      }
+    }
+  </script>
 </body>
 </html>
