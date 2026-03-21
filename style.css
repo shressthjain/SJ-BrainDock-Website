@@ -5056,22 +5056,22 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 1;
 }
 
-/* ── Base colour variants ── */
+/* ── Base colour variants (gradient: hinge-dark → front-light for taper) ── */
 .laptop-base-inner.citrus {
   background: linear-gradient(180deg,
-    #d4e068 0%, #cdd962 25%, #c2cc56 60%, #b2bc46 100%);
+    #b5be3f 0%, #c2cc4a 40%, #c9d84a 80%, #d0df55 100%);
 }
 .laptop-base-inner.blush {
   background: linear-gradient(180deg,
-    #f6c4d0 0%, #f0bac6 25%, #e8aebe 60%, #dca0b0 100%);
+    #daa8b4 0%, #eab5c2 40%, #f5c0cc 80%, #f8ccd6 100%);
 }
 .laptop-base-inner.midnight {
   background: linear-gradient(180deg,
-    #484b5e 0%, #3e4154 25%, #363848 60%, #282a38 100%);
+    #282a38 0%, #363848 40%, #3e4154 80%, #484b5e 100%);
 }
 .laptop-base-inner.silver {
   background: linear-gradient(180deg,
-    #e2e2e4 0%, #d8d8da 25%, #cecece 60%, #bebebc 100%);
+    #bebebc 0%, #cecece 40%, #d8d8da 80%, #e2e2e4 100%);
 }
 
 /* ── MagSafe notch ── */
