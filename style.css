@@ -5124,15 +5124,27 @@ h1, h2, h3, h4, h5, h6 {
 /* ── Lid ── */
 .laptop-lid {
   position: relative;
-  width: 92%;
+  width: 96%;
   margin: 0 auto;
-  padding-top: 60%;
+  padding-top: 62.5%;
   transform-origin: bottom center;
   transform: rotateX(-91deg);
   transform-style: preserve-3d;
   will-change: transform;
   transition: none;
   display: block;
+}
+
+/* Lid thickness — top edge visible when lid is open */
+.laptop-lid::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 1%; right: 1%;
+  height: 4px;
+  background: var(--lid-color-dark, #bbb);
+  transform-origin: top center;
+  transform: rotateX(90deg);
+  border-radius: 2px 2px 0 0;
 }
 
 /* ── Lid outer shell ── */
@@ -5143,17 +5155,28 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
   backface-visibility: hidden;
   box-shadow: 0 0 0 1.5px rgba(0,0,0,0.18);
+  border-left: 2px solid var(--lid-color-dark, rgba(0,0,0,0.1));
+  border-right: 2px solid var(--lid-color-dark, rgba(0,0,0,0.1));
 }
 
-.laptop-lid-outer.citrus   { background: #cdd962; }
-.laptop-lid-outer.blush    { background: #f2bec9; }
+/* Bottom edge highlight for consistent lighting */
+.laptop-lid-outer::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 2px;
+  background: rgba(255,255,255,0.12);
+  z-index: 5;
+}
+
+.laptop-lid-outer.citrus   { background: #c9d84a; }
+.laptop-lid-outer.blush    { background: #f5c0cc; }
 .laptop-lid-outer.midnight { background: #3a3d4a; }
 .laptop-lid-outer.silver   { background: #d4d4d6; }
 
-/* ── Black bezel ── */
+/* ── Black bezel (top fractionally thicker for camera module) ── */
 .laptop-screen-bezel {
   position: absolute;
-  top: 2.5%; left: 1.5%; right: 1.5%; bottom: 1.5%;
+  top: 3.2%; left: 1.5%; right: 1.5%; bottom: 1.5%;
   border-radius: 8px 8px 2px 2px;
   background: #000;
   overflow: hidden;
@@ -5171,6 +5194,19 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 4;
 }
 
+/* Screen glare — subtle anti-reflective coating */
+.laptop-screen-bezel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 20%,
+    rgba(255,255,255,0.04) 0%,
+    transparent 70%);
+  pointer-events: none;
+  z-index: 5;
+  border-radius: inherit;
+}
+
 .laptop-screen-img {
   position: absolute;
   top: 5%; left: 2.5%; right: 2.5%; bottom: 2.5%;
@@ -5178,7 +5214,38 @@ h1, h2, h3, h4, h5, h6 {
   object-fit: cover;
   object-position: center top;
   display: block;
-  border-radius: 0;
+  border-radius: 8px;
+}
+
+/* ── Keyboard grid — subtle key outlines ── */
+.laptop-keyboard {
+  position: absolute;
+  top: 10%; left: 7%; right: 7%;
+  height: 48%;
+  border-radius: 2px;
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0%, transparent 7.5%,
+      rgba(0,0,0,0.07) 7.5%, rgba(0,0,0,0.07) 7.8%),
+    repeating-linear-gradient(180deg,
+      transparent 0%, transparent 45%,
+      rgba(0,0,0,0.07) 45%, rgba(0,0,0,0.07) 50%);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ── Trackpad indent ── */
+.laptop-trackpad {
+  position: absolute;
+  bottom: 8%; left: 50%;
+  transform: translateX(-50%);
+  width: 30%; height: 35%;
+  border-radius: 3px;
+  border: 0.5px solid rgba(0,0,0,0.08);
+  box-shadow: inset 0 0.5px 2px rgba(0,0,0,0.08);
+  z-index: 2;
+  pointer-events: none;
 }
 
 /* ── Mobile adjustments ── */
