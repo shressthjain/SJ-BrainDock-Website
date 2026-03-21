@@ -26,24 +26,26 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://esm.sh">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- React importmap for scroll animation component -->
-  <script type="importmap">
-  {
-    "imports": {
-      "react": "https://esm.sh/react@18.3.1",
-      "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
-      "framer-motion": "https://esm.sh/framer-motion@11?deps=react@18.3.1,react-dom@18.3.1"
-    }
-  }
-  </script>
 </head>
 <body>
+  <!-- Liquid Glass SVG Filter -->
+  <svg class="liquid-glass-svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <defs>
+      <filter id="container-glass" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="1" seed="1" result="turbulence"/>
+        <feGaussianBlur in="turbulence" stdDeviation="2" result="blurredNoise"/>
+        <feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="70" xChannelSelector="R" yChannelSelector="B" result="displaced"/>
+        <feGaussianBlur in="displaced" stdDeviation="4" result="finalBlur"/>
+        <feComposite in="finalBlur" in2="finalBlur" operator="over"/>
+      </filter>
+    </defs>
+  </svg>
+
   <a href="#main" class="skip-to-content">Skip to content</a>
 
   <!-- ========== HEADER ========== -->
@@ -549,8 +551,123 @@
       </div>
     </section>
 
-    <!-- ===== CONTAINER SCROLL ANIMATION (React) ===== -->
-    <div id="scroll-animation-root"></div>
+    <!-- ===== MacBook Neo — Multi-Scene Laptop Scroll Animation ===== -->
+
+    <!-- SCENE 1 — CITRUS — Deep Focus -->
+    <section class="laptop-scene scene-citrus" id="scene-0">
+      <div class="laptop-sticky">
+        <div class="scene-text" id="text-0">
+          <span class="scene-color-dot" style="background:#c8d96c"></span>
+          <p class="scene-label">Citrus · Deep Focus</p>
+          <h2 class="scene-title">Master your<br>to&#8209;do list.</h2>
+          <p class="scene-body">Block distractions and enter a state of deep productivity with BrainDock's intelligent focus sessions.</p>
+        </div>
+        <div class="laptop-3d-wrap" id="laptop-0">
+          <div class="laptop-3d">
+            <div class="laptop-lid" id="lid-0">
+              <div class="laptop-lid-outer citrus">
+                <div class="laptop-screen-bezel">
+                  <img class="laptop-screen-img" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1400&q=80" alt="BrainDock deep focus" loading="lazy" draggable="false" />
+                </div>
+              </div>
+            </div>
+            <div class="laptop-hinge"></div>
+            <div class="laptop-base">
+              <div class="laptop-base-inner citrus">
+                <div class="laptop-notch"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 2 — BLUSH — Creative Flow -->
+    <section class="laptop-scene scene-blush" id="scene-1">
+      <div class="laptop-sticky">
+        <div class="scene-text" id="text-1">
+          <span class="scene-color-dot" style="background:#f2bec9"></span>
+          <p class="scene-label">Blush · Creative Flow</p>
+          <h2 class="scene-title">Stay in the<br>zone.</h2>
+          <p class="scene-body">Seamless website blocking keeps your creative momentum unbroken, session after session.</p>
+        </div>
+        <div class="laptop-3d-wrap" id="laptop-1">
+          <div class="laptop-3d">
+            <div class="laptop-lid" id="lid-1">
+              <div class="laptop-lid-outer blush">
+                <div class="laptop-screen-bezel">
+                  <img class="laptop-screen-img" src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1400&q=80" alt="BrainDock creative flow" loading="lazy" draggable="false" />
+                </div>
+              </div>
+            </div>
+            <div class="laptop-hinge"></div>
+            <div class="laptop-base">
+              <div class="laptop-base-inner blush">
+                <div class="laptop-notch"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 3 — MIDNIGHT — Late Sessions -->
+    <section class="laptop-scene scene-midnight" id="scene-2">
+      <div class="laptop-sticky">
+        <div class="scene-text" id="text-2">
+          <span class="scene-color-dot" style="background:#3a3d4a"></span>
+          <p class="scene-label">Midnight · Late Sessions</p>
+          <h2 class="scene-title">Own the<br>night.</h2>
+          <p class="scene-body">Track your productivity through detailed session reports and see exactly where your time goes.</p>
+        </div>
+        <div class="laptop-3d-wrap" id="laptop-2">
+          <div class="laptop-3d">
+            <div class="laptop-lid" id="lid-2">
+              <div class="laptop-lid-outer midnight">
+                <div class="laptop-screen-bezel">
+                  <img class="laptop-screen-img" src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1400&q=80" alt="BrainDock night mode" loading="lazy" draggable="false" />
+                </div>
+              </div>
+            </div>
+            <div class="laptop-hinge"></div>
+            <div class="laptop-base">
+              <div class="laptop-base-inner midnight">
+                <div class="laptop-notch"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCENE 4 — SILVER — Study Mode -->
+    <section class="laptop-scene scene-silver" id="scene-3">
+      <div class="laptop-sticky">
+        <div class="scene-text" id="text-3">
+          <span class="scene-color-dot" style="background:#d4d4d6"></span>
+          <p class="scene-label">Silver · Study Mode</p>
+          <h2 class="scene-title">Ace every<br>exam.</h2>
+          <p class="scene-body">Purpose-built for students who need distraction-free study sessions that actually work.</p>
+        </div>
+        <div class="laptop-3d-wrap" id="laptop-3">
+          <div class="laptop-3d">
+            <div class="laptop-lid" id="lid-3">
+              <div class="laptop-lid-outer silver">
+                <div class="laptop-screen-bezel">
+                  <img class="laptop-screen-img" src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=1400&q=80" alt="BrainDock study mode" loading="lazy" draggable="false" />
+                </div>
+              </div>
+            </div>
+            <div class="laptop-hinge"></div>
+            <div class="laptop-base">
+              <div class="laptop-base-inner silver">
+                <div class="laptop-notch"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- ===== FEATURE SHOWCASE: Personal Blocks & Session Report ===== -->
     <section class="section feature-showcase-section">
@@ -1264,100 +1381,5 @@
 
   <script src="script.js"></script>
 
-  <!-- Container Scroll Animation (React + framer-motion) -->
-  <script type="module">
-    import React from 'react';
-    import { createRoot } from 'react-dom/client';
-    import { motion, useScroll, useTransform } from 'framer-motion';
-
-    const { createElement: h, useRef, useState, useEffect } = React;
-
-    // --- ContainerScroll Component ---
-    function ContainerScroll({ titleComponent, children }) {
-      const containerRef = useRef(null);
-      const { scrollYProgress } = useScroll({ target: containerRef });
-      const [isMobile, setIsMobile] = useState(false);
-
-      useEffect(() => {
-        const check = () => setIsMobile(window.innerWidth <= 768);
-        check();
-        window.addEventListener('resize', check);
-        return () => window.removeEventListener('resize', check);
-      }, []);
-
-      const scaleDimensions = isMobile ? [0.7, 0.9] : [1.05, 1];
-      const rotate = useTransform(scrollYProgress, [0, 1], [20, 0]);
-      const scale = useTransform(scrollYProgress, [0, 1], scaleDimensions);
-      const translate = useTransform(scrollYProgress, [0, 1], [0, -100]);
-
-      return h('div', { className: 'csa-wrapper', ref: containerRef },
-        h('div', { className: 'csa-inner', style: { perspective: '1000px' } },
-          h(Header, { translate, titleComponent }),
-          h(Card, { rotate, scale, children })
-        )
-      );
-    }
-
-    // --- Header ---
-    function Header({ translate, titleComponent }) {
-      return h(motion.div, {
-        style: { translateY: translate },
-        className: 'csa-header',
-      }, titleComponent);
-    }
-
-    // --- Card ---
-    function Card({ rotate, scale, children }) {
-      return h(motion.div, {
-        style: {
-          rotateX: rotate,
-          scale,
-          boxShadow:
-            '0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003',
-        },
-        className: 'csa-card',
-      },
-        h('div', { className: 'csa-card-inner' }, children)
-      );
-    }
-
-    // --- App ---
-    function ScrollAnimationApp() {
-      return h(ContainerScroll, {
-        titleComponent: h('div', { className: 'csa-title-block' },
-          h('p', { className: 'csa-subtitle' }, 'Experience the power of'),
-          h('h2', { className: 'csa-main-title' },
-            'Deep ',
-            h('span', { className: 'text-gradient' }, 'Focus'),
-            ' in Action'
-          )
-        ),
-      },
-        h('img', {
-          src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1400&q=80',
-          alt: 'BrainDock productivity workspace',
-          className: 'csa-img',
-          loading: 'lazy',
-          draggable: false,
-        })
-      );
-    }
-
-    // --- Lazy mount via IntersectionObserver ---
-    const rootEl = document.getElementById('scroll-animation-root');
-    if (rootEl) {
-      if ('IntersectionObserver' in window) {
-        const obs = new IntersectionObserver((entries) => {
-          if (entries[0].isIntersecting) {
-            obs.disconnect();
-            createRoot(rootEl).render(h(ScrollAnimationApp));
-          }
-        }, { rootMargin: '200px' });
-        obs.observe(rootEl);
-      } else {
-        createRoot(rootEl).render(h(ScrollAnimationApp));
-      }
-    }
-  </script>
 </body>
 </html>

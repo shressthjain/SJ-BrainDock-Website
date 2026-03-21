@@ -883,4 +883,71 @@
     window.addEventListener('load', initBinaryBanner);
   }
 
+  // ========== MacBook Neo — MULTI-SCENE 3D LAPTOP SCROLL ANIMATION ==========
+  var SCENE_COUNT = 4;
+  var LID_CLOSED = -91;
+  var LID_OPEN   = -13;
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function laptopEaseInOut(t) {
+    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+  }
+
+  if (!prefersReducedMotion) {
+    window.addEventListener('scroll', function () {
+      for (var i = 0; i < SCENE_COUNT; i++) {
+        var scene  = document.getElementById('scene-' + i);
+        var lid    = document.getElementById('lid-' + i);
+        var wrap   = document.getElementById('laptop-' + i);
+        var text   = document.getElementById('text-' + i);
+
+        if (!scene || !lid || !wrap) continue;
+
+        var inner = wrap.querySelector('.laptop-3d');
+        var rect  = scene.getBoundingClientRect();
+        var total = scene.offsetHeight - window.innerHeight;
+
+        if (total <= 0) continue;
+
+        var raw = Math.max(0, Math.min(1, -rect.top / total));
+
+        // Phase 1: Fade + rise in (0% → 15%)
+        var appearP = Math.min(raw / 0.15, 1);
+        if (appearP > 0.01) {
+          wrap.classList.add('visible');
+        } else {
+          wrap.classList.remove('visible');
+        }
+        wrap.style.opacity = appearP;
+        if (inner) {
+          inner.style.transform = 'translateY(' + ((1 - appearP) * 40) + 'px)';
+        }
+
+        // Phase 2: Lid opens (15% → 65%)
+        var openP = laptopEaseInOut(Math.max(0, Math.min((raw - 0.15) / 0.50, 1)));
+        lid.style.transform = 'rotateX(' + (LID_CLOSED + openP * (LID_OPEN - LID_CLOSED)) + 'deg)';
+
+        // Phase 3: Text appears (30% → 55%)
+        if (text) {
+          var textP = Math.max(0, Math.min((raw - 0.30) / 0.25, 1));
+          if (textP > 0.1) {
+            text.classList.add('visible');
+          } else {
+            text.classList.remove('visible');
+          }
+        }
+      }
+    }, { passive: true });
+  } else {
+    // Reduced motion: show everything open
+    for (var i = 0; i < SCENE_COUNT; i++) {
+      var wrap = document.getElementById('laptop-' + i);
+      var text = document.getElementById('text-' + i);
+      var lid  = document.getElementById('lid-' + i);
+      if (wrap) { wrap.classList.add('visible'); wrap.style.opacity = 1; }
+      if (text) text.classList.add('visible');
+      if (lid)  lid.style.transform = 'rotateX(' + LID_OPEN + 'deg)';
+    }
+  }
+
 })();

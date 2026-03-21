@@ -361,27 +361,53 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 6px 28px rgba(74, 55, 40, 0.5);
 }
 
-.btn-secondary {
-  background: var(--bg-glass);
-  color: var(--text-primary);
-  border: 1px solid var(--border-default);
-  backdrop-filter: blur(8px);
-}
-
-.btn-secondary:hover {
-  background: var(--bg-glass-hover);
-  border-color: var(--border-hover);
-}
-
+/* ---------- Liquid Glass Buttons ---------- */
+.btn-secondary,
 .btn-outline {
   background: transparent;
   color: var(--text-primary);
-  border: 1px solid var(--border-default);
+  border: none;
+  isolation: isolate;
+  box-shadow:
+    0 0 6px rgba(0,0,0,0.03),
+    0 2px 6px rgba(0,0,0,0.08),
+    inset 3px 3px 0.5px -3px rgba(0,0,0,0.9),
+    inset -3px -3px 0.5px -3px rgba(0,0,0,0.85),
+    inset 1px 1px 1px -0.5px rgba(0,0,0,0.6),
+    inset -1px -1px 1px -0.5px rgba(0,0,0,0.6),
+    inset 0 0 6px 6px rgba(0,0,0,0.12),
+    inset 0 0 2px 2px rgba(0,0,0,0.06),
+    0 0 12px rgba(255,255,255,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Glass distortion backdrop layer */
+.btn-secondary::before,
+.btn-outline::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: -1;
+  overflow: hidden;
+  backdrop-filter: url("#container-glass");
+  -webkit-backdrop-filter: url("#container-glass");
+  pointer-events: none;
+}
+
+.btn-secondary:hover,
 .btn-outline:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+  transform: scale(1.05);
+  box-shadow:
+    0 0 8px rgba(0,0,0,0.05),
+    0 4px 10px rgba(0,0,0,0.1),
+    inset 3px 3px 0.5px -3px rgba(0,0,0,0.9),
+    inset -3px -3px 0.5px -3px rgba(0,0,0,0.85),
+    inset 1px 1px 1px -0.5px rgba(0,0,0,0.6),
+    inset -1px -1px 1px -0.5px rgba(0,0,0,0.6),
+    inset 0 0 6px 6px rgba(0,0,0,0.12),
+    inset 0 0 2px 2px rgba(0,0,0,0.06),
+    0 0 16px rgba(255,255,255,0.2);
 }
 
 .btn-lg {
@@ -1233,11 +1259,19 @@ h1, h2, h3, h4, h5, h6 {
 
 .mfy-panel-actions .btn-outline {
   color: #f5f0e8;
-  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow:
+    0 0 6px rgba(0,0,0,0.03),
+    0 2px 6px rgba(0,0,0,0.08),
+    inset 3px 3px 0.5px -3.5px rgba(255,255,255,0.09),
+    inset -3px -3px 0.5px -3.5px rgba(255,255,255,0.85),
+    inset 1px 1px 1px -0.5px rgba(255,255,255,0.6),
+    inset -1px -1px 1px -0.5px rgba(255,255,255,0.6),
+    inset 0 0 6px 6px rgba(255,255,255,0.12),
+    inset 0 0 2px 2px rgba(255,255,255,0.06),
+    0 0 12px rgba(0,0,0,0.15);
 }
 
 .mfy-panel-actions .btn-outline:hover {
-  border-color: #fff;
   color: #fff;
 }
 
@@ -4868,127 +4902,327 @@ h1, h2, h3, h4, h5, h6 {
 .pulse-ring-inner .icon,
 .privacy-shield-core .icon { width: 2rem; height: 2rem; }
 
-/* ===== Container Scroll Animation (React component) ===== */
-#scroll-animation-root {
-  min-height: 60rem;
+/* ===== MacBook Neo — Multi-Scene Laptop Scroll Animation ===== */
+
+.laptop-scene {
+  position: relative;
+  height: 280vh;
 }
 
-@media (min-width: 769px) {
-  #scroll-animation-root {
-    min-height: 80rem;
-  }
-}
-
-#scroll-animation-root .csa-wrapper {
-  height: 60rem;
+.laptop-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  padding: 0.5rem;
-}
-
-@media (min-width: 769px) {
-  #scroll-animation-root .csa-wrapper {
-    height: 80rem;
-    padding: 5rem;
-  }
-}
-
-#scroll-animation-root .csa-inner {
-  padding: 2.5rem 0;
-  width: 100%;
-  position: relative;
-}
-
-@media (min-width: 769px) {
-  #scroll-animation-root .csa-inner {
-    padding: 10rem 0;
-  }
-}
-
-#scroll-animation-root .csa-header {
-  max-width: 64rem;
-  margin: 0 auto;
-  text-align: center;
-}
-
-#scroll-animation-root .csa-title-block {
-  margin-bottom: var(--space-4);
-}
-
-#scroll-animation-root .csa-subtitle {
-  font-family: var(--font-sans);
-  font-size: var(--text-lg);
-  font-weight: 500;
-  color: var(--text-secondary);
-  margin-bottom: var(--space-2);
-}
-
-#scroll-animation-root .csa-main-title {
-  font-family: var(--font-sans);
-  font-size: var(--text-4xl);
-  font-weight: 800;
-  color: var(--text-primary);
-  letter-spacing: var(--tracking-tight);
-  line-height: var(--leading-tight);
-}
-
-@media (min-width: 769px) {
-  #scroll-animation-root .csa-main-title {
-    font-size: var(--text-7xl);
-  }
-}
-
-#scroll-animation-root .csa-card {
-  max-width: 64rem;
-  margin: -3rem auto 0;
-  height: 30rem;
-  border: 4px solid #6C6C6C;
-  padding: 0.5rem;
-  background: #222222;
-  border-radius: 30px;
-}
-
-@media (min-width: 769px) {
-  #scroll-animation-root .csa-card {
-    height: 40rem;
-    padding: 1.5rem;
-  }
-}
-
-#scroll-animation-root .csa-card-inner {
-  height: 100%;
-  width: 100%;
   overflow: hidden;
-  border-radius: 1rem;
-  background: var(--bg-secondary);
 }
 
-@media (min-width: 769px) {
-  #scroll-animation-root .csa-card-inner {
-    padding: 1rem;
-  }
+/* Scene-level custom properties for lid colour inheritance */
+.scene-citrus   { --lid-color: #c9d84a; --lid-color-dark: #b5be3f; --glow-color: 180,200,60; }
+.scene-blush    { --lid-color: #f5c0cc; --lid-color-dark: #daa8b4; --glow-color: 230,180,195; }
+.scene-midnight { --lid-color: #3a3d4a; --lid-color-dark: #2d303c; --glow-color: 140,160,220; }
+.scene-silver   { --lid-color: #d4d4d6; --lid-color-dark: #bdbdbe; --glow-color: 200,200,210; }
+
+/* Background per scene */
+.scene-citrus   .laptop-sticky { background: #fafaf5; }
+.scene-blush    .laptop-sticky { background: #fdf7f8; }
+.scene-midnight .laptop-sticky { background: #f0f2f8; }
+.scene-silver   .laptop-sticky { background: #f5f5f7; }
+
+/* ── Scene Text ── */
+.scene-text {
+  position: absolute;
+  left: clamp(16px, 3vw, 48px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-30px);
+  max-width: min(240px, 28vw);
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.5s, transform 0.5s;
 }
 
-#scroll-animation-root .csa-img {
+.scene-text.visible {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+.scene-color-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-bottom: 14px;
+}
+
+.scene-label {
+  font-family: 'DM Sans', var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6e6e73;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.scene-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(28px, 3.5vw, 46px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: #1d1d1f;
+  margin-bottom: 14px;
+}
+
+.scene-body {
+  font-family: 'DM Sans', var(--font-sans);
+  font-size: clamp(14px, 1.5vw, 16px);
+  font-weight: 300;
+  color: #6e6e73;
+  line-height: 1.65;
+}
+
+/* ── Laptop 3D Wrapper ── */
+.laptop-3d-wrap {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(420px, 52vw, 680px);
+  perspective: 1800px;
+  perspective-origin: 50% 35%;
+  opacity: 0;
+  transition: opacity 0.6s;
+}
+
+.laptop-3d-wrap.visible {
+  opacity: 1;
+}
+
+.laptop-3d {
+  position: relative;
   width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  object-position: left top;
-  border-radius: 1rem;
+  transform-style: preserve-3d;
 }
 
-/* Reduced motion: disable 3D transforms */
-@media (prefers-reduced-motion: reduce) {
-  #scroll-animation-root .csa-wrapper {
-    height: auto;
-    padding: var(--space-24) var(--space-6);
+/* ── BASE — thin keyboard slab ── */
+.laptop-base {
+  position: relative;
+  width: 100%;
+  padding-top: 3.8%;
+  margin-top: 0;
+  z-index: 2;
+}
+
+.laptop-base-inner {
+  position: absolute;
+  inset: 0;
+  border-radius: 0 0 10px 10px;
+  overflow: hidden;
+  box-shadow:
+    0 40px 100px rgba(0,0,0,0.35),
+    0 18px 40px  rgba(0,0,0,0.20),
+    0 6px  12px  rgba(0,0,0,0.12),
+    0 1px  2px   rgba(0,0,0,0.10),
+    inset 0 3px 8px rgba(0,0,0,0.06);
+}
+
+/* Top edge highlight */
+.laptop-base-inner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.0)  0%,
+    rgba(255,255,255,0.55) 20%,
+    rgba(255,255,255,0.70) 50%,
+    rgba(255,255,255,0.55) 80%,
+    rgba(255,255,255,0.0)  100%);
+  z-index: 3;
+}
+
+/* Front-taper: lighter at front (bottom), heavier at hinge (top) */
+.laptop-base-inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg,
+    rgba(255,255,255,0.08) 0%,
+    rgba(0,0,0,0.0) 35%,
+    rgba(0,0,0,0.10) 100%);
+  border-radius: 0 0 10px 10px;
+  z-index: 1;
+}
+
+/* ── Base colour variants ── */
+.laptop-base-inner.citrus {
+  background: linear-gradient(180deg,
+    #d4e068 0%, #cdd962 25%, #c2cc56 60%, #b2bc46 100%);
+}
+.laptop-base-inner.blush {
+  background: linear-gradient(180deg,
+    #f6c4d0 0%, #f0bac6 25%, #e8aebe 60%, #dca0b0 100%);
+}
+.laptop-base-inner.midnight {
+  background: linear-gradient(180deg,
+    #484b5e 0%, #3e4154 25%, #363848 60%, #282a38 100%);
+}
+.laptop-base-inner.silver {
+  background: linear-gradient(180deg,
+    #e2e2e4 0%, #d8d8da 25%, #cecece 60%, #bebebc 100%);
+}
+
+/* ── MagSafe notch ── */
+.laptop-notch {
+  position: absolute;
+  top: 12%; left: 50%; transform: translateX(-50%);
+  width: 5.5%; height: 76%;
+  border-radius: 3px 3px 4px 4px;
+  background: rgba(0,0,0,0.55);
+  box-shadow:
+    inset 0 1px 0   rgba(255,255,255,0.25),
+    inset 0 2px 6px rgba(0,0,0,0.6),
+    inset 0 0 0 1px rgba(0,0,0,0.3),
+    0 1px 0 rgba(255,255,255,0.15);
+  z-index: 4;
+}
+
+/* ── Hinge ── */
+.laptop-hinge {
+  position: relative;
+  z-index: 3;
+  width: 90%;
+  height: 2px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: rgba(0,0,0,0.7);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.12);
+}
+
+/* ── Lid ── */
+.laptop-lid {
+  position: relative;
+  width: 92%;
+  margin: 0 auto;
+  padding-top: 60%;
+  transform-origin: bottom center;
+  transform: rotateX(-91deg);
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: none;
+  display: block;
+}
+
+/* ── Lid outer shell ── */
+.laptop-lid-outer {
+  position: absolute;
+  inset: 0;
+  border-radius: 11px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  box-shadow: 0 0 0 1.5px rgba(0,0,0,0.18);
+}
+
+.laptop-lid-outer.citrus   { background: #cdd962; }
+.laptop-lid-outer.blush    { background: #f2bec9; }
+.laptop-lid-outer.midnight { background: #3a3d4a; }
+.laptop-lid-outer.silver   { background: #d4d4d6; }
+
+/* ── Black bezel ── */
+.laptop-screen-bezel {
+  position: absolute;
+  top: 2.5%; left: 1.5%; right: 1.5%; bottom: 1.5%;
+  border-radius: 8px 8px 2px 2px;
+  background: #000;
+  overflow: hidden;
+  padding: 4% 2.5% 2.5% 2.5%;
+}
+
+/* Camera dot */
+.laptop-screen-bezel::before {
+  content: '';
+  position: absolute;
+  top: 1.2%; left: 50%; transform: translateX(-50%);
+  width: 5px; height: 5px;
+  background: #222;
+  border-radius: 50%;
+  z-index: 4;
+}
+
+.laptop-screen-img {
+  position: absolute;
+  top: 5%; left: 2.5%; right: 2.5%; bottom: 2.5%;
+  width: 95%; height: 92.5%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  border-radius: 0;
+}
+
+/* ── Mobile adjustments ── */
+@media (max-width: 768px) {
+  .laptop-scene {
+    height: 220vh;
   }
 
-  #scroll-animation-root .csa-card,
-  #scroll-animation-root .csa-header {
+  .scene-text {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    max-width: 100%;
+    text-align: center;
+    padding: 20px 24px 0;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  .scene-text.visible {
+    transform: none;
+  }
+
+  .laptop-sticky {
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .laptop-3d-wrap {
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    width: clamp(280px, 85vw, 480px);
+    margin: 0 auto;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .laptop-scene {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .laptop-sticky {
+    position: relative;
+  }
+
+  .laptop-3d-wrap {
+    opacity: 1 !important;
+  }
+
+  .laptop-3d {
     transform: none !important;
+  }
+
+  .laptop-lid {
+    transform: rotateX(-13deg) !important;
+  }
+
+  .scene-text {
+    opacity: 1 !important;
+    transform: translateY(-50%) translateX(0) !important;
   }
 }
