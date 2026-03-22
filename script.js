@@ -889,17 +889,8 @@
   var LID_OPEN   = -13;
   var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Glow colours per scene (R,G,B) — avoids reading computed styles in scroll loop
-  var GLOW_COLORS = ['180,200,60', '230,180,195', '140,160,220', '200,200,210'];
-
-  /**
-   * Custom hinge easing — cubic-bezier(0.25, 0.1, 0.1, 1.0) approximation.
-   * Decelerates sharply at the end for a mechanical lid-resistance feel.
-   */
-  function hingeEase(t) {
-    // Attempt to approximate cubic-bezier(0.25, 0.1, 0.1, 1.0)
-    // This gives a fast start that decelerates sharply near the end
-    return 1 - Math.pow(1 - t, 3.2);
+  function laptopEaseInOut(t) {
+    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
   }
 
   if (!prefersReducedMotion) {
@@ -912,65 +903,29 @@
 
         if (!scene || !lid || !wrap) continue;
 
-        var inner     = wrap.querySelector('.laptop-3d');
-        var baseInner = wrap.querySelector('.laptop-base-inner');
-        var rect      = scene.getBoundingClientRect();
-        var total     = scene.offsetHeight - window.innerHeight;
+        var inner = wrap.querySelector('.laptop-3d');
+        var rect  = scene.getBoundingClientRect();
+        var total = scene.offsetHeight - window.innerHeight;
 
         if (total <= 0) continue;
-
-        // Check if scene is in or near viewport
-        var inView = rect.top < window.innerHeight * 1.15 && rect.bottom > -50;
-        if (!inView) {
-          wrap.classList.remove('visible');
-          wrap.style.opacity = 0;
-          continue;
-        }
 
         var raw = Math.max(0, Math.min(1, -rect.top / total));
 
         // Phase 1: Fade + rise in (0% → 15%)
-        // Laptop starts at 15% opacity (partially visible before scroll starts)
         var appearP = Math.min(raw / 0.15, 1);
-        var opacity = Math.max(0.15, appearP);
-        wrap.classList.add('visible');
-        wrap.style.opacity = opacity;
-
-        // Phase 2: Lid opens (15% → 70%, stretched for deliberate feel)
-        var rawOpen = Math.max(0, Math.min((raw - 0.15) / 0.55, 1));
-        var openP = hingeEase(rawOpen);
-
-        // Bounce/settle: 2° overshoot past fully open, then ease back
-        var bounce = 0;
-        if (rawOpen > 0.85 && rawOpen < 1.0) {
-          bounce = Math.sin(((rawOpen - 0.85) / 0.15) * Math.PI) * 2;
+        if (appearP > 0.01) {
+          wrap.classList.add('visible');
+        } else {
+          wrap.classList.remove('visible');
         }
-
-        var baseAngle = LID_CLOSED + openP * (LID_OPEN - LID_CLOSED);
-        lid.style.transform = 'rotateX(' + (baseAngle + bounce) + 'deg)';
-
-        // Combine rise-in + base parallax (lid weight shifts base down 5px)
+        wrap.style.opacity = appearP;
         if (inner) {
-          var riseOffset = (1 - appearP) * 40;
-          var baseShift = openP * 5;
-          inner.style.transform = 'translateY(' + (riseOffset + baseShift) + 'px)';
+          inner.style.transform = 'translateY(' + ((1 - appearP) * 40) + 'px)';
         }
 
-        // Dynamic shadow + ambient screen glow on base
-        if (baseInner) {
-          var sY = Math.round(15 + openP * 25);
-          var sBlur = Math.round(40 + openP * 60);
-          var sOp = (0.25 + openP * 0.10).toFixed(2);
-          // Ambient glow: screen light cast down onto keyboard area
-          var glowOp = (openP * 0.15).toFixed(3);
-          var gc = GLOW_COLORS[i] || '200,200,210';
-          baseInner.style.boxShadow =
-            '0 ' + sY + 'px ' + sBlur + 'px rgba(0,0,0,' + sOp + '),' +
-            '0 6px 12px rgba(0,0,0,0.12),' +
-            '0 1px 2px rgba(0,0,0,0.10),' +
-            'inset 0 3px 8px rgba(0,0,0,0.06),' +
-            'inset 0 4px 14px rgba(' + gc + ',' + glowOp + ')';
-        }
+        // Phase 2: Lid opens (15% → 65%)
+        var openP = laptopEaseInOut(Math.max(0, Math.min((raw - 0.15) / 0.50, 1)));
+        lid.style.transform = 'rotateX(' + (LID_CLOSED + openP * (LID_OPEN - LID_CLOSED)) + 'deg)';
 
         // Phase 3: Text appears (30% → 55%)
         if (text) {

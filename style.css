@@ -5056,22 +5056,22 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 1;
 }
 
-/* ── Base colour variants (gradient: hinge-dark → front-light for taper) ── */
+/* ── Base colour variants ── */
 .laptop-base-inner.citrus {
   background: linear-gradient(180deg,
-    #b5be3f 0%, #c2cc4a 40%, #c9d84a 80%, #d0df55 100%);
+    #d4e068 0%, #cdd962 25%, #c2cc56 60%, #b2bc46 100%);
 }
 .laptop-base-inner.blush {
   background: linear-gradient(180deg,
-    #daa8b4 0%, #eab5c2 40%, #f5c0cc 80%, #f8ccd6 100%);
+    #f6c4d0 0%, #f0bac6 25%, #e8aebe 60%, #dca0b0 100%);
 }
 .laptop-base-inner.midnight {
   background: linear-gradient(180deg,
-    #282a38 0%, #363848 40%, #3e4154 80%, #484b5e 100%);
+    #484b5e 0%, #3e4154 25%, #363848 60%, #282a38 100%);
 }
 .laptop-base-inner.silver {
   background: linear-gradient(180deg,
-    #bebebc 0%, #cecece 40%, #d8d8da 80%, #e2e2e4 100%);
+    #e2e2e4 0%, #d8d8da 25%, #cecece 60%, #bebebc 100%);
 }
 
 /* ── MagSafe notch ── */
@@ -5089,62 +5089,30 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 4;
 }
 
-/* ── Hinge — cylindrical barrel ── */
+/* ── Hinge ── */
 .laptop-hinge {
   position: relative;
   z-index: 3;
   width: 90%;
-  height: 6px;
+  height: 2px;
   margin: 0 auto;
-  border-radius: 3px;
-  background: linear-gradient(180deg,
-    rgba(160,160,160,0.5) 0%,
-    rgba(0,0,0,0.65) 25%,
-    rgba(0,0,0,0.8) 65%,
-    rgba(120,120,120,0.4) 100%);
-  box-shadow:
-    0 1px 0 rgba(255,255,255,0.12),
-    inset 0 1px 0 rgba(255,255,255,0.15);
+  overflow: hidden;
+  background: rgba(0,0,0,0.7);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.12);
 }
-
-/* Hinge screw dots */
-.laptop-hinge::before,
-.laptop-hinge::after {
-  content: '';
-  position: absolute;
-  top: 50%; transform: translateY(-50%);
-  width: 4px; height: 4px;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.45);
-  box-shadow: inset 0 0.5px 0 rgba(255,255,255,0.2);
-}
-.laptop-hinge::before { left: 4px; }
-.laptop-hinge::after  { right: 4px; }
 
 /* ── Lid ── */
 .laptop-lid {
   position: relative;
-  width: 96%;
+  width: 92%;
   margin: 0 auto;
-  padding-top: 62.5%;
+  padding-top: 60%;
   transform-origin: bottom center;
   transform: rotateX(-91deg);
   transform-style: preserve-3d;
   will-change: transform;
   transition: none;
   display: block;
-}
-
-/* Lid thickness — top edge visible when lid is open */
-.laptop-lid::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 1%; right: 1%;
-  height: 4px;
-  background: var(--lid-color-dark, #bbb);
-  transform-origin: top center;
-  transform: rotateX(90deg);
-  border-radius: 2px 2px 0 0;
 }
 
 /* ── Lid outer shell ── */
@@ -5155,28 +5123,17 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
   backface-visibility: hidden;
   box-shadow: 0 0 0 1.5px rgba(0,0,0,0.18);
-  border-left: 2px solid var(--lid-color-dark, rgba(0,0,0,0.1));
-  border-right: 2px solid var(--lid-color-dark, rgba(0,0,0,0.1));
 }
 
-/* Bottom edge highlight for consistent lighting */
-.laptop-lid-outer::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0; height: 2px;
-  background: rgba(255,255,255,0.12);
-  z-index: 5;
-}
-
-.laptop-lid-outer.citrus   { background: #c9d84a; }
-.laptop-lid-outer.blush    { background: #f5c0cc; }
+.laptop-lid-outer.citrus   { background: #cdd962; }
+.laptop-lid-outer.blush    { background: #f2bec9; }
 .laptop-lid-outer.midnight { background: #3a3d4a; }
 .laptop-lid-outer.silver   { background: #d4d4d6; }
 
-/* ── Black bezel (top fractionally thicker for camera module) ── */
+/* ── Black bezel ── */
 .laptop-screen-bezel {
   position: absolute;
-  top: 3.2%; left: 1.5%; right: 1.5%; bottom: 1.5%;
+  top: 2.5%; left: 1.5%; right: 1.5%; bottom: 1.5%;
   border-radius: 8px 8px 2px 2px;
   background: #000;
   overflow: hidden;
@@ -5194,19 +5151,6 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 4;
 }
 
-/* Screen glare — subtle anti-reflective coating */
-.laptop-screen-bezel::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 30% 20%,
-    rgba(255,255,255,0.04) 0%,
-    transparent 70%);
-  pointer-events: none;
-  z-index: 5;
-  border-radius: inherit;
-}
-
 .laptop-screen-img {
   position: absolute;
   top: 5%; left: 2.5%; right: 2.5%; bottom: 2.5%;
@@ -5214,38 +5158,7 @@ h1, h2, h3, h4, h5, h6 {
   object-fit: cover;
   object-position: center top;
   display: block;
-  border-radius: 8px;
-}
-
-/* ── Keyboard grid — subtle key outlines ── */
-.laptop-keyboard {
-  position: absolute;
-  top: 10%; left: 7%; right: 7%;
-  height: 48%;
-  border-radius: 2px;
-  background:
-    repeating-linear-gradient(90deg,
-      transparent 0%, transparent 7.5%,
-      rgba(0,0,0,0.07) 7.5%, rgba(0,0,0,0.07) 7.8%),
-    repeating-linear-gradient(180deg,
-      transparent 0%, transparent 45%,
-      rgba(0,0,0,0.07) 45%, rgba(0,0,0,0.07) 50%);
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* ── Trackpad indent ── */
-.laptop-trackpad {
-  position: absolute;
-  bottom: 8%; left: 50%;
-  transform: translateX(-50%);
-  width: 30%; height: 35%;
-  border-radius: 3px;
-  border: 0.5px solid rgba(0,0,0,0.08);
-  box-shadow: inset 0 0.5px 2px rgba(0,0,0,0.08);
-  z-index: 2;
-  pointer-events: none;
+  border-radius: 0;
 }
 
 /* ── Mobile adjustments ── */
