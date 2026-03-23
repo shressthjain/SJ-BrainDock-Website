@@ -3288,6 +3288,241 @@ h1, h2, h3, h4, h5, h6 {
   line-height: var(--leading-relaxed);
 }
 
+/* ---------- Students Hero Background ---------- */
+.students-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.students-hero::before {
+  background: transparent;
+}
+
+#shader-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+#shader-bg canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.students-hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Developers Hero Background ---------- */
+.developers-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.developers-hero::before {
+  background: transparent;
+}
+
+#dotted-surface-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+#dotted-surface-bg canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.developers-hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Creators Hero Background ---------- */
+.creators-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+.creators-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 30%, var(--bg-primary) 75%);
+}
+
+.creators-hero::before {
+  background: transparent;
+}
+
+#shader-lines-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+#shader-lines-bg canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.creators-hero .page-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------- Sales Hero Background ---------- */
+.sales-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.sales-hero::before {
+  background: transparent;
+}
+
+.sales-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 30%, var(--bg-primary) 75%);
+}
+
+#cyber-grid-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+#cyber-grid-bg canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.sales-hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------- Support Hero Background ---------- */
+.support-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.support-hero::before {
+  background: transparent;
+}
+
+.support-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 30%, var(--bg-primary) 75%);
+}
+
+#flow-field-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+#flowFieldCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.support-hero .page-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------- Lawyers Hero Background ---------- */
+.lawyers-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.lawyers-hero::before {
+  background: transparent;
+}
+
+.lawyers-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 30%, var(--bg-primary) 75%);
+}
+
+#dither-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+#ditherCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.lawyers-hero .page-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------- Leaders Hero Background ---------- */
+.leaders-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.leaders-hero::before {
+  background: transparent;
+}
+
+.leaders-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 30%, var(--bg-primary) 75%);
+}
+
+#warp-drive-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+#warp-drive-bg canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.leaders-hero .page-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
 /* ---------- Use Cases Grid ---------- */
 .use-cases-tabs {
   display: flex;
@@ -6052,5 +6287,93 @@ h1, h2, h3, h4, h5, h6 {
   .fan-frame {
     animation: none !important;
   }
+}
+
+/* ============================================
+   Dark Page Theme — for individual pages
+   ============================================ */
+body.page-dark {
+  background: #000000;
+  color: #ffffff;
+
+  /* Override CSS custom properties */
+  --bg-primary: #000000;
+  --bg-secondary: #111111;
+  --bg-elevated: #1a1a1a;
+  --bg-card: #111111;
+  --bg-card-hover: #1a1a1a;
+  --bg-glass: rgba(255, 255, 255, 0.03);
+  --bg-glass-hover: rgba(255, 255, 255, 0.06);
+
+  --text-primary: #ffffff;
+  --text-secondary: #B0B0B0;
+  --text-tertiary: #808080;
+  --text-inverse: #000000;
+
+  --border-default: rgba(255, 255, 255, 0.1);
+  --border-hover: rgba(255, 255, 255, 0.2);
+  --border-active: rgba(100, 134, 16, 0.5);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
+}
+
+/* Header — dark glass */
+body.page-dark .header::before {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+/* Animated grid — lighter for dark bg */
+body.page-dark .animated-grid-bg {
+  color: rgba(255, 255, 255, 0.08);
+}
+
+body.page-dark .animated-grid-bg .grid-square {
+  fill: rgba(255, 255, 255, 0.5);
+}
+
+/* Hardcoded text colors */
+body.page-dark .hiw-heading,
+body.page-dark .hiw-step-title,
+body.page-dark .pr-card-plain .pr-card-stat,
+body.page-dark .savings-calc-card-row span:last-child {
+  color: #ffffff;
+}
+
+body.page-dark .hiw-subtitle,
+body.page-dark .hiw-step-desc {
+  color: #999999;
+}
+
+body.page-dark .hiw-step-number {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* Footer social icons */
+body.page-dark .footer-social a {
+  background: #1a1a1a;
+}
+
+/* Links */
+body.page-dark a {
+  color: inherit;
+}
+
+/* Buttons — keep primary CTA visible */
+body.page-dark .btn-ghost {
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+}
+
+body.page-dark .btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ASCII art */
+body.page-dark #ascii-art {
+  color: #ffffff;
 }
 
