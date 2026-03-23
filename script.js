@@ -187,30 +187,10 @@
     });
   });
 
-  // ========== SCROLL REVEAL ANIMATIONS ==========
-  const revealElements = document.querySelectorAll('.reveal');
-
-  if (revealElements.length > 0 && 'IntersectionObserver' in window) {
-    const revealObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px',
-      }
-    );
-
-    revealElements.forEach((el) => revealObserver.observe(el));
-  } else {
-    // Fallback: show all
-    revealElements.forEach((el) => el.classList.add('visible'));
-  }
+  // ========== REVEAL ELEMENTS — show immediately (no animation) ==========
+  document.querySelectorAll('.reveal, .reveal-slide-left, .reveal-slide-right').forEach(function (el) {
+    el.classList.add('visible');
+  });
 
   // ========== FAQ ACCORDION ==========
   const faqItems = document.querySelectorAll('.faq-item');
@@ -363,36 +343,6 @@
     });
   });
 
-  // ========== TESTIMONIAL SEAMLESS SCROLL ==========
-  const testimonialTrack = document.querySelector('.testimonials-track');
-  if (testimonialTrack) {
-    const firstSlide = testimonialTrack.querySelector('.testimonials-slide');
-    if (firstSlide) {
-      // Measure actual pixel width of one slide for a seamless loop
-      const slideWidth = firstSlide.offsetWidth;
-
-      // Inject keyframe with exact pixel distance (avoids CSS % miscalculation)
-      const scrollStyle = document.createElement('style');
-      scrollStyle.textContent = `
-        @keyframes testimonials-scroll {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-${slideWidth}px); }
-        }
-      `;
-      document.head.appendChild(scrollStyle);
-
-      // Apply smooth, infinite animation
-      testimonialTrack.style.animation = 'testimonials-scroll 40s linear infinite';
-
-      // Pause on hover so users can read
-      testimonialTrack.addEventListener('mouseenter', () => {
-        testimonialTrack.style.animationPlayState = 'paused';
-      });
-      testimonialTrack.addEventListener('mouseleave', () => {
-        testimonialTrack.style.animationPlayState = 'running';
-      });
-    }
-  }
 
   // ========== MADE FOR YOU — PILL SWITCHER ==========
   const mfyPills = document.querySelectorAll('.mfy-pill');
@@ -495,459 +445,325 @@
   }
   updateTeamSavings();
 
-  // ========== PERFORMANCE REPORTS — CHART DRAW + STAT COUNTERS ==========
-  const prChart = document.getElementById('prChart');
-  const prStats = document.getElementById('prStats');
+  // ========== PERFORMANCE REPORTS — show immediately (no animation) ==========
+  var prChart = document.getElementById('prChart');
+  if (prChart) prChart.classList.add('animated');
 
-  if (prChart && 'IntersectionObserver' in window) {
-    let prAnimated = false;
-
-    const prObserver = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting && !prAnimated) {
-            prAnimated = true;
-
-            // Trigger the SVG line drawing
-            prChart.classList.add('animated');
-
-            // Animate stat counters
-            if (prStats) {
-              const counters = prStats.querySelectorAll('.pr-stat-num');
-              counters.forEach(function (counter) {
-                animateCounter(counter);
-              });
-            }
-
-            prObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.4 }
-    );
-
-    prObserver.observe(prChart);
-  }
-
-  /**
-   * Animates a number element from 0 to its data-count value.
-   * Supports integers and decimals via data-decimals attribute.
-   */
-  function animateCounter(el) {
-    var target = parseFloat(el.getAttribute('data-count'));
-    var decimals = parseInt(el.getAttribute('data-decimals')) || 0;
-    var duration = 1600;
-    var startTime = null;
-
-    function step(timestamp) {
-      if (!startTime) startTime = timestamp;
-      var progress = Math.min((timestamp - startTime) / duration, 1);
-
-      // Ease-out cubic for a satisfying deceleration
-      var eased = 1 - Math.pow(1 - progress, 3);
-      var current = eased * target;
-
-      el.textContent = current.toFixed(decimals);
-
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      } else {
-        el.textContent = target.toFixed(decimals);
-      }
-    }
-
-    requestAnimationFrame(step);
-  }
-
-  // ========== HOW BRAINDOCK HELPS — TYPING ANIMATION ==========
-  const hbhTextEl = document.getElementById('hbhTypedText');
-  const hbhCursor = document.getElementById('hbhCursor');
-  const hbhPopup = document.getElementById('hbhCompletePopup');
-
-  if (hbhTextEl) {
-    const hbhFullText =
-      'I met the lawyer in a quiet office, discussing contracts, deadlines, and risks. ' +
-      'Papers rustled, coffee cooled, and advice flowed calmly, leaving me relieved, ' +
-      'informed, and cautiously optimistic about next steps after a long morning.';
-
-    let hbhStarted = false;
-
-    /**
-     * Types text one character at a time with human-like variable speed.
-     * Pauses longer on punctuation for a natural rhythm.
-     */
-    function runTypingAnimation() {
-      let i = 0;
-
-      function typeChar() {
-        if (i >= hbhFullText.length) {
-          // Typing done — hide cursor, show popup after 3s
-          if (hbhCursor) hbhCursor.classList.add('hidden');
-          setTimeout(function () {
-            if (hbhPopup) hbhPopup.classList.add('visible');
-          }, 3000);
-          return;
-        }
-
-        hbhTextEl.textContent += hbhFullText[i];
-        i++;
-
-        // Variable delay for realistic typing feel
-        var char = hbhFullText[i - 1];
-        var delay;
-        if (char === '.' || char === '!') {
-          delay = 280 + Math.random() * 120; // longer pause at sentences
-        } else if (char === ',') {
-          delay = 140 + Math.random() * 80; // medium pause at commas
-        } else if (char === ' ') {
-          delay = 50 + Math.random() * 50; // quick on spaces
-        } else {
-          delay = 40 + Math.random() * 70; // base typing speed
-        }
-
-        setTimeout(typeChar, delay);
-      }
-
-      typeChar();
-    }
-
-    // Trigger when section scrolls into view (plays only once)
-    var hbhSection = document.querySelector('.hbh-section');
-    if (hbhSection && 'IntersectionObserver' in window) {
-      var hbhObserver = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting && !hbhStarted) {
-              hbhStarted = true;
-              runTypingAnimation();
-              hbhObserver.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.3 }
-      );
-      hbhObserver.observe(hbhSection);
-    } else if (hbhSection) {
-      // Fallback: just run immediately
-      runTypingAnimation();
-    }
-  }
-
-  // ========== BINARY TEXT BANNER ==========
-  // Renders "BrainDock" formed by dense 0s and 1s with a Matrix-rain
-  // reveal and continuous character scrambling. Inspired by Wispr Flow.
-
-  function initBinaryBanner() {
-    var canvas = document.getElementById('binaryCanvas');
-    if (!canvas) return;
-
-    var ctx = canvas.getContext('2d');
-    var dpr = window.devicePixelRatio || 1;
-    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // Dense grid — compact chars for high-res binary texture
-    var FONT_SIZE = 9;
-    var CELL_W = 6;
-    var CELL_H = 10;
-
-    var W, H, cols, rows, mask, dripMask, centerWeight, grid, rainY, settled, animId;
-
-    /** Set canvas dimensions and rebuild everything. */
-    function setup() {
-      W = canvas.parentElement.clientWidth;
-      H = Math.max(220, Math.min(380, W * 0.3));
-
-      canvas.width = W * dpr;
-      canvas.height = H * dpr;
-      canvas.style.width = W + 'px';
-      canvas.style.height = H + 'px';
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      cols = Math.ceil(W / CELL_W);
-      rows = Math.ceil(H / CELL_H);
-
-      buildMask();
-      initGrid();
-    }
-
-    /** Render "BrainDock" at full canvas resolution, sample at each grid cell. */
-    function buildMask() {
-      // Render text at the FULL canvas pixel resolution for crisp sampling
-      var off = document.createElement('canvas');
-      off.width = Math.ceil(W * dpr);
-      off.height = Math.ceil(H * dpr);
-      var oc = off.getContext('2d');
-      oc.scale(dpr, dpr);
-
-      // Large bold text covering ~65% of banner height
-      var fontSize = H * 0.65;
-      oc.font = '800 ' + fontSize + 'px "Inter", sans-serif';
-      oc.textAlign = 'center';
-      oc.textBaseline = 'middle';
-      // Stroke for extra thickness
-      oc.lineWidth = fontSize * 0.04;
-      oc.strokeStyle = '#000';
-      oc.strokeText('BrainDock', W / 2, H / 2);
-      oc.fillStyle = '#000';
-      oc.fillText('BrainDock', W / 2, H / 2);
-
-      var data = oc.getImageData(0, 0, off.width, off.height).data;
-
-      // Sample the pixel at the center of each grid cell
-      mask = [];
-      for (var r = 0; r < rows; r++) {
-        mask[r] = [];
-        for (var c = 0; c < cols; c++) {
-          var cx = Math.floor((c * CELL_W + CELL_W / 2) * dpr);
-          var cy = Math.floor((r * CELL_H + CELL_H / 2) * dpr);
-          if (cx >= off.width) cx = off.width - 1;
-          if (cy >= off.height) cy = off.height - 1;
-          var idx = (cy * off.width + cx) * 4;
-          mask[r][c] = data[idx + 3] > 25;
-        }
-      }
-
-      // Drip mask: vertical bleed above and below text for rain/drip halo
-      dripMask = [];
-      for (var r2 = 0; r2 < rows; r2++) {
-        dripMask[r2] = [];
-        for (var c2 = 0; c2 < cols; c2++) {
-          if (mask[r2][c2]) {
-            dripMask[r2][c2] = 0;
-            continue;
-          }
-          var nearest = 99;
-          for (var dr = -10; dr <= 10; dr++) {
-            var rr = r2 + dr;
-            if (rr >= 0 && rr < rows && mask[rr][c2]) {
-              nearest = Math.min(nearest, Math.abs(dr));
-            }
-          }
-          dripMask[r2][c2] = nearest < 99 ? Math.max(0, 0.45 - nearest * 0.04) : 0;
-        }
-      }
-
-      // Center-weight map: elliptical Gaussian falloff for background noise density
-      var halfW = W / 2;
-      var halfH = H / 2;
-      centerWeight = [];
-      for (var r3 = 0; r3 < rows; r3++) {
-        centerWeight[r3] = [];
-        for (var c3 = 0; c3 < cols; c3++) {
-          var dx = (c3 * CELL_W + CELL_W / 2 - halfW) / halfW; // -1 to 1
-          var dy = (r3 * CELL_H + CELL_H / 2 - halfH) / halfH; // -1 to 1
-          var d2 = dx * dx + dy * dy; // squared elliptical distance
-          centerWeight[r3][c3] = Math.exp(-d2 * 2.5); // Gaussian falloff
-        }
-      }
-    }
-
-    /** Fill grid with random binary chars and stagger rain start positions. */
-    function initGrid() {
-      grid = [];
-      rainY = [];
-      settled = false;
-
-      for (var r = 0; r < rows; r++) {
-        grid[r] = [];
-        for (var c = 0; c < cols; c++) {
-          grid[r][c] = Math.random() > 0.5 ? '1' : '0';
-        }
-      }
-      for (var c = 0; c < cols; c++) {
-        rainY[c] = -(Math.random() * rows * 1.5);
-      }
-    }
-
-    var frame = 0;
-
-    /** Main render loop. */
-    function draw() {
-      frame++;
-
-      ctx.fillStyle = '#F8F2E6';
-      ctx.fillRect(0, 0, W, H);
-
-      ctx.font = FONT_SIZE + 'px "Courier New", monospace';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-
-      // Advance rain
-      if (!settled) {
-        var allDone = true;
-        for (var c = 0; c < cols; c++) {
-          rainY[c] += 0.5 + Math.random() * 0.3;
-          if (rainY[c] < rows + 5) allDone = false;
-        }
-        if (allDone) settled = true;
-      }
-
-      // Draw every cell
-      for (var r = 0; r < rows; r++) {
-        for (var c = 0; c < cols; c++) {
-          var isText = mask[r][c];
-          var drip = dripMask[r][c];
-          var rainPos = rainY[c];
-          var visible = r <= rainPos;
-
-          if (!visible) continue;
-
-          // Scramble characters
-          if (!isText && frame % 3 === 0 && Math.random() > 0.95) {
-            grid[r][c] = Math.random() > 0.5 ? '1' : '0';
-          }
-          if (isText && frame % 5 === 0 && Math.random() > 0.92) {
-            grid[r][c] = Math.random() > 0.5 ? '1' : '0';
-          }
-
-          // Determine opacity
-          var dist = rainPos - r;
-          var alpha;
-
-          if (isText) {
-            // Solid black text characters
-            alpha = settled ? 1.0 : Math.min(1.0, dist / 2.5);
-          } else if (drip > 0) {
-            // Medium-visible drip chars near the text
-            alpha = settled ? drip : Math.min(drip, dist / 6);
-          } else {
-            // Background noise with center-focused density
-            var cw = centerWeight[r][c];
-            if (cw < 0.02) continue; // skip near-empty edges
-            var baseAlpha = 0.14 * cw;
-            alpha = settled ? baseAlpha : Math.min(baseAlpha, dist / 30);
-          }
-
-          if (alpha < 0.01) continue; // skip invisible
-
-          ctx.fillStyle = 'rgba(26,26,26,' + alpha.toFixed(3) + ')';
-          ctx.fillText(grid[r][c], c * CELL_W + CELL_W / 2, r * CELL_H + CELL_H / 2);
-        }
-      }
-
-      animId = requestAnimationFrame(draw);
-    }
-
-    // Pause when scrolled out of viewport for performance
-    if ('IntersectionObserver' in window) {
-      var observer = new IntersectionObserver(function (entries) {
-        var vis = entries[0].isIntersecting;
-        if (vis && !animId && !reducedMotion) draw();
-        if (!vis && animId) {
-          cancelAnimationFrame(animId);
-          animId = null;
-        }
-      }, { threshold: 0 });
-      observer.observe(canvas);
-    }
-
-    // --- Init ---
-    setup();
-
-    if (reducedMotion) {
-      settled = true;
-      for (var c = 0; c < cols; c++) rainY[c] = rows + 10;
-      draw();
-      cancelAnimationFrame(animId);
-      animId = null;
-    } else {
-      draw();
-    }
-
-    // Debounced resize handler
-    var resizeTimer;
-    window.addEventListener('resize', function () {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(function () {
-        if (animId) cancelAnimationFrame(animId);
-        animId = null;
-        frame = 0;
-        setup();
-        if (reducedMotion) {
-          settled = true;
-          for (var c2 = 0; c2 < cols; c2++) rainY[c2] = rows + 10;
-          draw();
-          cancelAnimationFrame(animId);
-          animId = null;
-        } else {
-          draw();
-        }
-      }, 250);
+  var prStats = document.getElementById('prStats');
+  if (prStats) {
+    prStats.querySelectorAll('.pr-stat-num').forEach(function (el) {
+      var target = parseFloat(el.getAttribute('data-count'));
+      var decimals = parseInt(el.getAttribute('data-decimals')) || 0;
+      el.textContent = target.toFixed(decimals);
     });
   }
 
-  // Run binary banner after fonts are loaded (mask needs Inter)
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(initBinaryBanner);
-  } else {
-    window.addEventListener('load', initBinaryBanner);
+  // ========== HOW BRAINDOCK HELPS — show full text immediately (no typing animation) ==========
+  var hbhTextEl = document.getElementById('hbhTypedText');
+  var hbhCursor = document.getElementById('hbhCursor');
+  var hbhPopup = document.getElementById('hbhCompletePopup');
+
+  if (hbhTextEl) {
+    hbhTextEl.textContent =
+      'I met the lawyer in a quiet office, discussing contracts, deadlines, and risks. ' +
+      'Papers rustled, coffee cooled, and advice flowed calmly, leaving me relieved, ' +
+      'informed, and cautiously optimistic about next steps after a long morning.';
+    if (hbhCursor) hbhCursor.classList.add('hidden');
+    if (hbhPopup) hbhPopup.classList.add('visible');
   }
 
-  // ========== MacBook Neo — MULTI-SCENE 3D LAPTOP SCROLL ANIMATION ==========
-  var SCENE_COUNT = 4;
-  var LID_CLOSED = -91;
-  var LID_OPEN   = -13;
-  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function laptopEaseInOut(t) {
-    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+  // ========== MACBOOK FAN ANIMATION (160-frame smooth sequence) ==========
+  var fanFrame = document.getElementById('fanFrame');
+  var fanLoader = document.getElementById('fanLoader');
+
+  var fanTotalFrames = 160;
+  var fanCurrentFrame = 0;
+  var fanPlaying = false;
+  var fanReady = false;
+  var fanAnimId = null;
+  var fanLastTime = 0;
+  var fanTargetFPS = 75;
+  var fanFrameInterval = 1000 / fanTargetFPS;
+  var fanImagesLoaded = 0;
+
+  // Ping-pong: play forward 0→159, then reverse 159→0 to avoid the color jump
+  var fanDirection = 1; // 1 = forward, -1 = reverse
+
+  // The frame index where the laptop screen is straight-on (0-indexed)
+  var fanStopFrame = 79; // frame 80
+
+  // Feature button state
+  var fanActiveFeature = null;
+  var fanStopTarget = -1; // frame to stop at, -1 = don't stop
+
+  // Preload all 160 frames
+  var fanImages = [];
+  (function preloadFanFrames() {
+    for (var i = 1; i <= fanTotalFrames; i++) {
+      var img = new Image();
+      var padded = String(i);
+      while (padded.length < 4) padded = '0' + padded;
+      img.src = 'assets/images/fan-frames/f60_' + padded + '.png';
+      img.onload = function () {
+        fanImagesLoaded++;
+        if (fanLoader) {
+          fanLoader.textContent = 'Loading… ' + Math.round((fanImagesLoaded / fanTotalFrames) * 100) + '%';
+        }
+        if (fanImagesLoaded === fanTotalFrames) {
+          fanReady = true;
+          if (fanLoader) fanLoader.classList.add('hidden');
+        }
+      };
+      img.onerror = function () {
+        fanImagesLoaded++;
+      };
+      fanImages.push(img);
+    }
+  })();
+
+  function fanShowFrame(idx) {
+    if (!fanFrame || !fanImages[idx]) return;
+    fanCurrentFrame = idx;
+    fanFrame.src = fanImages[idx].src;
   }
 
-  if (!prefersReducedMotion) {
-    window.addEventListener('scroll', function () {
-      for (var i = 0; i < SCENE_COUNT; i++) {
-        var scene  = document.getElementById('scene-' + i);
-        var lid    = document.getElementById('lid-' + i);
-        var wrap   = document.getElementById('laptop-' + i);
-        var text   = document.getElementById('text-' + i);
+  function fanAnimate(timestamp) {
+    if (!fanPlaying) return;
+    if (!fanLastTime) fanLastTime = timestamp;
 
-        if (!scene || !lid || !wrap) continue;
+    var elapsed = timestamp - fanLastTime;
+    if (elapsed >= fanFrameInterval) {
+      fanLastTime = timestamp - (elapsed % fanFrameInterval);
 
-        var inner = wrap.querySelector('.laptop-3d');
-        var rect  = scene.getBoundingClientRect();
-        var total = scene.offsetHeight - window.innerHeight;
-
-        if (total <= 0) continue;
-
-        var raw = Math.max(0, Math.min(1, -rect.top / total));
-
-        // Phase 1: Fade + rise in (0% → 15%)
-        var appearP = Math.min(raw / 0.15, 1);
-        if (appearP > 0.01) {
-          wrap.classList.add('visible');
-        } else {
-          wrap.classList.remove('visible');
-        }
-        wrap.style.opacity = appearP;
-        if (inner) {
-          inner.style.transform = 'translateY(' + ((1 - appearP) * 40) + 'px)';
-        }
-
-        // Phase 2: Lid opens (15% → 65%)
-        var openP = laptopEaseInOut(Math.max(0, Math.min((raw - 0.15) / 0.50, 1)));
-        lid.style.transform = 'rotateX(' + (LID_CLOSED + openP * (LID_OPEN - LID_CLOSED)) + 'deg)';
-
-        // Phase 3: Text appears (30% → 55%)
-        if (text) {
-          var textP = Math.max(0, Math.min((raw - 0.30) / 0.25, 1));
-          if (textP > 0.1) {
-            text.classList.add('visible');
-          } else {
-            text.classList.remove('visible');
-          }
-        }
+      // Ping-pong: reverse direction at boundaries instead of wrapping
+      var next = fanCurrentFrame + fanDirection;
+      if (next >= fanTotalFrames) {
+        fanDirection = -1;
+        next = fanTotalFrames - 2; // bounce back
+      } else if (next < 0) {
+        fanDirection = 1;
+        next = 1; // bounce forward
       }
-    }, { passive: true });
-  } else {
-    // Reduced motion: show everything open
-    for (var i = 0; i < SCENE_COUNT; i++) {
-      var wrap = document.getElementById('laptop-' + i);
-      var text = document.getElementById('text-' + i);
-      var lid  = document.getElementById('lid-' + i);
-      if (wrap) { wrap.classList.add('visible'); wrap.style.opacity = 1; }
-      if (text) text.classList.add('visible');
-      if (lid)  lid.style.transform = 'rotateX(' + LID_OPEN + 'deg)';
+      fanShowFrame(next);
+
+      // Check if we've reached the stop frame
+      if (fanStopTarget >= 0 && fanCurrentFrame === fanStopTarget) {
+        fanPlaying = false;
+        cancelAnimationFrame(fanAnimId);
+        fanShowDescription(fanActiveFeature);
+        return;
+      }
+    }
+
+    fanAnimId = requestAnimationFrame(fanAnimate);
+  }
+
+  function fanPlayToFrame(targetFrame) {
+    fanStopTarget = targetFrame;
+    if (!fanPlaying) {
+      fanPlaying = true;
+      fanLastTime = 0;
+      fanAnimId = requestAnimationFrame(fanAnimate);
     }
   }
 
+  // Description panel logic
+  var fanDescContainer = document.getElementById('fanFeatureDesc');
+  var fanDescItems = document.querySelectorAll('.fan-feature-desc-item');
+
+  function fanShowDescription(feature) {
+    if (!fanDescContainer || !feature) return;
+    fanDescItems.forEach(function (item) {
+      item.classList.toggle('active', item.getAttribute('data-desc') === feature);
+    });
+    fanDescContainer.classList.add('visible');
+  }
+
+  function fanHideDescription() {
+    if (!fanDescContainer) return;
+    fanDescContainer.classList.remove('visible');
+  }
+
+  // Feature button click handlers
+  var fanFeatureBtns = document.querySelectorAll('.fan-feature-btn');
+  fanFeatureBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (!fanReady) return;
+      var feature = btn.getAttribute('data-feature');
+
+      // If clicking the already-active button, do nothing
+      if (fanActiveFeature === feature) return;
+
+      // Update active button state
+      fanFeatureBtns.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+
+      // Hide current description while animation plays
+      fanHideDescription();
+
+      fanActiveFeature = feature;
+
+      // Play animation to the straight-on frame
+      fanPlayToFrame(fanStopFrame);
+    });
+  });
+
+})();
+
+/* ========== FEATURES DECK — Stacked Card Interaction ========== */
+;(function () {
+  'use strict';
+
+  var DESKTOP_OFFSETS = [
+    { x: -100, y: 0   },
+    { x: -30,  y: 50  },
+    { x: 40,   y: 100 },
+    { x: 110,  y: 150 }
+  ];
+  var DESKTOP_ACTIVE = { x: 0, y: -20 };
+
+  var MOBILE_OFFSETS = [
+    { x: -60, y: 0  },
+    { x: -20, y: 30 },
+    { x: 20,  y: 60 },
+    { x: 60,  y: 90 }
+  ];
+  var MOBILE_ACTIVE = { x: 0, y: -15 };
+
+  var cards = [];
+  var activeIndex = -1;
+
+  function isMobile() {
+    return window.innerWidth < 768;
+  }
+
+  function getOffsets() {
+    return isMobile() ? MOBILE_OFFSETS : DESKTOP_OFFSETS;
+  }
+
+  function getActivePos() {
+    return isMobile() ? MOBILE_ACTIVE : DESKTOP_ACTIVE;
+  }
+
+  function updateDeck() {
+    var offsets = getOffsets();
+    var activePos = getActivePos();
+    var totalCards = cards.length;
+    var positionIndex = 0;
+    var hasActive = activeIndex >= 0;
+    var highestInactivePos = -1;
+
+    for (var i = 0; i < totalCards; i++) {
+      var card = cards[i];
+      var desc = card.querySelector('p');
+
+      card.classList.remove('deck-front');
+
+      if (i === activeIndex) {
+        card.style.setProperty('--deck-offset-x', activePos.x + 'px');
+        card.style.setProperty('--deck-offset-y', activePos.y + 'px');
+        card.style.setProperty('--deck-z', String(totalCards + 1));
+        card.classList.add('active');
+        card.setAttribute('aria-pressed', 'true');
+        card.setAttribute('tabindex', '0');
+        if (desc) desc.removeAttribute('aria-hidden');
+      } else {
+        var offset = offsets[positionIndex] || offsets[offsets.length - 1];
+        card.style.setProperty('--deck-offset-x', offset.x + 'px');
+        card.style.setProperty('--deck-offset-y', offset.y + 'px');
+        card.style.setProperty('--deck-z', String(positionIndex + 1));
+        card.classList.remove('active');
+        card.setAttribute('aria-pressed', 'false');
+        card.setAttribute('tabindex', hasActive ? '-1' : '0');
+        if (desc) desc.setAttribute('aria-hidden', 'true');
+        highestInactivePos = i;
+        positionIndex++;
+      }
+    }
+
+    if (highestInactivePos >= 0) {
+      cards[highestInactivePos].classList.add('deck-front');
+    }
+  }
+
+  function toggleCard(index) {
+    if (index === activeIndex) {
+      activeIndex = -1;
+    } else {
+      activeIndex = index;
+    }
+    updateDeck();
+  }
+
+  function deactivate() {
+    if (activeIndex >= 0) {
+      activeIndex = -1;
+      updateDeck();
+    }
+  }
+
+  function init() {
+    var deck = document.querySelector('.features-deck');
+    if (!deck) return;
+
+    var cardElements = deck.querySelectorAll('.feature-card');
+    if (cardElements.length === 0) return;
+
+    cards = Array.prototype.slice.call(cardElements);
+
+    cards.forEach(function (card) {
+      card.classList.remove('active');
+    });
+
+    activeIndex = -1;
+    updateDeck();
+
+    cards.forEach(function (card, i) {
+      card.addEventListener('click', function (e) {
+        e.stopPropagation();
+        toggleCard(i);
+        if (activeIndex >= 0) {
+          cards[activeIndex].focus();
+        }
+      });
+
+      card.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleCard(i);
+        } else if (e.key === 'Escape') {
+          e.preventDefault();
+          deactivate();
+          card.focus();
+        } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          var next = (i + 1) % cards.length;
+          cards[next].focus();
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          var prev = (i - 1 + cards.length) % cards.length;
+          cards[prev].focus();
+        }
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (deck && !deck.contains(e.target)) {
+        deactivate();
+      }
+    });
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(updateDeck, 200);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();

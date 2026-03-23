@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MacBook Neo</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #f0f0f0;
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+.scroll-container {
+  height: 800vh;
+  position: relative;
+}
+
+.sticky-frame {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  transition: background 0.7s ease;
+  background: linear-gradient(150deg, #f4f6e8, #eef2dc);
+}
+
+/* ── Left Text Panel ── */
+.text-panel {
+  position: absolute;
+  left: 4vw;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 280px;
+  z-index: 10;
+}
+
+.text-card {
+  position: absolute;
+  top: 0; left: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+.text-card.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.text-card .dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-bottom: 14px;
+}
+
+.text-card .label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-variant: small-caps;
+  color: #888;
+  margin-bottom: 12px;
+}
+
+.text-card .heading {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.2;
+  color: #1d1d1f;
+}
+
+/* ── Stage ── */
+.stage {
+  position: absolute;
+  right: 6vw;
+  top: 50%;
+  transform: translateY(-50%) rotateX(6deg) rotateY(-14deg);
+  width: 420px;
+  height: 320px;
+  perspective: 1600px;
+  transform-style: preserve-3d;
+}
+
+/* ── Mac Wrapper (each laptop) ── */
+.mac-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0; top: 0;
+  transform-style: preserve-3d;
+}
+
+/* ── Mac Body (gets rotateY for flip) ── */
+.mac-body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* ── Lid (front face) ── */
+.lid {
+  position: absolute;
+  width: 92%;
+  left: 4%;
+  top: 0;
+  height: 72%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.lid-shell {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.lid-shell .bezel {
+  position: absolute;
+  top: 3%;
+  left: 1.5%;
+  right: 1.5%;
+  bottom: 1.5%;
+  background: #111;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.lid-shell .camera {
+  position: absolute;
+  top: 1%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #222;
+  border: 1px solid #333;
+  z-index: 2;
+}
+
+.screen-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ── Lid Back ── */
+.lid-back {
+  position: absolute;
+  width: 92%;
+  left: 4%;
+  top: 0;
+  height: 72%;
+  border-radius: 10px;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lid-back .apple-logo {
+  font-size: 42px;
+  color: rgba(255,255,255,0.2);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.lid-back .hello-text {
+  position: absolute;
+  bottom: 12%;
+  right: 12%;
+  font-style: italic;
+  font-size: 14px;
+  color: rgba(255,255,255,0.15);
+  font-family: 'DM Sans', sans-serif;
+}
+
+.lid-back .specular {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 30%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* ── Lid Thickness ── */
+.lid-thickness {
+  position: absolute;
+  width: 92%;
+  left: 4%;
+  top: 72%;
+  height: 3px;
+  transform: rotateX(-90deg);
+  transform-origin: top center;
+  border-radius: 0 0 2px 2px;
+}
+
+/* ── Hinge ── */
+.hinge {
+  position: absolute;
+  width: 90%;
+  left: 5%;
+  top: calc(72% + 1px);
+  height: 3px;
+  background: linear-gradient(180deg, #999, #666);
+  border-radius: 1px;
+}
+
+/* ── Base ── */
+.base {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: calc(72% + 4px);
+  padding-top: 3.8%;
+  transform-style: preserve-3d;
+}
+
+.base-inner {
+  width: 100%;
+  height: 100%;
+  min-height: 18px;
+  border-radius: 0 0 8px 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.base-inner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: rgba(255,255,255,0.6);
+}
+
+.base-inner::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.08));
+}
+
+/* ── MagSafe Notch ── */
+.notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5.5%;
+  height: 76%;
+  background: #222;
+  border-radius: 0 0 3px 3px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.5), 0 0 0 0.5px rgba(255,255,255,0.15);
+}
+
+/* ── Drop Shadow ── */
+.mac-body::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 5%;
+  right: 5%;
+  height: 30px;
+  border-radius: 50%;
+  box-shadow:
+    0 40px 100px rgba(0,0,0,0.35),
+    0 18px 40px rgba(0,0,0,0.20),
+    0 6px 12px rgba(0,0,0,0.12);
+  z-index: -1;
+}
+
+/* ── Colour Variants ── */
+/* Citrus */
+.mac-citrus .lid-shell { background: #c9d84a; }
+.mac-citrus .lid-back { background: #c9d84a; }
+.mac-citrus .lid-thickness { background: #b2bc46; }
+.mac-citrus .base-inner { background: linear-gradient(180deg, #d4e068, #c2cc56, #b2bc46); }
+
+/* Blush */
+.mac-blush .lid-shell { background: #f5c0cc; }
+.mac-blush .lid-back { background: #f5c0cc; }
+.mac-blush .lid-thickness { background: #dca0b0; }
+.mac-blush .base-inner { background: linear-gradient(180deg, #f6c4d0, #e8aebe, #dca0b0); }
+
+/* Midnight */
+.mac-midnight .lid-shell { background: #383b4a; }
+.mac-midnight .lid-back { background: #383b4a; }
+.mac-midnight .lid-thickness { background: #282a38; }
+.mac-midnight .base-inner { background: linear-gradient(180deg, #484b5e, #363848, #282a38); }
+
+/* Silver */
+.mac-silver .lid-shell { background: #d4d4d6; }
+.mac-silver .lid-back { background: #d4d4d6; }
+.mac-silver .lid-thickness { background: #bebebc; }
+.mac-silver .base-inner { background: linear-gradient(180deg, #e2e2e4, #cecece, #bebebc); }
+
+@media (max-width: 900px) {
+  .stage {
+    width: 320px;
+    height: 240px;
+    right: 2vw;
+  }
+  .text-panel {
+    max-width: 180px;
+    left: 2vw;
+  }
+  .text-card .heading {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .stage {
+    width: 260px;
+    height: 200px;
+    right: 0;
+    top: 60%;
+  }
+  .text-panel {
+    top: 20%;
+    transform: none;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="scroll-container" id="scroll-container">
+  <div class="sticky-frame" id="sticky-frame">
+
+    <!-- Left Text Panel -->
+    <div class="text-panel" id="text-panel">
+      <div class="text-card" id="text-citrus" data-name="citrus">
+        <div class="dot" style="background:#c9d84a"></div>
+        <div class="label">Citrus · Everyday</div>
+        <div class="heading">Master your to&#8209;do&nbsp;list.</div>
+      </div>
+      <div class="text-card" id="text-blush" data-name="blush">
+        <div class="dot" style="background:#f5c0cc"></div>
+        <div class="label">Blush · Learning</div>
+        <div class="heading">Study smarter, not&nbsp;harder.</div>
+      </div>
+      <div class="text-card" id="text-midnight" data-name="midnight">
+        <div class="dot" style="background:#383b4a"></div>
+        <div class="label">Midnight · Creative</div>
+        <div class="heading">Bring bold ideas to&nbsp;life.</div>
+      </div>
+      <div class="text-card" id="text-silver" data-name="silver">
+        <div class="dot" style="background:#d4d4d6"></div>
+        <div class="label">Silver · Gaming</div>
+        <div class="heading">Play without limits.</div>
+      </div>
+    </div>
+
+    <!-- 3D Stage -->
+    <div class="stage" id="main-scene">
+
+      <!-- Silver (bottom of stack) -->
+      <div class="mac-wrapper mac-silver" id="wrap-silver">
+        <div class="mac-body" id="body-silver">
+          <div class="lid">
+            <div class="lid-shell">
+              <div class="camera"></div>
+              <div class="bezel">
+                <svg class="screen-svg" viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Silver: Game screen -->
+                  <defs>
+                    <linearGradient id="sky-s" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#4a6fa5"/>
+                      <stop offset="60%" stop-color="#8eb5e0"/>
+                      <stop offset="100%" stop-color="#c9dff0"/>
+                    </linearGradient>
+                  </defs>
+                  <!-- Wallpaper / Game world -->
+                  <rect width="1440" height="900" fill="url(#sky-s)"/>
+                  <!-- Ground -->
+                  <rect y="520" width="1440" height="380" fill="#8b6f47"/>
+                  <rect y="500" width="1440" height="40" fill="#a08050"/>
+                  <!-- Canyon walls -->
+                  <polygon points="0,200 180,500 0,900" fill="#7a5c3a"/>
+                  <polygon points="1440,180 1260,500 1440,900" fill="#7a5c3a"/>
+                  <polygon points="100,300 280,520 60,520" fill="#8d6e45"/>
+                  <polygon points="1340,280 1160,520 1380,520" fill="#8d6e45"/>
+                  <!-- Rocky details -->
+                  <polygon points="200,400 320,520 120,520" fill="#6b4f30" opacity="0.5"/>
+                  <polygon points="1240,380 1360,520 1100,520" fill="#6b4f30" opacity="0.5"/>
+                  <!-- Path -->
+                  <rect x="580" y="520" width="280" height="380" fill="#9a7d55" rx="4"/>
+                  <rect x="620" y="520" width="200" height="380" fill="#a88b5e" rx="2"/>
+                  <!-- Gate -->
+                  <rect x="620" y="360" width="200" height="180" fill="none" stroke="#c4a265" stroke-width="8" rx="6"/>
+                  <rect x="620" y="360" width="200" height="20" fill="#c4a265" rx="4"/>
+                  <rect x="620" y="360" width="8" height="180" fill="#c4a265"/>
+                  <rect x="812" y="360" width="8" height="180" fill="#c4a265"/>
+                  <!-- Gate arch -->
+                  <path d="M620,380 Q720,300 820,380" fill="none" stroke="#c4a265" stroke-width="6"/>
+                  <!-- Character -->
+                  <rect x="700" y="450" width="40" height="60" rx="6" fill="#3a5a8c"/>
+                  <circle cx="720" cy="438" r="14" fill="#f0c8a0"/>
+                  <rect x="708" y="510" width="10" height="20" rx="3" fill="#2a4060"/>
+                  <rect x="722" y="510" width="10" height="20" rx="3" fill="#2a4060"/>
+                  <!-- HUD - Hearts -->
+                  <g transform="translate(40, 30)">
+                    <text x="0" y="20" font-size="22" fill="#ff4444">&#9829;</text>
+                    <text x="28" y="20" font-size="22" fill="#ff4444">&#9829;</text>
+                    <text x="56" y="20" font-size="22" fill="#ff4444">&#9829;</text>
+                    <text x="84" y="20" font-size="22" fill="#ff6666" opacity="0.4">&#9829;</text>
+                  </g>
+                  <!-- HUD - Lightning -->
+                  <g transform="translate(1300, 30)">
+                    <text x="0" y="20" font-size="20" fill="#ffd700">&#9889;</text>
+                    <text x="24" y="20" font-size="20" fill="#ffd700">&#9889;</text>
+                    <text x="48" y="20" font-size="20" fill="#ffd700">&#9889;</text>
+                    <text x="72" y="20" font-size="20" fill="#ffd700">&#9889;</text>
+                  </g>
+                  <!-- HUD - Score -->
+                  <rect x="640" y="20" width="160" height="30" rx="15" fill="rgba(0,0,0,0.4)"/>
+                  <text x="720" y="42" text-anchor="middle" font-size="14" fill="white" font-family="sans-serif" font-weight="bold">Stage 4-2</text>
+                  <!-- Clouds -->
+                  <ellipse cx="300" cy="120" rx="80" ry="30" fill="rgba(255,255,255,0.3)"/>
+                  <ellipse cx="1100" cy="90" rx="100" ry="35" fill="rgba(255,255,255,0.25)"/>
+                  <ellipse cx="700" cy="70" rx="60" ry="20" fill="rgba(255,255,255,0.2)"/>
+                  <!-- Menu bar -->
+                  <rect width="1440" height="28" fill="rgba(0,0,0,0.5)"/>
+                  <!-- Dock -->
+                  <rect x="420" y="855" width="600" height="40" rx="12" fill="rgba(0,0,0,0.3)"/>
+                  <g transform="translate(440, 860)">
+                    <rect x="0" y="4" width="30" height="30" rx="7" fill="#4a90d9"/>
+                    <rect x="45" y="4" width="30" height="30" rx="7" fill="#50c878"/>
+                    <rect x="90" y="4" width="30" height="30" rx="7" fill="#ff6b6b"/>
+                    <rect x="135" y="4" width="30" height="30" rx="7" fill="#ffa500"/>
+                    <rect x="180" y="4" width="30" height="30" rx="7" fill="#9b59b6"/>
+                    <rect x="225" y="4" width="30" height="30" rx="7" fill="#1abc9c"/>
+                    <rect x="270" y="4" width="30" height="30" rx="7" fill="#e74c3c"/>
+                    <rect x="315" y="4" width="30" height="30" rx="7" fill="#3498db"/>
+                    <rect x="360" y="4" width="30" height="30" rx="7" fill="#f39c12"/>
+                    <rect x="405" y="4" width="30" height="30" rx="7" fill="#2ecc71"/>
+                    <rect x="450" y="4" width="30" height="30" rx="7" fill="#e67e22"/>
+                    <rect x="495" y="4" width="30" height="30" rx="7" fill="#8e44ad"/>
+                  </g>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="lid-back">
+            <div class="specular"></div>
+            <div class="apple-logo">&#63743;</div>
+            <div class="hello-text">hello</div>
+          </div>
+          <div class="lid-thickness"></div>
+          <div class="hinge"></div>
+          <div class="base">
+            <div class="base-inner">
+              <div class="notch"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Midnight -->
+      <div class="mac-wrapper mac-midnight" id="wrap-midnight">
+        <div class="mac-body" id="body-midnight">
+          <div class="lid">
+            <div class="lid-shell">
+              <div class="camera"></div>
+              <div class="bezel">
+                <svg class="screen-svg" viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Midnight: FaceTime + Freeform -->
+                  <defs>
+                    <radialGradient id="bub-m1" cx="30%" cy="40%">
+                      <stop offset="0%" stop-color="#4a5a8a"/>
+                      <stop offset="100%" stop-color="#2a3050"/>
+                    </radialGradient>
+                  </defs>
+                  <!-- Blue bubble wallpaper -->
+                  <rect width="1440" height="900" fill="#1e2540"/>
+                  <circle cx="200" cy="300" r="180" fill="#2a3868" opacity="0.6"/>
+                  <circle cx="600" cy="150" r="120" fill="#354580" opacity="0.5"/>
+                  <circle cx="1100" cy="400" r="200" fill="#2c3a6a" opacity="0.5"/>
+                  <circle cx="800" cy="700" r="160" fill="#3a4878" opacity="0.4"/>
+                  <circle cx="400" cy="600" r="100" fill="#324070" opacity="0.5"/>
+                  <circle cx="1300" cy="200" r="140" fill="#2e3e72" opacity="0.4"/>
+                  <!-- Menu bar -->
+                  <rect width="1440" height="28" fill="rgba(40,45,65,0.85)"/>
+                  <circle cx="18" cy="14" r="5" fill="#ff5f57"/>
+                  <circle cx="36" cy="14" r="5" fill="#febc2e"/>
+                  <circle cx="54" cy="14" r="5" fill="#28c840"/>
+                  <text x="74" y="18" font-size="13" fill="rgba(255,255,255,0.9)" font-family="sans-serif" font-weight="600">FaceTime</text>
+                  <text x="1340" y="18" font-size="12" fill="rgba(255,255,255,0.7)" font-family="sans-serif">9:41 AM</text>
+                  <!-- Freeform window (behind) -->
+                  <rect x="500" y="80" width="880" height="600" rx="10" fill="#f8f8f8" stroke="#ccc" stroke-width="1"/>
+                  <rect x="500" y="80" width="880" height="32" rx="10" fill="#e8e8e8"/>
+                  <rect x="500" y="102" width="880" height="10" fill="#e8e8e8"/>
+                  <circle cx="520" cy="96" r="5" fill="#ff5f57"/>
+                  <circle cx="538" cy="96" r="5" fill="#febc2e"/>
+                  <circle cx="556" cy="96" r="5" fill="#28c840"/>
+                  <text x="700" y="100" font-size="12" fill="#666" font-family="sans-serif">Freeform — Dim Sum Restaurant</text>
+                  <!-- Freeform content: sticky notes, photos, menu -->
+                  <rect x="540" y="140" width="140" height="100" rx="4" fill="#fff3a0" transform="rotate(-3,610,190)"/>
+                  <text x="555" y="170" font-size="11" fill="#666" font-family="sans-serif">Menu Ideas:</text>
+                  <text x="555" y="186" font-size="10" fill="#888" font-family="sans-serif">• Har Gow</text>
+                  <text x="555" y="200" font-size="10" fill="#888" font-family="sans-serif">• Siu Mai</text>
+                  <text x="555" y="214" font-size="10" fill="#888" font-family="sans-serif">• Char Siu Bao</text>
+                  <!-- Photo placeholder -->
+                  <rect x="720" y="150" width="160" height="120" rx="6" fill="#ddd"/>
+                  <rect x="720" y="150" width="160" height="120" rx="6" fill="#e8a060" opacity="0.6"/>
+                  <text x="770" y="218" font-size="11" fill="white" font-family="sans-serif">dim sum.jpg</text>
+                  <!-- Menu mockup -->
+                  <rect x="920" y="140" width="120" height="160" rx="4" fill="white" stroke="#ddd"/>
+                  <text x="945" y="168" font-size="13" fill="#333" font-family="serif" font-weight="bold">DIM SUM</text>
+                  <text x="940" y="185" font-size="9" fill="#999" font-family="sans-serif">HOUSE</text>
+                  <line x1="935" y1="195" x2="1025" y2="195" stroke="#eee"/>
+                  <text x="935" y="212" font-size="8" fill="#666" font-family="sans-serif">Appetizers</text>
+                  <text x="935" y="226" font-size="7" fill="#999" font-family="sans-serif">Spring Rolls.........$8</text>
+                  <text x="935" y="240" font-size="7" fill="#999" font-family="sans-serif">Dumplings............$10</text>
+                  <text x="935" y="254" font-size="7" fill="#999" font-family="sans-serif">Wontons..............$9</text>
+                  <!-- Another sticky note -->
+                  <rect x="560" y="270" width="130" height="90" rx="4" fill="#b8e6b8" transform="rotate(2,625,315)"/>
+                  <text x="575" y="298" font-size="10" fill="#555" font-family="sans-serif">Logo colours:</text>
+                  <rect x="575" y="308" width="20" height="14" rx="2" fill="#c0392b"/>
+                  <rect x="600" y="308" width="20" height="14" rx="2" fill="#f1c40f"/>
+                  <rect x="625" y="308" width="20" height="14" rx="2" fill="#27ae60"/>
+                  <!-- Photo 2 -->
+                  <rect x="730" y="300" width="130" height="100" rx="6" fill="#c9dff0"/>
+                  <text x="760" y="358" font-size="10" fill="#666" font-family="sans-serif">interior.jpg</text>
+                  <!-- FaceTime window (front) -->
+                  <rect x="60" y="120" width="400" height="520" rx="12" fill="#111"/>
+                  <rect x="60" y="120" width="400" height="32" rx="12" fill="#222"/>
+                  <circle cx="80" cy="136" r="5" fill="#ff5f57"/>
+                  <circle cx="98" cy="136" r="5" fill="#febc2e"/>
+                  <circle cx="116" cy="136" r="5" fill="#28c840"/>
+                  <!-- FaceTime video -->
+                  <rect x="68" y="160" width="384" height="400" rx="6" fill="#2a3050"/>
+                  <!-- Woman avatar -->
+                  <circle cx="260" cy="320" r="80" fill="#f0c8a0"/>
+                  <ellipse cx="260" cy="260" rx="65" ry="50" fill="#4a2800"/>
+                  <circle cx="238" cy="310" r="6" fill="#333"/>
+                  <circle cx="282" cy="310" r="6" fill="#333"/>
+                  <ellipse cx="260" cy="340" rx="16" ry="8" fill="#e0a080"/>
+                  <path d="M240,355 Q260,370 280,355" fill="none" stroke="#c07050" stroke-width="2"/>
+                  <!-- Shoulders -->
+                  <ellipse cx="260" cy="430" rx="70" ry="40" fill="#5a8ab0"/>
+                  <!-- Self view -->
+                  <rect x="340" y="470" width="100" height="70" rx="6" fill="#1a2030"/>
+                  <circle cx="390" cy="498" r="16" fill="#d4b090"/>
+                  <ellipse cx="390" cy="520" rx="20" ry="12" fill="#3a6050"/>
+                  <!-- Call controls -->
+                  <g transform="translate(160, 580)">
+                    <circle cx="0" cy="0" r="22" fill="#444"/>
+                    <circle cx="60" cy="0" r="22" fill="#ff3b30"/>
+                    <circle cx="120" cy="0" r="22" fill="#444"/>
+                    <circle cx="180" cy="0" r="22" fill="#444"/>
+                  </g>
+                  <!-- Dock -->
+                  <rect x="420" y="855" width="600" height="40" rx="12" fill="rgba(30,37,64,0.6)"/>
+                  <g transform="translate(440, 860)">
+                    <rect x="0" y="4" width="30" height="30" rx="7" fill="#4a90d9"/>
+                    <rect x="45" y="4" width="30" height="30" rx="7" fill="#50c878"/>
+                    <rect x="90" y="4" width="30" height="30" rx="7" fill="#ff6b6b"/>
+                    <rect x="135" y="4" width="30" height="30" rx="7" fill="#5856d6"/>
+                    <rect x="180" y="4" width="30" height="30" rx="7" fill="#ff9500"/>
+                    <rect x="225" y="4" width="30" height="30" rx="7" fill="#1abc9c"/>
+                    <rect x="270" y="4" width="30" height="30" rx="7" fill="#ff2d55"/>
+                    <rect x="315" y="4" width="30" height="30" rx="7" fill="#5ac8fa"/>
+                    <rect x="360" y="4" width="30" height="30" rx="7" fill="#ffcc00"/>
+                    <rect x="405" y="4" width="30" height="30" rx="7" fill="#34c759"/>
+                    <rect x="450" y="4" width="30" height="30" rx="7" fill="#af52de"/>
+                    <rect x="495" y="4" width="30" height="30" rx="7" fill="#ff6347"/>
+                  </g>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="lid-back">
+            <div class="specular"></div>
+            <div class="apple-logo">&#63743;</div>
+            <div class="hello-text">hello</div>
+          </div>
+          <div class="lid-thickness"></div>
+          <div class="hinge"></div>
+          <div class="base">
+            <div class="base-inner">
+              <div class="notch"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blush -->
+      <div class="mac-wrapper mac-blush" id="wrap-blush">
+        <div class="mac-body" id="body-blush">
+          <div class="lid">
+            <div class="lid-shell">
+              <div class="camera"></div>
+              <div class="bezel">
+                <svg class="screen-svg" viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Blush: Preview + Pages -->
+                  <!-- Pink bubble wallpaper -->
+                  <rect width="1440" height="900" fill="#f5d0d8"/>
+                  <circle cx="300" cy="200" r="160" fill="#f0b8c8" opacity="0.6"/>
+                  <circle cx="800" cy="400" r="200" fill="#e8a0b8" opacity="0.4"/>
+                  <circle cx="1200" cy="300" r="140" fill="#f0c0d0" opacity="0.5"/>
+                  <circle cx="500" cy="700" r="180" fill="#e8b0c0" opacity="0.4"/>
+                  <circle cx="1000" cy="100" r="100" fill="#f5c0d0" opacity="0.5"/>
+                  <circle cx="150" cy="600" r="120" fill="#eab0c0" opacity="0.3"/>
+                  <!-- Menu bar -->
+                  <rect width="1440" height="28" fill="rgba(245,200,215,0.85)"/>
+                  <circle cx="18" cy="14" r="5" fill="#ff5f57"/>
+                  <circle cx="36" cy="14" r="5" fill="#febc2e"/>
+                  <circle cx="54" cy="14" r="5" fill="#28c840"/>
+                  <text x="74" y="18" font-size="13" fill="rgba(80,40,60,0.9)" font-family="sans-serif" font-weight="600">Preview</text>
+                  <text x="1340" y="18" font-size="12" fill="rgba(80,40,60,0.7)" font-family="sans-serif">9:41 AM</text>
+                  <!-- Preview window (PDF) -->
+                  <rect x="60" y="60" width="680" height="600" rx="10" fill="#f0f0f0" stroke="#ccc" stroke-width="1"/>
+                  <rect x="60" y="60" width="680" height="32" rx="10" fill="#e0e0e0"/>
+                  <rect x="60" y="82" width="680" height="10" fill="#e0e0e0"/>
+                  <circle cx="80" cy="76" r="5" fill="#ff5f57"/>
+                  <circle cx="98" cy="76" r="5" fill="#febc2e"/>
+                  <circle cx="116" cy="76" r="5" fill="#28c840"/>
+                  <text x="300" y="80" font-size="12" fill="#666" font-family="sans-serif">Sticky Science.pdf</text>
+                  <!-- PDF sidebar -->
+                  <rect x="60" y="92" width="120" height="568" fill="#f5f5f5"/>
+                  <rect x="72" y="110" width="96" height="70" rx="3" fill="white" stroke="#ddd"/>
+                  <rect x="72" y="195" width="96" height="70" rx="3" fill="white" stroke="#ddd"/>
+                  <rect x="72" y="280" width="96" height="70" rx="3" fill="white" stroke="#ddd"/>
+                  <rect x="72" y="110" width="96" height="70" rx="3" fill="none" stroke="#4a90d9" stroke-width="2"/>
+                  <!-- PDF main content -->
+                  <rect x="200" y="110" width="520" height="530" fill="white" stroke="#ddd"/>
+                  <text x="360" y="160" font-size="22" fill="#333" font-family="serif" font-weight="bold" text-anchor="middle" transform="translate(100,0)">Sticky Science</text>
+                  <text x="460" y="185" font-size="12" fill="#888" font-family="sans-serif" text-anchor="middle">The Chemistry of Adhesives</text>
+                  <line x1="280" y1="200" x2="640" y2="200" stroke="#ddd"/>
+                  <rect x="240" y="220" width="440" height="10" rx="2" fill="#e0e0e0"/>
+                  <rect x="240" y="240" width="400" height="10" rx="2" fill="#e0e0e0"/>
+                  <rect x="240" y="260" width="420" height="10" rx="2" fill="#e0e0e0"/>
+                  <rect x="240" y="280" width="380" height="10" rx="2" fill="#e0e0e0"/>
+                  <rect x="240" y="310" width="200" height="120" rx="4" fill="#e8f4e8"/>
+                  <text x="300" y="378" font-size="9" fill="#666" font-family="sans-serif">Figure 1: Molecular bonds</text>
+                  <rect x="460" y="310" width="220" height="10" rx="2" fill="#e0e0e0"/>
+                  <rect x="460" y="330" width="200" height="10" rx="2" fill="#e0e0e0"/>
+                  <rect x="460" y="350" width="210" height="10" rx="2" fill="#e0e0e0"/>
+                  <rect x="460" y="370" width="180" height="10" rx="2" fill="#e0e0e0"/>
+                  <rect x="460" y="390" width="200" height="10" rx="2" fill="#e0e0e0"/>
+                  <rect x="240" y="450" width="440" height="10" rx="2" fill="#e0e0e0"/>
+                  <rect x="240" y="470" width="400" height="10" rx="2" fill="#e0e0e0"/>
+                  <rect x="240" y="490" width="430" height="10" rx="2" fill="#e0e0e0"/>
+                  <!-- Scrollbar -->
+                  <rect x="722" y="110" width="8" height="530" rx="4" fill="#eee"/>
+                  <rect x="722" y="120" width="8" height="80" rx="4" fill="#ccc"/>
+                  <!-- Pages window (quiz) -->
+                  <rect x="700" y="200" width="680" height="520" rx="10" fill="#fafafa" stroke="#ccc" stroke-width="1"/>
+                  <rect x="700" y="200" width="680" height="32" rx="10" fill="#e0e0e0"/>
+                  <rect x="700" y="222" width="680" height="10" fill="#e0e0e0"/>
+                  <circle cx="720" cy="216" r="5" fill="#ff5f57"/>
+                  <circle cx="738" cy="216" r="5" fill="#febc2e"/>
+                  <circle cx="756" cy="216" r="5" fill="#28c840"/>
+                  <text x="960" y="220" font-size="12" fill="#666" font-family="sans-serif">Science Quiz — Pages</text>
+                  <!-- Quiz content -->
+                  <rect x="740" y="260" width="600" height="440" fill="white"/>
+                  <text x="900" y="300" font-size="18" fill="#333" font-family="sans-serif" font-weight="bold">Science Quiz: Adhesives</text>
+                  <text x="770" y="340" font-size="13" fill="#444" font-family="sans-serif">1. What type of bond holds glue molecules together?</text>
+                  <rect x="790" y="355" width="14" height="14" rx="3" fill="none" stroke="#999"/>
+                  <text x="812" y="367" font-size="12" fill="#666" font-family="sans-serif">A) Ionic bonds</text>
+                  <rect x="790" y="380" width="14" height="14" rx="3" fill="#4a90d9" stroke="#4a90d9"/>
+                  <text x="812" y="392" font-size="12" fill="#666" font-family="sans-serif">B) Van der Waals forces</text>
+                  <rect x="790" y="405" width="14" height="14" rx="3" fill="none" stroke="#999"/>
+                  <text x="812" y="417" font-size="12" fill="#666" font-family="sans-serif">C) Nuclear forces</text>
+                  <text x="770" y="460" font-size="13" fill="#444" font-family="sans-serif">2. Which adhesive is strongest on rough surfaces?</text>
+                  <rect x="790" y="475" width="14" height="14" rx="3" fill="none" stroke="#999"/>
+                  <text x="812" y="487" font-size="12" fill="#666" font-family="sans-serif">A) Superglue</text>
+                  <rect x="790" y="500" width="14" height="14" rx="3" fill="none" stroke="#999"/>
+                  <text x="812" y="512" font-size="12" fill="#666" font-family="sans-serif">B) Epoxy</text>
+                  <rect x="790" y="525" width="14" height="14" rx="3" fill="none" stroke="#999"/>
+                  <text x="812" y="537" font-size="12" fill="#666" font-family="sans-serif">C) PVA glue</text>
+                  <!-- Dock -->
+                  <rect x="420" y="855" width="600" height="40" rx="12" fill="rgba(240,180,200,0.5)"/>
+                  <g transform="translate(440, 860)">
+                    <rect x="0" y="4" width="30" height="30" rx="7" fill="#4a90d9"/>
+                    <rect x="45" y="4" width="30" height="30" rx="7" fill="#50c878"/>
+                    <rect x="90" y="4" width="30" height="30" rx="7" fill="#ff6b6b"/>
+                    <rect x="135" y="4" width="30" height="30" rx="7" fill="#ffa500"/>
+                    <rect x="180" y="4" width="30" height="30" rx="7" fill="#9b59b6"/>
+                    <rect x="225" y="4" width="30" height="30" rx="7" fill="#1abc9c"/>
+                    <rect x="270" y="4" width="30" height="30" rx="7" fill="#e74c3c"/>
+                    <rect x="315" y="4" width="30" height="30" rx="7" fill="#3498db"/>
+                    <rect x="360" y="4" width="30" height="30" rx="7" fill="#f39c12"/>
+                    <rect x="405" y="4" width="30" height="30" rx="7" fill="#2ecc71"/>
+                    <rect x="450" y="4" width="30" height="30" rx="7" fill="#e67e22"/>
+                    <rect x="495" y="4" width="30" height="30" rx="7" fill="#8e44ad"/>
+                  </g>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="lid-back">
+            <div class="specular"></div>
+            <div class="apple-logo">&#63743;</div>
+            <div class="hello-text">hello</div>
+          </div>
+          <div class="lid-thickness"></div>
+          <div class="hinge"></div>
+          <div class="base">
+            <div class="base-inner">
+              <div class="notch"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Citrus (top of stack) -->
+      <div class="mac-wrapper mac-citrus" id="wrap-citrus">
+        <div class="mac-body" id="body-citrus">
+          <div class="lid">
+            <div class="lid-shell">
+              <div class="camera"></div>
+              <div class="bezel">
+                <svg class="screen-svg" viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Citrus: Luck Charm exhibit + Mail -->
+                  <!-- Vibrant wallpaper -->
+                  <rect width="1440" height="900" fill="#d8e898"/>
+                  <circle cx="400" cy="350" r="200" fill="#c8d868" opacity="0.5"/>
+                  <circle cx="1000" cy="500" r="250" fill="#b8c848" opacity="0.4"/>
+                  <circle cx="200" cy="700" r="150" fill="#e0e8a0" opacity="0.5"/>
+                  <circle cx="1200" cy="200" r="180" fill="#d0d878" opacity="0.4"/>
+                  <!-- Menu bar -->
+                  <rect width="1440" height="28" fill="rgba(200,210,100,0.85)"/>
+                  <circle cx="18" cy="14" r="5" fill="#ff5f57"/>
+                  <circle cx="36" cy="14" r="5" fill="#febc2e"/>
+                  <circle cx="54" cy="14" r="5" fill="#28c840"/>
+                  <text x="74" y="18" font-size="13" fill="rgba(60,70,20,0.9)" font-family="sans-serif" font-weight="600">Safari</text>
+                  <text x="1340" y="18" font-size="12" fill="rgba(60,70,20,0.7)" font-family="sans-serif">9:41 AM</text>
+                  <!-- Safari window (Luck Charm exhibit) -->
+                  <rect x="80" y="50" width="800" height="620" rx="10" fill="white" stroke="#ccc" stroke-width="1"/>
+                  <rect x="80" y="50" width="800" height="36" rx="10" fill="#e8e8e8"/>
+                  <rect x="80" y="76" width="800" height="10" fill="#e8e8e8"/>
+                  <circle cx="100" cy="68" r="5" fill="#ff5f57"/>
+                  <circle cx="118" cy="68" r="5" fill="#febc2e"/>
+                  <circle cx="136" cy="68" r="5" fill="#28c840"/>
+                  <!-- URL bar -->
+                  <rect x="250" y="58" width="460" height="20" rx="10" fill="white" stroke="#ddd"/>
+                  <text x="400" y="72" font-size="10" fill="#888" font-family="sans-serif">luckcharm-folkart.exhibit.org</text>
+                  <!-- Website hero -->
+                  <rect x="80" y="86" width="800" height="240" fill="#e85d3a"/>
+                  <text x="200" y="180" font-size="40" fill="white" font-family="serif" font-weight="bold">LUCK</text>
+                  <text x="200" y="225" font-size="40" fill="white" font-family="serif" font-weight="bold">CHARM</text>
+                  <text x="200" y="260" font-size="14" fill="rgba(255,255,255,0.8)" font-family="sans-serif">A Folk Art Exhibition</text>
+                  <!-- Folk art decorations -->
+                  <circle cx="650" cy="180" r="40" fill="#f7c948" opacity="0.8"/>
+                  <circle cx="720" cy="220" r="30" fill="#4ecdc4" opacity="0.8"/>
+                  <circle cx="680" cy="250" r="25" fill="#ff6b6b" opacity="0.7"/>
+                  <polygon points="760,150 780,190 740,190" fill="#45b7d1" opacity="0.7"/>
+                  <rect x="600" y="140" width="30" height="30" rx="4" fill="#96ceb4" opacity="0.8" transform="rotate(15,615,155)"/>
+                  <!-- Website content -->
+                  <rect x="100" y="340" width="240" height="160" rx="6" fill="#f0e4d0"/>
+                  <text x="160" y="430" font-size="11" fill="#666" font-family="sans-serif">Textile Gallery</text>
+                  <rect x="360" y="340" width="240" height="160" rx="6" fill="#d4e8c0"/>
+                  <text x="420" y="430" font-size="11" fill="#666" font-family="sans-serif">Ceramic Works</text>
+                  <rect x="620" y="340" width="240" height="160" rx="6" fill="#c8d8f0"/>
+                  <text x="680" y="430" font-size="11" fill="#666" font-family="sans-serif">Wood Carvings</text>
+                  <rect x="100" y="520" width="760" height="12" rx="2" fill="#eee"/>
+                  <rect x="100" y="540" width="600" height="12" rx="2" fill="#eee"/>
+                  <rect x="100" y="560" width="700" height="12" rx="2" fill="#eee"/>
+                  <!-- Scrollbar -->
+                  <rect x="864" y="86" width="8" height="584" rx="4" fill="#eee"/>
+                  <rect x="864" y="100" width="8" height="120" rx="4" fill="#ccc"/>
+                  <!-- Mail compose window (floating) -->
+                  <rect x="580" y="280" width="520" height="380" rx="10" fill="white" stroke="#bbb" stroke-width="1">
+                  </rect>
+                  <rect x="580" y="280" width="520" height="36" rx="10" fill="#f0f0f0"/>
+                  <rect x="580" y="306" width="520" height="10" fill="#f0f0f0"/>
+                  <circle cx="600" cy="298" r="5" fill="#ff5f57"/>
+                  <circle cx="618" cy="298" r="5" fill="#febc2e"/>
+                  <circle cx="636" cy="298" r="5" fill="#28c840"/>
+                  <text x="800" y="302" font-size="12" fill="#666" font-family="sans-serif" text-anchor="middle">New Message</text>
+                  <!-- Mail fields -->
+                  <line x1="600" y1="330" x2="1080" y2="330" stroke="#eee"/>
+                  <text x="605" y="346" font-size="11" fill="#999" font-family="sans-serif">To:</text>
+                  <text x="635" y="346" font-size="11" fill="#333" font-family="sans-serif">sarah@gallery.com</text>
+                  <line x1="600" y1="356" x2="1080" y2="356" stroke="#eee"/>
+                  <text x="605" y="372" font-size="11" fill="#999" font-family="sans-serif">Subject:</text>
+                  <text x="660" y="372" font-size="11" fill="#333" font-family="sans-serif">Luck Charm Exhibit — Opening Night RSVP</text>
+                  <line x1="600" y1="382" x2="1080" y2="382" stroke="#eee"/>
+                  <!-- Mail body -->
+                  <text x="605" y="410" font-size="11" fill="#333" font-family="sans-serif">Hi Sarah,</text>
+                  <text x="605" y="432" font-size="11" fill="#333" font-family="sans-serif">I'd love to attend the opening night of Luck</text>
+                  <text x="605" y="448" font-size="11" fill="#333" font-family="sans-serif">Charm! Could you add me to the guest list?</text>
+                  <text x="605" y="475" font-size="11" fill="#333" font-family="sans-serif">Looking forward to seeing the folk art</text>
+                  <text x="605" y="491" font-size="11" fill="#333" font-family="sans-serif">collection. The textile gallery sounds</text>
+                  <text x="605" y="507" font-size="11" fill="#333" font-family="sans-serif">amazing.</text>
+                  <text x="605" y="540" font-size="11" fill="#333" font-family="sans-serif">Best,</text>
+                  <text x="605" y="556" font-size="11" fill="#333" font-family="sans-serif">Alex</text>
+                  <!-- Send button -->
+                  <rect x="1010" y="620" width="70" height="26" rx="6" fill="#007AFF"/>
+                  <text x="1045" y="638" text-anchor="middle" font-size="12" fill="white" font-family="sans-serif" font-weight="600">Send</text>
+                  <!-- Dock -->
+                  <rect x="420" y="855" width="600" height="40" rx="12" fill="rgba(200,210,80,0.45)"/>
+                  <g transform="translate(440, 860)">
+                    <rect x="0" y="4" width="30" height="30" rx="7" fill="#4a90d9"/>
+                    <rect x="45" y="4" width="30" height="30" rx="7" fill="#50c878"/>
+                    <rect x="90" y="4" width="30" height="30" rx="7" fill="#ff6b6b"/>
+                    <rect x="135" y="4" width="30" height="30" rx="7" fill="#ffa500"/>
+                    <rect x="180" y="4" width="30" height="30" rx="7" fill="#9b59b6"/>
+                    <rect x="225" y="4" width="30" height="30" rx="7" fill="#1abc9c"/>
+                    <rect x="270" y="4" width="30" height="30" rx="7" fill="#e74c3c"/>
+                    <rect x="315" y="4" width="30" height="30" rx="7" fill="#3498db"/>
+                    <rect x="360" y="4" width="30" height="30" rx="7" fill="#f39c12"/>
+                    <rect x="405" y="4" width="30" height="30" rx="7" fill="#2ecc71"/>
+                    <rect x="450" y="4" width="30" height="30" rx="7" fill="#e67e22"/>
+                    <rect x="495" y="4" width="30" height="30" rx="7" fill="#8e44ad"/>
+                  </g>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="lid-back">
+            <div class="specular"></div>
+            <div class="apple-logo">&#63743;</div>
+            <div class="hello-text">hello</div>
+          </div>
+          <div class="lid-thickness"></div>
+          <div class="hinge"></div>
+          <div class="base">
+            <div class="base-inner">
+              <div class="notch"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /stage -->
+  </div><!-- /sticky-frame -->
+</div><!-- /scroll-container -->
+
+<script>
+(function() {
+  'use strict';
+
+  // Elements
+  const stickyFrame = document.getElementById('sticky-frame');
+  const scrollContainer = document.getElementById('scroll-container');
+
+  const ORDER = ['citrus', 'blush', 'midnight', 'silver'];
+  const SLOT = 1 / ORDER.length; // 0.25
+
+  // Rest positions in the arc stack
+  const restConfig = {
+    silver:   { rz: -20, tz: -90,  scale: 0.88 },
+    midnight: { rz: -10, tz: -60,  scale: 0.92 },
+    blush:    { rz: -3,  tz: -30,  scale: 0.96 },
+    citrus:   { rz: 3,   tz: 0,    scale: 1.00 }
+  };
+
+  // Background gradients per laptop
+  const bgGradients = {
+    citrus:   'linear-gradient(150deg, #f4f6e8, #eef2dc)',
+    blush:    'linear-gradient(150deg, #fdf4f6, #f8eef2)',
+    midnight: 'linear-gradient(150deg, #edeef4, #e4e6f0)',
+    silver:   'linear-gradient(150deg, #f4f4f6, #eaeaec)'
+  };
+
+  // Cache DOM refs
+  const wrappers = {};
+  const bodies = {};
+  const textCards = {};
+
+  ORDER.forEach(name => {
+    wrappers[name] = document.getElementById('wrap-' + name);
+    bodies[name] = document.getElementById('body-' + name);
+    textCards[name] = document.getElementById('text-' + name);
+  });
+
+  let activeText = null;
+  let ticking = false;
+
+  // Easing
+  function easeInOut(t) { return t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t; }
+  function easeOut(t) { return 1 - (1-t)*(1-t); }
+  function easeIn(t) { return t*t; }
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function getScrollProgress() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const containerTop = scrollContainer.offsetTop;
+    const containerHeight = scrollContainer.offsetHeight - window.innerHeight;
+    return clamp((scrollTop - containerTop) / containerHeight, 0, 1);
+  }
+
+  function activateText(name) {
+    if (activeText === name) return;
+    activeText = name;
+    ORDER.forEach(n => {
+      textCards[n].classList.toggle('active', n === name);
+    });
+    stickyFrame.style.background = bgGradients[name];
+  }
+
+  function tick() {
+    const P = getScrollProgress();
+
+    // Determine which laptop is most active for text
+    let bestName = ORDER[0];
+    let bestActivity = -1;
+
+    ORDER.forEach((name, i) => {
+      const loc = clamp((P - i * SLOT) / SLOT, 0, 1);
+      const rest = restConfig[name];
+
+      // Phase A: lift out (0 → 0.12)
+      const liftP = easeOut(clamp(loc / 0.12, 0, 1));
+      // Phase F: sink back (0.85 → 1.0)
+      const sinkP = easeIn(clamp((loc - 0.85) / 0.15, 0, 1));
+      const active = clamp(liftP - sinkP, 0, 1);
+
+      // Translation Z and scale
+      const tz = rest.tz + active * 140;
+      const scale = rest.scale + active * (1.12 - rest.scale);
+
+      // Sweep rotateY (0.12 → 0.85)
+      let sweepRaw = clamp((loc - 0.12) / 0.73, 0, 1);
+      let sweepP = easeInOut(sweepRaw);
+      let rotateY = -90 + sweepP * 180; // -90 → +90
+
+      // When not active at all, keep rotateY at -90 (showing back)
+      if (loc <= 0) rotateY = -90;
+      if (loc >= 1) rotateY = 90;
+
+      // RotateX tilt during sweep phases B-E
+      const inSweep = (loc > 0.12 && loc < 0.85) ? 1 : 0;
+      const sweepEntry = clamp((loc - 0.10) / 0.05, 0, 1);
+      const sweepExit = clamp((loc - 0.82) / 0.05, 0, 1);
+      const tiltAmount = clamp(sweepEntry - sweepExit, 0, 1);
+      const rotateX = -8 * tiltAmount;
+
+      // Apply wrapper transform (position in arc + lift)
+      wrappers[name].style.transform =
+        `rotate(${rest.rz}deg) translateZ(${tz}px) scale(${scale})`;
+
+      // Apply body transform (flip rotation)
+      bodies[name].style.transform =
+        `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+
+      // Track which laptop is most "facing viewer" for text
+      const facingness = (loc > 0.22 && loc < 0.72) ? (1 - Math.abs(rotateY) / 90) : 0;
+      if (facingness > bestActivity) {
+        bestActivity = facingness;
+        bestName = name;
+      }
+    });
+
+    // Activate text for the most visible laptop
+    if (bestActivity > 0.1) {
+      activateText(bestName);
+    }
+
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(tick);
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Initial state
+  activateText('citrus');
+  tick();
+})();
+</script>
+
+</body>
+</html>
