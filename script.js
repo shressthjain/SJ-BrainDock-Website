@@ -767,3 +767,47 @@
     init();
   }
 })();
+
+/* ========== HERO — Container Scroll Animation ========== */
+;(function () {
+  'use strict';
+
+  var container = document.getElementById('heroScroll');
+  var header = document.getElementById('heroScrollHeader');
+  var card = document.getElementById('heroScrollCard');
+  if (!container || !header || !card) return;
+
+  var isMobile = window.innerWidth <= 768;
+  window.addEventListener('resize', function () {
+    isMobile = window.innerWidth <= 768;
+  });
+
+  function lerp(start, end, t) {
+    return start + (end - start) * t;
+  }
+
+  function clamp(val, min, max) {
+    return Math.max(min, Math.min(max, val));
+  }
+
+  function onScroll() {
+    var rect = container.getBoundingClientRect();
+    var scrollHeight = container.offsetHeight - window.innerHeight;
+    var progress = clamp(-rect.top / scrollHeight, 0, 1);
+
+    // Header moves up as you scroll
+    var translateY = lerp(0, -100, progress);
+    header.style.transform = 'translateY(' + translateY + 'px)';
+
+    // Card: rotate from 20deg to 0, scale from 1.05 to 1 (mobile: 0.7 to 0.9)
+    var rotate = lerp(20, 0, progress);
+    var scaleStart = isMobile ? 0.7 : 1.05;
+    var scaleEnd = isMobile ? 0.9 : 1;
+    var scale = lerp(scaleStart, scaleEnd, progress);
+
+    card.style.transform = 'rotateX(' + rotate + 'deg) scale(' + scale + ')';
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
