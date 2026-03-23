@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,6 +33,109 @@
 
 </head>
 <body>
+  <!-- Animated Grid Background -->
+  <script>
+  ;(function () {
+    'use strict'
+    var SVG_NS = 'http://www.w3.org/2000/svg'
+    var CELL_SIZE = 40
+    var SQUARE_COUNT = 20
+    var MIN_DURATION = 3
+    var MAX_DURATION = 8
+
+    if (document.querySelector('.animated-grid-bg')) return
+
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    var svg = document.createElementNS(SVG_NS, 'svg')
+    svg.setAttribute('class', 'animated-grid-bg')
+    svg.setAttribute('aria-hidden', 'true')
+
+    var defs = document.createElementNS(SVG_NS, 'defs')
+    var pattern = document.createElementNS(SVG_NS, 'pattern')
+    pattern.setAttribute('id', 'grid-pattern-landing')
+    pattern.setAttribute('width', CELL_SIZE)
+    pattern.setAttribute('height', CELL_SIZE)
+    pattern.setAttribute('patternUnits', 'userSpaceOnUse')
+    pattern.setAttribute('x', '-1')
+    pattern.setAttribute('y', '-1')
+
+    var path = document.createElementNS(SVG_NS, 'path')
+    path.setAttribute('d', 'M.5 ' + CELL_SIZE + 'V.5H' + CELL_SIZE)
+    path.setAttribute('fill', 'none')
+    path.setAttribute('stroke', 'currentColor')
+    path.setAttribute('stroke-width', '1')
+    pattern.appendChild(path)
+    defs.appendChild(pattern)
+    svg.appendChild(defs)
+
+    var bgRect = document.createElementNS(SVG_NS, 'rect')
+    bgRect.setAttribute('width', '100%')
+    bgRect.setAttribute('height', '100%')
+    bgRect.setAttribute('fill', 'url(#grid-pattern-landing)')
+    svg.appendChild(bgRect)
+
+    if (!reducedMotion) {
+      var squaresGroup = document.createElementNS(SVG_NS, 'svg')
+      squaresGroup.setAttribute('class', 'grid-squares-group')
+      squaresGroup.style.overflow = 'visible'
+
+      var squares = []
+
+      function positionSquare(rect) {
+        var cols = Math.floor(window.innerWidth / CELL_SIZE)
+        var rows = Math.floor(window.innerHeight / CELL_SIZE)
+        if (cols < 1 || rows < 1) {
+          rect.setAttribute('x', -CELL_SIZE)
+          rect.setAttribute('y', -CELL_SIZE)
+          return
+        }
+        rect.setAttribute('x', Math.floor(Math.random() * cols) * CELL_SIZE + 1)
+        rect.setAttribute('y', Math.floor(Math.random() * rows) * CELL_SIZE + 1)
+      }
+
+      for (var i = 0; i < SQUARE_COUNT; i++) {
+        var rect = document.createElementNS(SVG_NS, 'rect')
+        rect.setAttribute('class', 'grid-square')
+        rect.setAttribute('width', CELL_SIZE - 1)
+        rect.setAttribute('height', CELL_SIZE - 1)
+        rect.setAttribute('fill', 'rgba(176, 176, 176, 1)')
+        rect.setAttribute('stroke-width', '0')
+
+        var duration = MIN_DURATION + Math.random() * (MAX_DURATION - MIN_DURATION)
+        var delay = Math.random() * duration
+        rect.style.setProperty('--grid-duration', duration.toFixed(1) + 's')
+        rect.style.setProperty('--grid-delay', delay.toFixed(1) + 's')
+
+        squaresGroup.appendChild(rect)
+        squares.push(rect)
+      }
+
+      svg.appendChild(squaresGroup)
+      squares.forEach(positionSquare)
+
+      squares.forEach(function (rect) {
+        rect.addEventListener('animationiteration', function () { positionSquare(rect) })
+      })
+
+      var resizeTimer = null
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer)
+        resizeTimer = setTimeout(function () { squares.forEach(positionSquare) }, 250)
+      })
+
+      document.addEventListener('visibilitychange', function () {
+        var state = document.hidden ? 'paused' : 'running'
+        squares.forEach(function (rect) { rect.style.animationPlayState = state })
+      })
+    }
+
+    document.body.insertBefore(svg, document.body.firstChild)
+  })()
+  </script>
+
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
   <!-- Liquid Glass SVG Filter -->
   <svg class="liquid-glass-svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
     <defs>
@@ -276,16 +379,17 @@
   <!-- ========== MAIN CONTENT ========== -->
   <main id="main">
 
-    <!-- ===== HERO — Container Scroll Animation ===== -->
-    <section class="hero-scroll" id="heroScroll">
-      <div class="hero-scroll-inner">
-        <!-- Header / title area -->
-        <div class="hero-scroll-header" id="heroScrollHeader">
-          <h1>Own Your<br><span class="text-gradient">Attention</span></h1>
-          <p class="hero-subtitle">
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="hero-glow hero-glow-1"></div>
+      <div class="hero-glow hero-glow-2"></div>
+      <div class="hero-split container">
+        <div class="hero-content">
+          <h1 class="hero-reveal">Own Your<br><span class="text-gradient">Attention</span></h1>
+          <p class="hero-subtitle hero-reveal" style="transition-delay: 0.15s;">
             BrainDock uses AI to help you focus, work smarter and strengthen concentration.
           </p>
-          <div class="hero-actions" style="justify-content:center;">
+          <div class="hero-actions hero-reveal-cta">
             <a href="downloads/download.html" class="btn btn-primary btn-lg btn-cta">
               <span class="btn-cta-label">Download <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
               <span class="btn-cta-slide" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
@@ -294,16 +398,15 @@
               Learn More
             </a>
           </div>
-          <p class="hero-available" style="text-align:center;">Available for macOS, Windows and Linux.</p>
+          <p class="hero-available hero-reveal-sub">Available for macOS and Windows.</p>
         </div>
-        <!-- 3D Card -->
-        <div class="hero-scroll-card" id="heroScrollCard">
-          <div class="hero-scroll-card-inner">
-            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1400&q=80" alt="BrainDock productivity workspace" loading="eager">
-          </div>
+        <div class="hero-image hero-reveal-image">
+          <img src="assets/images/head-monitor.png" alt="BrainDock - brain connected to monitor illustration">
         </div>
       </div>
     </section>
+
+    <div class="section-separator reveal" aria-hidden="true"></div>
 
     <!-- ===== MADE FOR YOU ===== -->
     <section class="section mfy-section reveal">
@@ -311,16 +414,16 @@
         <!-- Left column: heading + pills -->
         <div class="mfy-left">
           <h2 class="mfy-heading">BrainDock is made<br><span class="mfy-heading-accent">for you</span></h2>
-          <div class="mfy-pills">
-            <button class="mfy-pill active" data-mfy="accessibility">Accessibility</button>
-            <button class="mfy-pill" data-mfy="creators">Creators</button>
-            <button class="mfy-pill" data-mfy="customer-support">Customer Support</button>
-            <button class="mfy-pill" data-mfy="developers">Developers</button>
-            <button class="mfy-pill" data-mfy="lawyers">Lawyers</button>
-            <button class="mfy-pill" data-mfy="leaders">Leaders</button>
-            <button class="mfy-pill" data-mfy="sales">Sales</button>
-            <button class="mfy-pill" data-mfy="students">Students</button>
-            <button class="mfy-pill" data-mfy="teams">Teams</button>
+          <div class="mfy-pills stagger-children">
+            <button class="mfy-pill active reveal" data-mfy="accessibility">Accessibility</button>
+            <button class="mfy-pill reveal" data-mfy="creators">Creators</button>
+            <button class="mfy-pill reveal" data-mfy="customer-support">Customer Support</button>
+            <button class="mfy-pill reveal" data-mfy="developers">Developers</button>
+            <button class="mfy-pill reveal" data-mfy="lawyers">Lawyers</button>
+            <button class="mfy-pill reveal" data-mfy="leaders">Leaders</button>
+            <button class="mfy-pill reveal" data-mfy="sales">Sales</button>
+            <button class="mfy-pill reveal" data-mfy="students">Students</button>
+            <button class="mfy-pill reveal" data-mfy="teams">Teams</button>
           </div>
         </div>
 
@@ -429,6 +532,37 @@
       </div>
     </section>
 
+    <div class="section-separator reveal" aria-hidden="true"></div>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section class="section how-it-works-section reveal">
+      <div class="container">
+        <div class="text-center">
+          <h2 class="hiw-heading">How It Works</h2>
+          <p class="hiw-subtitle">Three simple steps to better focus.</p>
+        </div>
+        <div class="hiw-steps stagger-children">
+          <div class="hiw-step reveal">
+            <div class="hiw-step-number">1</div>
+            <h3 class="hiw-step-title">Download the App</h3>
+            <p class="hiw-step-desc">Click the Download button for your operating system (macOS or Windows). Configure your settings and you're good to go!</p>
+          </div>
+          <div class="hiw-step reveal">
+            <div class="hiw-step-number">2</div>
+            <h3 class="hiw-step-title">Start a Session</h3>
+            <p class="hiw-step-desc">Click Start to begin your session, align your camera view, and start working. BrainDock runs quietly in the background. You can pause or stop any time.</p>
+          </div>
+          <div class="hiw-step reveal">
+            <div class="hiw-step-number">3</div>
+            <h3 class="hiw-step-title">Report Generated</h3>
+            <p class="hiw-step-desc">A PDF report containing session insights and analytics is available after each session ends.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-separator reveal" aria-hidden="true"></div>
+
     <!-- ===== FEATURES DECK (Stacked Cards) ===== -->
     <section class="section features-deck-section reveal" id="features-deck">
       <div class="container">
@@ -502,6 +636,8 @@
       </div>
     </section>
 
+    <div class="section-separator reveal" aria-hidden="true"></div>
+
     <!-- ===== HOW BRAINDOCK HELPS ===== -->
     <section class="section hbh-section reveal">
       <div class="container">
@@ -564,37 +700,61 @@
       <div class="container">
         <h2 class="section-title">On-the-go or at your desk</h2>
         <p class="section-subtitle">With apps for macOS, Windows, and mobile, stay focused from wherever you are. Your settings and data sync seamlessly between all devices.</p>
-        <div class="platform-badges">
-          <span class="platform-badge">
+        <div class="platform-badges stagger-children">
+          <span class="platform-badge reveal">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 21.99 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09 21.99C7.79 22.03 6.8 20.68 5.96 19.47C4.25 16.97 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.89C10.1 6.87 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5Z"/></svg>
             macOS
           </span>
-          <span class="platform-badge">
+          <span class="platform-badge reveal">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.548l7.065-0.964 0.003 6.818-7.06 0.04L3 5.548zm7.062 6.632l0.006 6.827-7.062-0.97v-5.896l7.056 0.039zm0.856-7.703L21 3v8.39l-10.082 0.08V4.477zm10.088 7.958L21 21l-10.084-1.39-0.014-7.178 10.104 0.003z"/></svg>
             Windows
           </span>
-          <span class="platform-badge">
+          <span class="platform-badge reveal">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09z"/></svg>
             iOS
           </span>
         </div>
         <div class="platform-mockup reveal">
-          <div style="text-align: center; padding: 3rem 0;">
-            <div style="font-size: 4rem; margin-bottom: 1rem;"><svg class="icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-            <div style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">BrainDock Desktop</div>
-            <div style="font-size: 0.875rem; color: var(--text-secondary);">Seamlessly integrated into your desktop workflow</div>
-            <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 2rem;">
-              <div style="text-align: center;">
-                <div style="font-size: 1.5rem; font-weight: 700; color: var(--color-primary);">v2.1</div>
-                <div style="font-size: 0.75rem; color: var(--text-tertiary);">Latest Version</div>
+          <!-- Device frame: macOS window chrome -->
+          <div class="device-frame">
+            <div class="device-titlebar">
+              <span class="device-dot device-dot-red"></span>
+              <span class="device-dot device-dot-yellow"></span>
+              <span class="device-dot device-dot-green"></span>
+              <span class="device-titlebar-text">BrainDock — Focus Session</span>
+            </div>
+            <div class="device-screen">
+              <!-- Simulated app UI inside the frame -->
+              <div class="device-app-header">
+                <div class="device-app-status">
+                  <span class="device-status-dot"></span>
+                  Session Active
+                </div>
+                <span class="device-app-timer">24:37</span>
               </div>
-              <div style="text-align: center;">
-                <div style="font-size: 1.5rem; font-weight: 700;">12MB</div>
-                <div style="font-size: 0.75rem; color: var(--text-tertiary);">Lightweight</div>
-              </div>
-              <div style="text-align: center;">
-                <div style="font-size: 1.5rem; font-weight: 700; color: var(--color-success);">4.9★</div>
-                <div style="font-size: 0.75rem; color: var(--text-tertiary);">User Rating</div>
+              <div class="device-app-body">
+                <div class="device-focus-ring">
+                  <svg viewBox="0 0 120 120" class="device-ring-svg">
+                    <circle cx="60" cy="60" r="52" stroke="rgba(100,134,16,0.15)" stroke-width="8" fill="none"/>
+                    <circle cx="60" cy="60" r="52" stroke="var(--color-primary)" stroke-width="8" fill="none" stroke-dasharray="327" stroke-dashoffset="16" stroke-linecap="round" class="device-ring-progress"/>
+                  </svg>
+                  <div class="device-focus-score">95%</div>
+                  <div class="device-focus-label">Focus</div>
+                </div>
+                <div class="device-app-stats">
+                  <div class="device-stat">
+                    <div class="device-stat-value">0</div>
+                    <div class="device-stat-label">Distractions</div>
+                  </div>
+                  <div class="device-stat">
+                    <div class="device-stat-value">52m</div>
+                    <div class="device-stat-label">Deep Work</div>
+                  </div>
+                  <div class="device-stat">
+                    <div class="device-stat-value">3</div>
+                    <div class="device-stat-label">Apps Blocked</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -602,22 +762,48 @@
       </div>
     </section>
 
-      <!-- Case Studies -->
+      <!-- Testimonials -->
       <div class="container">
-        <div class="case-studies reveal">
-          <a href="#" class="case-study-card">
-            <div class="case-study-stat">2x faster output</div>
-            <div class="case-study-title">How a startup founder reclaimed 3 hours daily with BrainDock</div>
-            <div class="case-study-author">Alex Rivera, CEO &amp; Founder</div>
-          </a>
-          <a href="#" class="case-study-card">
-            <div class="case-study-stat">50+ hours saved/mo</div>
-            <div class="case-study-title">From constant context-switching to deep focus - a developer's journey</div>
-            <div class="case-study-author">Sam Park, Senior Developer</div>
-          </a>
+        <h3 class="testimonials-heading reveal">What people are saying</h3>
+        <div class="testimonial-grid stagger-children">
+          <div class="testimonial-quote-card reveal">
+            <div class="tq-stat">2x faster output</div>
+            <blockquote class="tq-quote">"I used to lose 3 hours a day to context-switching. BrainDock made me realize how much time I was bleeding. Now I finish my deep work before lunch."</blockquote>
+            <div class="tq-author">
+              <div class="tq-avatar">AR</div>
+              <div>
+                <div class="tq-name">Alex Rivera</div>
+                <div class="tq-role">CEO &amp; Founder, Metaform</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-quote-card reveal">
+            <div class="tq-stat">50+ hours saved/mo</div>
+            <blockquote class="tq-quote">"As a developer, flow state is everything. BrainDock blocks the noise and lets me code for hours without a single interruption. My PRs have never been cleaner."</blockquote>
+            <div class="tq-author">
+              <div class="tq-avatar">SP</div>
+              <div>
+                <div class="tq-name">Sam Park</div>
+                <div class="tq-role">Senior Developer, Canopy Labs</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-quote-card reveal">
+            <div class="tq-stat">98% focus rate</div>
+            <blockquote class="tq-quote">"I'm a law student with ADHD. BrainDock is the first tool that actually helps me stay on task during long study sessions. It changed my grades."</blockquote>
+            <div class="tq-author">
+              <div class="tq-avatar">JM</div>
+              <div>
+                <div class="tq-name">Jordan Malloy</div>
+                <div class="tq-role">Law Student, Columbia</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+
+    <div class="section-separator reveal" aria-hidden="true"></div>
 
     <!-- ===== FAQ ===== -->
     <section class="section" id="faq">
@@ -625,8 +811,8 @@
         <div class="text-center reveal">
           <h2 class="section-title">Frequently asked questions</h2>
         </div>
-        <div class="faq-section" style="margin-top: 2rem;">
-          <div class="faq-item">
+        <div class="faq-section stagger-children" style="margin-top: 2rem;">
+          <div class="faq-item reveal">
             <button class="faq-question">
               Does BrainDock violate my privacy?
               <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -635,7 +821,7 @@
               <div class="faq-answer-inner">No, privacy was a top priority when we built BrainDock. We don't permanently store anything, we don't use facial recognition, and your session data stays on your device. BrainDock is here to help you focus, not collect your personal information.</div>
             </div>
           </div>
-          <div class="faq-item">
+          <div class="faq-item reveal">
             <button class="faq-question">
               Is sharing your screen private and safe?
               <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -644,7 +830,7 @@
               <div class="faq-answer-inner">Yes, completely. Screen sharing is done entirely on your computer and works offline. BrainDock only reads the name of your active window to check against your distraction list. No screenshots are taken, no recordings are made, and nothing regarding this leaves your machine.</div>
             </div>
           </div>
-          <div class="faq-item">
+          <div class="faq-item reveal">
             <button class="faq-question">
               What can BrainDock actually notice during your session?
               <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -653,7 +839,7 @@
               <div class="faq-answer-inner">BrainDock can notice activities during your session. For example, stepping away from your desk, distractions like using your phone, tablets, game controllers, etc. The best part is that it only flags these when you're actually using them in front of your screen, not just because they're nearby.</div>
             </div>
           </div>
-          <div class="faq-item">
+          <div class="faq-item reveal">
             <button class="faq-question">
               Does BrainDock require an internet connection?
               <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -662,7 +848,7 @@
               <div class="faq-answer-inner">Screen sharing operates entirely offline, as it runs locally on your computer. AI-powered distraction sensing requires an internet connection to identify devices such as phones and tablets; however, no data is stored permanently on servers, and any data sent for analysis is discarded after processing.</div>
             </div>
           </div>
-          <div class="faq-item">
+          <div class="faq-item reveal">
             <button class="faq-question">
               Is my data uploaded to the Cloud?
               <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -677,8 +863,11 @@
 
     <!-- ===== CTA ===== -->
     <section class="section section-lg cta-section" id="download">
+      <div class="cta-glow cta-glow-1" aria-hidden="true"></div>
+      <div class="cta-glow cta-glow-2" aria-hidden="true"></div>
       <div class="container">
         <div class="cta-content reveal">
+          <div class="cta-badge">Ready to focus?</div>
           <h2>Start focusing</h2>
           <p>AI-powered focus and productivity in every application. 2x more productive, with privacy built in.</p>
           <div class="cta-actions">
@@ -689,6 +878,10 @@
             <a href="#" class="btn btn-secondary btn-lg">Try BrainDock</a>
           </div>
           <div class="cta-note">Available on macOS, Windows, and iOS</div>
+          <div class="cta-trust">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            No credit card required &middot; Free forever for individuals
+          </div>
         </div>
       </div>
     </section>
@@ -698,10 +891,10 @@
       <div class="container">
         <h3>Still not sure that BrainDock is right for you?</h3>
         <p>Let your favorite AI do the thinking for you. Click a button and see what they say about BrainDock.</p>
-        <div class="ask-ai-buttons">
-          <a href="https://chat.openai.com/?q=tell+me+why+braindock+is+a+great+focus+and+productivity+app" target="_blank" rel="noopener" class="btn btn-outline">Ask ChatGPT</a>
-          <a href="https://claude.ai/new?q=tell+me+why+braindock+is+a+great+focus+and+productivity+app" target="_blank" rel="noopener" class="btn btn-outline">Ask Claude</a>
-          <a href="https://www.perplexity.ai/search/new?q=tell+me+why+braindock+is+a+great+focus+and+productivity+app" target="_blank" rel="noopener" class="btn btn-outline">Ask Perplexity</a>
+        <div class="ask-ai-buttons stagger-children">
+          <a href="https://chat.openai.com/?q=tell+me+why+braindock+is+a+great+focus+and+productivity+app" target="_blank" rel="noopener" class="btn btn-outline reveal">Ask ChatGPT</a>
+          <a href="https://claude.ai/new?q=tell+me+why+braindock+is+a+great+focus+and+productivity+app" target="_blank" rel="noopener" class="btn btn-outline reveal">Ask Claude</a>
+          <a href="https://www.perplexity.ai/search/new?q=tell+me+why+braindock+is+a+great+focus+and+productivity+app" target="_blank" rel="noopener" class="btn btn-outline reveal">Ask Perplexity</a>
         </div>
       </div>
     </section>
