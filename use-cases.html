@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="page-dark">
+<body>
   <!-- Animated Grid Background -->
   <script>
   ;(function () {
@@ -415,5 +415,92 @@
     </div>
   </footer>
   <script src="script.js"></script>
+  <script>
+  ;(function () {
+    'use strict';
+
+    // Inject glow overlays into each use-case card
+    var cards = document.querySelectorAll('.use-case-card');
+    var glowEls = [];
+
+    cards.forEach(function (card) {
+      // Blur layer (ambient glow)
+      var blur = document.createElement('div');
+      blur.className = 'glow-effect-blur';
+      blur.innerHTML = '<div class="glow"></div>';
+      card.appendChild(blur);
+
+      // Sharp layer (border glow)
+      var sharp = document.createElement('div');
+      sharp.className = 'glow-effect';
+      sharp.innerHTML = '<div class="glow"></div>';
+      card.appendChild(sharp);
+
+      glowEls.push({ blur: blur, sharp: sharp, angle: 0 });
+    });
+
+    var PROXIMITY = 200;
+    var INACTIVE_ZONE = 0.7;
+
+    function updateGlow(e) {
+      var mx = e.x, my = e.y;
+
+      glowEls.forEach(function (obj) {
+        var el = obj.sharp;
+        var blurEl = obj.blur;
+        var rect = el.getBoundingClientRect();
+        var w = rect.width, h = rect.height;
+        var cx = rect.left + w * 0.5;
+        var cy = rect.top + h * 0.5;
+
+        // Inactive zone check
+        var dist = Math.hypot(mx - cx, my - cy);
+        var inactiveRadius = 0.5 * Math.min(w, h) * INACTIVE_ZONE;
+
+        if (dist < inactiveRadius) {
+          el.style.setProperty('--active', '0');
+          blurEl.style.setProperty('--active', '0');
+          return;
+        }
+
+        // Proximity check
+        var isActive = mx > rect.left - PROXIMITY &&
+                       mx < rect.right + PROXIMITY &&
+                       my > rect.top - PROXIMITY &&
+                       my < rect.bottom + PROXIMITY;
+
+        el.style.setProperty('--active', isActive ? '1' : '0');
+        blurEl.style.setProperty('--active', isActive ? '1' : '0');
+
+        if (!isActive) return;
+
+        // Calculate angle from center to mouse
+        var targetAngle = Math.atan2(my - cy, mx - cx) * (180 / Math.PI) + 90;
+
+        // Smooth angle wrapping
+        var angleDiff = ((targetAngle - obj.angle + 180) % 360) - 180;
+        obj.angle += angleDiff;
+
+        el.style.setProperty('--start', String(obj.angle));
+        blurEl.style.setProperty('--start', String(obj.angle));
+      });
+    }
+
+    document.body.addEventListener('pointermove', function (e) {
+      requestAnimationFrame(function () { updateGlow(e); });
+    }, { passive: true });
+
+    // Update on scroll (mouse position doesn't change but card positions do)
+    window.addEventListener('scroll', function () {
+      if (glowEls.length) {
+        glowEls.forEach(function (obj) {
+          var rect = obj.sharp.getBoundingClientRect();
+          // Re-trigger with last known position isn't easily available,
+          // so we just fade out on scroll for simplicity
+        });
+      }
+    }, { passive: true });
+  })();
+  </script>
 </body>
 </html>

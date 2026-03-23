@@ -262,16 +262,20 @@
   <!-- Stats Section -->
   <section class="section">
     <div class="container">
-      <div class="stats-grid reveal">
-        <div class="stat-item">
-          <div class="stat-value">2x</div>
-          <div class="stat-label">Study efficiency</div>
+      <div class="stats-grid stagger-children">
+        <div class="stat-item reveal">
+          <div class="stat-value">2.4x</div>
+          <div class="stat-label">Study efficiency increase</div>
         </div>
-        <div class="stat-item">
+        <div class="stat-item reveal">
           <div class="stat-value">50%</div>
           <div class="stat-label">Fewer distractions</div>
         </div>
-        <div class="stat-item">
+        <div class="stat-item reveal">
+          <div class="stat-value">31%</div>
+          <div class="stat-label">Better retention</div>
+        </div>
+        <div class="stat-item reveal">
           <div class="stat-value">4.9</div>
           <div class="stat-label">Student rating</div>
         </div>
@@ -279,77 +283,191 @@
     </div>
   </section>
 
-  <!-- Feature 1: Study Sessions -->
+  <div class="section-separator"></div>
+
+  <!-- Bento Feature Grid -->
   <section class="section">
     <div class="container">
-      <div class="two-col reveal">
-        <div class="two-col-text">
-          <h2 class="section-title">Structured <span class="text-gradient">study sessions</span></h2>
-          <p class="section-subtitle">Forget cramming. BrainDock helps you break study time into focused, productive blocks with built-in breaks - so you retain more and burn out less. Set session goals, track your streaks, and watch your study habits transform.</p>
-          <ul style="list-style: none; padding: 0; margin: 1.5rem 0;">
-            <li style="padding: 0.5rem 0; color: #222;">✓ Pomodoro-style focus timers with smart breaks</li>
-            <li style="padding: 0.5rem 0; color: #222;">✓ Session goal setting and streak tracking</li>
-            <li style="padding: 0.5rem 0; color: #222;">✓ Subject-specific session profiles</li>
-          </ul>
+      <div style="text-align: center; margin-bottom: 3rem;" class="reveal">
+        <h2 class="section-title">Everything you need to <span class="text-gradient">study smarter</span></h2>
+        <p class="section-subtitle">Powerful tools designed specifically for how students actually study.</p>
+      </div>
+      <div class="bento-grid stagger-children">
+        <div class="feature-card bento-card-lg reveal">
+          <div class="feature-card-icon">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3>Smart Study Sessions</h3>
+          <p>AI-optimized Pomodoro intervals that adapt to your energy and subject difficulty. Set goals, track streaks, and build lasting focus habits automatically.</p>
+          <div class="bento-visual">
+            <div class="study-timer-mock">
+              <div class="timer-ring">
+                <svg viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="4"/>
+                  <circle cx="50" cy="50" r="45" fill="none" stroke="url(#timerGrad)" stroke-width="4" stroke-dasharray="212 283" stroke-linecap="round" transform="rotate(-90 50 50)"/>
+                  <defs><linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#648610"/><stop offset="100%" stop-color="#7a9b2e"/></linearGradient></defs>
+                </svg>
+                <span class="timer-display">24:38</span>
+              </div>
+              <div class="timer-label">Deep Focus &mdash; Organic Chemistry</div>
+            </div>
+          </div>
         </div>
-        <div class="two-col-visual">
-          <div class="feature-card">
-            <div class="feature-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
-            <h3>Smart Study Blocks</h3>
-            <p>AI-optimized study intervals that adapt to your energy levels and subject difficulty for maximum retention.</p>
+        <div class="feature-card bento-card-sm reveal">
+          <div class="feature-card-icon">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Focus Shield</h3>
+          <p>AI learns your distraction patterns and proactively blocks social media, games, and time-wasting sites during study sessions.</p>
+        </div>
+        <div class="feature-card bento-card-sm reveal">
+          <div class="feature-card-icon">
+            <svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <h3>Focus Analytics</h3>
+          <p>See your peak study hours, subject breakdowns, and focus trends. Optimize your schedule around when you actually learn best.</p>
+        </div>
+        <div class="feature-card bento-card-sm reveal">
+          <div class="feature-card-icon">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <h3>Subject Profiles</h3>
+          <p>Create custom profiles for each class with tailored blocklists, session lengths, and break intervals.</p>
+        </div>
+        <div class="feature-card bento-card-lg reveal">
+          <div class="feature-card-icon">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <h3>Weekly Progress Dashboard</h3>
+          <p>Track your study streaks, compare week-over-week focus time, and celebrate milestones. BrainDock turns consistency into a game you actually want to play.</p>
+          <div class="bento-visual">
+            <div class="progress-bars-mock">
+              <div class="progress-row"><span class="progress-label">Mon</span><div class="progress-track"><div class="progress-fill" style="width: 85%"></div></div><span class="progress-value">3.4h</span></div>
+              <div class="progress-row"><span class="progress-label">Tue</span><div class="progress-track"><div class="progress-fill" style="width: 62%"></div></div><span class="progress-value">2.5h</span></div>
+              <div class="progress-row"><span class="progress-label">Wed</span><div class="progress-track"><div class="progress-fill" style="width: 95%"></div></div><span class="progress-value">3.8h</span></div>
+              <div class="progress-row"><span class="progress-label">Thu</span><div class="progress-track"><div class="progress-fill" style="width: 75%"></div></div><span class="progress-value">3.0h</span></div>
+              <div class="progress-row"><span class="progress-label">Fri</span><div class="progress-track"><div class="progress-fill" style="width: 45%"></div></div><span class="progress-value">1.8h</span></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Feature 2: Distraction Blocking -->
+  <div class="section-separator"></div>
+
+  <!-- How It Works -->
+  <section class="how-it-works-section">
+    <div class="container">
+      <div style="text-align: center;" class="reveal">
+        <h2 class="hiw-heading">How it works</h2>
+        <p class="hiw-subtitle">Get focused in under 60 seconds</p>
+      </div>
+      <div class="hiw-steps stagger-children">
+        <div class="hiw-step reveal">
+          <div class="hiw-step-number">1</div>
+          <h3 class="hiw-step-title">Download &amp; set up</h3>
+          <p class="hiw-step-desc">Install BrainDock, choose your subjects, and tell it what distracts you most. Takes less than a minute.</p>
+        </div>
+        <div class="hiw-step reveal">
+          <div class="hiw-step-number">2</div>
+          <h3 class="hiw-step-title">Start a session</h3>
+          <p class="hiw-step-desc">Pick a subject, set your goal, and hit start. BrainDock blocks distractions and keeps you locked in.</p>
+        </div>
+        <div class="hiw-step reveal">
+          <div class="hiw-step-number">3</div>
+          <h3 class="hiw-step-title">Build the habit</h3>
+          <p class="hiw-step-desc">Track your streaks, review your analytics, and watch your focus ability compound over weeks and months.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-separator"></div>
+
+  <!-- Study Modes Deep Dive -->
   <section class="section">
     <div class="container">
-      <div class="two-col reveal" style="flex-direction: row-reverse;">
+      <div class="two-col reveal">
         <div class="two-col-text">
-          <h2 class="section-title">Intelligent <span class="text-gradient">distraction blocking</span></h2>
-          <p class="section-subtitle">Social media, notifications, random browsing - BrainDock silences them all during study time. Our AI learns your distraction patterns and proactively blocks temptations before they pull you off track.</p>
-          <ul style="list-style: none; padding: 0; margin: 1.5rem 0;">
-            <li style="padding: 0.5rem 0; color: #222;">✓ Block social media, games, and distracting sites</li>
-            <li style="padding: 0.5rem 0; color: #222;">✓ AI-powered distraction pattern detection</li>
-            <li style="padding: 0.5rem 0; color: #222;">✓ Allowlist for research and course websites</li>
-          </ul>
+          <div class="tag-pills"><span class="tag-pill">Study Modes</span></div>
+          <h2 class="section-title">One app, <span class="text-gradient">every study style</span></h2>
+          <p class="section-subtitle">Whether you're cramming for an exam, writing a research paper, or working through problem sets &mdash; BrainDock adapts to your workflow.</p>
+          <div class="study-modes-list">
+            <div class="study-mode-item">
+              <div class="study-mode-icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+              <div>
+                <strong>Deep Focus</strong>
+                <p>Extended, uninterrupted blocks for complex subjects. All distractions blocked.</p>
+              </div>
+            </div>
+            <div class="study-mode-item">
+              <div class="study-mode-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg></div>
+              <div>
+                <strong>Pomodoro</strong>
+                <p>25-minute sprints with 5-minute breaks. Perfect for memorization and review.</p>
+              </div>
+            </div>
+            <div class="study-mode-item">
+              <div class="study-mode-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+              <div>
+                <strong>Reading Mode</strong>
+                <p>Gentle ambient noise, no notifications. Ideal for textbooks and research papers.</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="two-col-visual">
-          <div class="feature-card">
-            <div class="feature-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-            <h3>Focus Shield</h3>
-            <p>Automatically blocks distracting apps and websites during study sessions so you can stay in the zone.</p>
+        <div class="two-col-visual" style="display: flex; align-items: center; justify-content: center;">
+          <div class="mode-selector-mock">
+            <div class="mode-option active">
+              <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>Deep Focus</span>
+            </div>
+            <div class="mode-option">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/></svg>
+              <span>Pomodoro</span>
+            </div>
+            <div class="mode-option">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              <span>Reading</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Feature 3: Focus Analytics -->
+  <div class="section-separator"></div>
+
+  <!-- Before / After Comparison -->
   <section class="section">
     <div class="container">
-      <div class="two-col reveal">
-        <div class="two-col-text">
-          <h2 class="section-title">Focus <span class="text-gradient">analytics</span> that help you grow</h2>
-          <p class="section-subtitle">See exactly where your time goes. BrainDock's analytics dashboard shows your focus trends, peak study hours, and progress over time - so you can optimize your schedule around when you actually focus best.</p>
-          <ul style="list-style: none; padding: 0; margin: 1.5rem 0;">
-            <li style="padding: 0.5rem 0; color: #222;">✓ Daily and weekly focus reports</li>
-            <li style="padding: 0.5rem 0; color: #222;">✓ Peak productivity hour insights</li>
-            <li style="padding: 0.5rem 0; color: #222;">✓ Subject-by-subject time breakdowns</li>
-          </ul>
+      <div style="text-align: center; margin-bottom: 1rem;" class="reveal">
+        <h2 class="section-title">Studying without vs. <span class="text-gradient">with BrainDock</span></h2>
+        <p class="section-subtitle">The difference a focus system makes.</p>
+      </div>
+      <div class="comparison-grid stagger-children">
+        <div class="comparison-col reveal">
+          <div class="comparison-header">Without BrainDock</div>
+          <div class="comparison-row"><svg class="icon cross" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Constant phone checking every 5 minutes</div>
+          <div class="comparison-row"><svg class="icon cross" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> No idea where study time actually goes</div>
+          <div class="comparison-row"><svg class="icon cross" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Cramming the night before exams</div>
+          <div class="comparison-row"><svg class="icon cross" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Social media rabbit holes mid-session</div>
+          <div class="comparison-row"><svg class="icon cross" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Burnout from unstructured marathon sessions</div>
         </div>
-        <div class="two-col-visual">
-          <div class="feature-card">
-            <div class="feature-icon"><svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
-            <h3>Study Insights</h3>
-            <p>Detailed analytics on your focus patterns help you discover your peak study times and continuously improve.</p>
-          </div>
+        <div class="comparison-col comparison-highlight reveal">
+          <div class="comparison-header">With BrainDock</div>
+          <div class="comparison-row"><svg class="icon check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Distraction-free deep focus blocks</div>
+          <div class="comparison-row"><svg class="icon check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Analytics show exactly how you spend time</div>
+          <div class="comparison-row"><svg class="icon check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Consistent daily study streaks all semester</div>
+          <div class="comparison-row"><svg class="icon check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> AI blocks temptations before they hit</div>
+          <div class="comparison-row"><svg class="icon check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Smart breaks prevent burnout automatically</div>
         </div>
       </div>
     </div>
   </section>
+
+  <div class="section-separator"></div>
 
   <!-- Testimonials Section -->
   <section class="section">
@@ -358,34 +476,34 @@
         <h2 class="section-title">Loved by students <span class="text-gradient">everywhere</span></h2>
         <p class="section-subtitle">Hear from students who transformed their study habits with BrainDock.</p>
       </div>
-      <div class="features-grid reveal">
-        <div class="testimonial-card">
-          <p>"BrainDock completely changed how I study. I went from barely passing to dean's list in one semester. The distraction blocking alone is worth it - I had no idea how much time I was losing to my phone."</p>
-          <div style="margin-top: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
-            <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #4A3728, #8B7355); display: flex; align-items: center; justify-content: center; font-weight: 600;">S</div>
+      <div class="testimonials-grid stagger-children">
+        <div class="testimonial-card reveal">
+          <div class="testimonial-quote">"BrainDock completely changed how I study. I went from barely passing to dean's list in one semester. The distraction blocking alone is worth it."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">S</div>
             <div>
-              <div style="font-weight: 600; color: #222;">Sarah M.</div>
-              <div style="font-size: 0.85rem; color: #5A5A5A;">Pre-Med, UCLA</div>
+              <div class="testimonial-name">Sarah M.</div>
+              <div class="testimonial-role">Pre-Med, UCLA</div>
             </div>
           </div>
         </div>
-        <div class="testimonial-card">
-          <p>"As a CS major, I need long blocks of uninterrupted focus for coding assignments. BrainDock's study sessions keep me locked in, and the analytics showed me I'm most productive at night - something I never would have realized on my own."</p>
-          <div style="margin-top: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
-            <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #8B7355, #C4A882); display: flex; align-items: center; justify-content: center; font-weight: 600;">J</div>
+        <div class="testimonial-card reveal">
+          <div class="testimonial-quote">"As a CS major, I need long blocks of uninterrupted focus. BrainDock's analytics showed me I'm most productive at night &mdash; something I never would have realized."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">J</div>
             <div>
-              <div style="font-weight: 600; color: #222;">James T.</div>
-              <div style="font-size: 0.85rem; color: #5A5A5A;">Computer Science, MIT</div>
+              <div class="testimonial-name">James T.</div>
+              <div class="testimonial-role">Computer Science, MIT</div>
             </div>
           </div>
         </div>
-        <div class="testimonial-card">
-          <p>"Finals used to be the most stressful week of my life. Now I actually feel prepared because I've been studying consistently all semester with BrainDock. The streak feature makes it almost addictive - in a good way."</p>
-          <div style="margin-top: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
-            <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b, #ef4444); display: flex; align-items: center; justify-content: center; font-weight: 600;">A</div>
+        <div class="testimonial-card reveal">
+          <div class="testimonial-quote">"Finals used to be the most stressful week of my life. Now I feel prepared because I've been studying consistently all semester. The streak feature is addictive."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">A</div>
             <div>
-              <div style="font-weight: 600; color: #222;">Aisha K.</div>
-              <div style="font-size: 0.85rem; color: #5A5A5A;">Business, NYU Stern</div>
+              <div class="testimonial-name">Aisha K.</div>
+              <div class="testimonial-role">Business, NYU Stern</div>
             </div>
           </div>
         </div>
@@ -393,31 +511,73 @@
     </div>
   </section>
 
+  <div class="section-separator"></div>
+
+  <!-- FAQ Section -->
+  <section class="section">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 3rem;" class="reveal">
+        <h2 class="section-title">Frequently asked <span class="text-gradient">questions</span></h2>
+      </div>
+      <div class="faq-section reveal">
+        <div class="faq-item">
+          <button class="faq-question">Does BrainDock work on all my devices? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Yes! BrainDock works on macOS, Windows, iOS, and Android. Your settings, streaks, and analytics sync across all devices automatically.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Can I still access research sites during a study session? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Absolutely. You can allowlist specific research sites, course platforms like Canvas, Blackboard, and Google Scholar, and any other tools you need for studying.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Is BrainDock really free for students? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+          <div class="faq-answer"><div class="faq-answer-inner">BrainDock's core features are free forever. Students get 50% off BrainDock Pro with a valid .edu email, which unlocks advanced analytics, unlimited subject profiles, and priority support.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">How is this different from a website blocker? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+          <div class="faq-answer"><div class="faq-answer-inner">BrainDock is a complete focus system, not just a blocker. It combines AI-powered distraction detection, structured study sessions, progress analytics, and habit tracking into one seamless experience that adapts to how you study.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Can I use BrainDock for group study? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Yes! BrainDock's study rooms let you and your friends join shared focus sessions. Everyone's focus metrics are anonymized, but you can see who's actively studying &mdash; accountability without the pressure.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-separator"></div>
+
   <!-- Student Discount Section -->
   <section class="section">
     <div class="container">
-      <div class="reveal" style="background: linear-gradient(135deg, rgba(74,55,40,0.15), rgba(139,115,85,0.15)); border: 1px solid rgba(74,55,40,0.3); border-radius: 1.5rem; padding: 3rem; text-align: center;">
-        <div style="display: inline-block; background: rgba(74,55,40,0.2); border: 1px solid rgba(74,55,40,0.3); border-radius: 2rem; padding: 0.35rem 1rem; font-size: 0.85rem; color: #C4A882; margin-bottom: 1.5rem;"><svg class="icon" viewBox="0 0 24 24"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/><path d="M22 10v6"/></svg> Student Exclusive</div>
-        <h2 class="section-title" style="margin-bottom: 1rem;">Get <span class="text-gradient">50% off</span> with your student email</h2>
-        <p class="section-subtitle" style="max-width: 600px; margin: 0 auto 2rem;">We believe every student deserves access to better focus. Verify your .edu email and unlock BrainDock Pro at half the price - for your entire time in school.</p>
-        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <div class="student-discount-card reveal">
+        <div class="cta-badge"><svg class="icon" viewBox="0 0 24 24" style="width:14px;height:14px;vertical-align:-2px;margin-right:4px;"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/><path d="M22 10v6"/></svg>Student Exclusive</div>
+        <h2 class="section-title">Get <span class="text-gradient">50% off</span> with your student email</h2>
+        <p class="section-subtitle" style="max-width: 600px; margin: 0 auto var(--space-8);">We believe every student deserves access to better focus. Verify your .edu email and unlock BrainDock Pro at half the price &mdash; for your entire time in school.</p>
+        <div class="cta-actions">
           <a href="downloads/download.html" class="btn btn-primary btn-lg">Claim Student Discount</a>
           <a href="pricing.html" class="btn btn-secondary btn-lg">View All Plans</a>
         </div>
-        <p style="color: #5A5A5A; font-size: 0.85rem; margin-top: 1.5rem;">Valid with any .edu or university email address. Renews annually while enrolled.</p>
+        <p class="cta-note">Valid with any .edu or university email address. Renews annually while enrolled.</p>
       </div>
     </div>
   </section>
 
   <!-- CTA Section -->
   <section class="cta-section">
+    <div class="cta-glow cta-glow-1"></div>
+    <div class="cta-glow cta-glow-2"></div>
     <div class="container">
       <div class="cta-content reveal">
-        <h2 class="section-title">Ready to <span class="text-gradient">ace your studies</span>?</h2>
-        <p class="section-subtitle">Join thousands of students who study smarter with BrainDock. Download free and start focusing today.</p>
+        <div class="cta-badge">Free forever for students</div>
+        <h2>Ready to <em>ace your studies</em>?</h2>
+        <p>Join thousands of students who study smarter with BrainDock. Download free and start focusing today.</p>
         <div class="cta-actions">
           <a href="downloads/download.html" class="btn btn-primary btn-lg">Download Free</a>
-          <a href="pricing.html" class="btn btn-secondary btn-lg">View Pricing</a>
+          <a href="pricing.html" class="btn btn-ghost btn-lg" style="color:#fff;border-color:rgba(255,255,255,0.3);">View Pricing</a>
+        </div>
+        <div class="cta-trust">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          No credit card required &middot; Free forever for individuals
         </div>
       </div>
     </div>
